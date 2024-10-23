@@ -2,6 +2,9 @@
 import { useRouter } from "expo-router";
 import React, { useState } from 'react'
 import { View, TouchableOpacity, Text, StyleSheet, TextInput } from "react-native";
+import {  Dimensions } from 'react-native';
+
+const { width, height } = Dimensions.get("window");
 
 export default function Index() {
   const router = useRouter();
@@ -16,7 +19,7 @@ export default function Index() {
   const [state, setState] = useState('');
 
   return (
-    <View style={{backgroundColor: "#4CD9E4"}}>
+    <View style={{backgroundColor: "#ccf5ff"}}>
       <View style={styles.main}>
         <TouchableOpacity activeOpacity={0.7} style = {styles.button} onPress={onRegister}>
           <Text style={styles.text}>Register</Text>
@@ -33,7 +36,7 @@ export default function Index() {
           style={styles.number}
         />
         <TouchableOpacity activeOpacity={0.7} style = {styles.btn}>
-          <Text style={styles.text}>Verify</Text>
+          <Text style={styles.text}>Search</Text>
         </TouchableOpacity>
       </View>
       <View style={styles.lang}>
@@ -63,54 +66,54 @@ export default function Index() {
 const styles = StyleSheet.create({
   main: {
     flexDirection: "row",
+    justifyContent: 'space-between', // Distribute buttons evenly
+    paddingHorizontal: width * 0.05, // 5% padding on left and right
+    marginVertical: height * 0.02, // Vertical margin based on screen height
   },
   lang: {
     backgroundColor: "#E9CE47",
     borderRadius: 20,
+    // padding: height * 0.00, // Padding relative to screen height
+    marginVertical: height * 0.02, // Vertical margin
+    width: width * 0.9, // 90% of the screen width
+    alignSelf: "center", // Center horizontally
   },
   button: {
-    backgroundColor: "blue",
-    width: 180,
-    height: 40,
+    backgroundColor: "#8533ff",
+    width: '48%', // Takes 48% of the parent's width
+    height: height * 0.06, // 6% of screen height for button height       #ccf5ff bgcolor    #8533ff button   #FFE9D0 nav
     borderRadius: 10,
-    marginLeft: 8,
-    marginVertical: 10,
     justifyContent: "center",
     alignItems: "center",
   },
   btn: {
-    backgroundColor: "blue",
-    width: 100,
-    height: 40,
+    backgroundColor: "#8533ff",
+    width: '30%', // 30% of the parent's width for the smaller button
+    height: height * 0.06, // 6% of screen height
     borderRadius: 10,
-    marginLeft: 8,
-    marginVertical: 5,
     justifyContent: "center",
     alignItems: "center",
   },
   text: {
-    fontSize: 16,
+    fontSize: width * 0.04, // Font size relative to screen width
     color: "white",
     fontWeight: "bold",
   },
   number: {
-    fontSize: 18,
-    height: 40,
-    width: 250,
-    justifyContent: 'center',
-    alignItems: 'center',
+    fontSize: width * 0.045, // Font size relative to screen width
+    height: height * 0.06, // 6% of screen height for input box
+    width: '65%', // Input width is 65% of its parent container
     borderColor: 'black', 
     borderWidth: 2, 
     borderRadius: 10,
-    marginVertical: 5,
-    paddingLeft: 20,
-    marginLeft: 10,
+    paddingLeft: width * 0.05, // Padding left relative to screen width
     backgroundColor: "white",
   },
   name: {
-    fontSize: 30,
+    fontSize: width * 0.075, // Text size based on screen width
     fontWeight: "bold",
-    marginLeft: 60,
+    textAlign: "center", // Center the text
+    paddingTop: height * 0.01, // Padding top relative to height
   },
   // blurview: {
   //   padding: 20,
