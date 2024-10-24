@@ -1,7 +1,7 @@
 // import { BlurView } from "expo-blur";
 import { useRouter } from "expo-router";
 import React, { useState } from 'react'
-import { View, TouchableOpacity, Text, StyleSheet, TextInput } from "react-native";
+import { View, TouchableOpacity, Text, StyleSheet, TextInput, ScrollView } from "react-native";
 import {  Dimensions } from 'react-native';
 
 const { width, height } = Dimensions.get("window");
@@ -19,7 +19,7 @@ export default function Index() {
   const [state, setState] = useState('');
 
   return (
-    <View style={{backgroundColor: "#ccf5ff"}}>
+    <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.main}>
         <TouchableOpacity activeOpacity={0.7} style = {styles.button} onPress={onRegister}>
           <Text style={styles.text}>Register</Text>
@@ -32,17 +32,42 @@ export default function Index() {
         <TextInput
           value={state}
           onChangeText={setState}
-          placeholder="Enter Your State"
+          placeholder="Enter State"
           style={styles.number}
         />
         <TouchableOpacity activeOpacity={0.7} style = {styles.btn}>
           <Text style={styles.text}>Search</Text>
         </TouchableOpacity>
       </View>
-      <View style={styles.lang}>
+      <View style={styles.lang1}>
         <Text style={styles.name}>Aao Mahare Desh</Text>
         <Text style={styles.name}>आओ हमारे देश</Text>
         <Text style={styles.name}>आवो म्हारे देश</Text>
+      </View>
+      <View style={styles.lang2}>
+        <Text style={styles.name}>"Nature always</Text>
+        <Text style={styles.name}> wears the colors</Text>
+        <Text style={styles.name}> of the spirit"</Text>
+      </View>
+      <View style={styles.lang3}>
+        <Text style={styles.name}>"Adopt the pace</Text>
+        <Text style={styles.name}>of nature. Her</Text>
+        <Text style={styles.name}>secret is patience."</Text>
+      </View>
+      <View style={styles.lang1}>
+        <Text style={styles.name}>"The tans will fade,</Text>
+        <Text style={styles.name}>but the memories</Text>
+        <Text style={styles.name}>will last forever."</Text>
+      </View>
+      <View style={styles.lang2}>
+        <Text style={styles.name}>"Once a year, go</Text>
+        <Text style={styles.name}>someplace you've</Text>
+        <Text style={styles.name}>never been before."</Text>
+      </View>
+      <View style={styles.lang3}>
+        <Text style={styles.name}>"There's hope at</Text>
+        <Text style={styles.name}>the bottom of the</Text>
+        <Text style={styles.name}>biggest waterfall."</Text>
       </View>
       {/* <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
         <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 1</Text>
@@ -59,7 +84,7 @@ export default function Index() {
       <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
         <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 5</Text>
       </BlurView> */}
-    </View>
+    </ScrollView>
   );
 }
 
@@ -70,8 +95,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: width * 0.05, // 5% padding on left and right
     marginVertical: height * 0.02, // Vertical margin based on screen height
   },
-  lang: {
-    backgroundColor: "#E9CE47",
+  lang1: {
+    backgroundColor: "#ccf5ff",
+    borderRadius: 20,
+    // padding: height * 0.00, // Padding relative to screen height
+    marginVertical: height * 0.02, // Vertical margin
+    width: width * 0.9, // 90% of the screen width
+    alignSelf: "center", // Center horizontally
+  },
+  lang2: {
+    backgroundColor: "#FFE9D0",
+    borderRadius: 20,
+    // padding: height * 0.00, // Padding relative to screen height
+    marginVertical: height * 0.02, // Vertical margin
+    width: width * 0.9, // 90% of the screen width
+    alignSelf: "center", // Center horizontally
+  },
+  lang3: {
+    backgroundColor: "#ffe6e6",
     borderRadius: 20,
     // padding: height * 0.00, // Padding relative to screen height
     marginVertical: height * 0.02, // Vertical margin
@@ -81,7 +122,7 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: "#8533ff",
     width: '48%', // Takes 48% of the parent's width
-    height: height * 0.06, // 6% of screen height for button height       #ccf5ff bgcolor    #8533ff button   #FFE9D0 nav
+    height: height * 0.06, // 6% of screen height for button height       
     borderRadius: 10,
     justifyContent: "center",
     alignItems: "center",
@@ -125,3 +166,7 @@ const styles = StyleSheet.create({
   //   borderRadius: 20,
   // },
 });
+
+
+
+// #ccf5ff color1 #FFE9D0 color2 #ffe6e6 color3    #8533ff button   

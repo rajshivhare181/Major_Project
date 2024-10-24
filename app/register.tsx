@@ -145,7 +145,7 @@ otp: {
   marginBottom: height * 0.02, // Space between OTP inputs
 },
 button: {
-  backgroundColor: "blue",
+  backgroundColor: "#8533ff",
   width: width * 0.25, // Button width is 25% of screen width
   height: height * 0.06, // Button height is 6% of screen height
   borderRadius: 10,
@@ -172,12 +172,12 @@ checkboxCircle: {
   height: width * 0.06, // Dynamic size for checkbox
   width: width * 0.06, // Dynamic size for checkbox
   borderRadius: (width * 0.06) / 2, // Circular checkbox
-  borderColor: 'gray',
+  borderColor: 'black',
   borderWidth: 2,
   marginRight: width * 0.03, // Space between checkbox and text
 },
 checkboxChecked: {
-  backgroundColor: 'blue',
+  backgroundColor: '#8533ff',
 },
 checkboxText: {
   fontSize: width * 0.045, // Dynamic font size
