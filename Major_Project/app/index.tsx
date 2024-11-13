@@ -18,6 +18,10 @@ export default function Index() {
 
   const [state, setState] = useState('');
 
+  const Gwalior_Fort = () => {
+    router.navigate("/Gwalior_Fort");
+  }
+
   return (
     <ScrollView showsVerticalScrollIndicator={false}>
       <View style={styles.main}>
@@ -45,9 +49,11 @@ export default function Index() {
         <Text style={styles.name}>आवो म्हारे देश</Text>
       </View>
       <View style={styles.lang2}>
-        <Text style={styles.name}>"Nature always</Text>
-        <Text style={styles.name}> wears the colors</Text>
-        <Text style={styles.name}> of the spirit"</Text>
+        <TouchableOpacity onPress={Gwalior_Fort}>
+          <Text style={styles.name}>"Nature always</Text>
+          <Text style={styles.name}> wears the colors</Text>
+          <Text style={styles.name}> of the spirit"</Text>
+        </TouchableOpacity>
       </View>
       <View style={styles.lang3}>
         <Text style={styles.name}>"Adopt the pace</Text>
@@ -96,7 +102,7 @@ const styles = StyleSheet.create({
     marginVertical: height * 0.02, // Vertical margin based on screen height
   },
   lang1: {
-    backgroundColor: "#ccf5ff",
+    backgroundColor: "#FFE9D0",
     borderRadius: 20,
     // padding: height * 0.00, // Padding relative to screen height
     marginVertical: height * 0.02, // Vertical margin
@@ -104,7 +110,7 @@ const styles = StyleSheet.create({
     alignSelf: "center", // Center horizontally
   },
   lang2: {
-    backgroundColor: "#FFE9D0",
+    backgroundColor: "#ccf5ff",
     borderRadius: 20,
     // padding: height * 0.00, // Padding relative to screen height
     marginVertical: height * 0.02, // Vertical margin
