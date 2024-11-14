@@ -1,5 +1,5 @@
 import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
-import React from 'react';
+import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
 import { FontAwesome6 } from '@expo/vector-icons';
@@ -10,6 +10,7 @@ const imgHeight = height * 0.4;
 
 const Gwalior_Fort = () => {
 
+  const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
     const scrollOffset = useScrollViewOffset(scrollRef);
     const imageAnimatedStyle = useAnimatedStyle(() => {
@@ -23,6 +24,9 @@ const Gwalior_Fort = () => {
         ]
         }
     });
+    const fullHistoryText = `Gwalior Fort, located in Madhya Pradesh, India, is an ancient hill fort with a rich history dating back over 1,000 years. It was established by Suraj Sen, a local ruler, in the 3rd century, though the fort saw significant expansion under various rulers. The Tomar dynasty, particularly under Raja Man Singh Tomar in the 15th century, is credited with constructing much of the current structure. The fort has witnessed the rise and fall of several dynasties, including the Mughals, Marathas, and Scindias. Renowned for its massive walls and grand architecture, it remains a symbol of India's rich cultural heritage.`;
+  
+    const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
   return (
     <>
         <Stack.Screen options={{ 
@@ -44,7 +48,15 @@ const Gwalior_Fort = () => {
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
             <Animated.Image source={require('@/assets/images/Gwalior_Fort.jpeg')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
-            <Text style={styles.text}>History : Gwalior Fort, located in Madhya Pradesh, India, is an ancient hill fort with a rich history dating back over 1,000 years. It was established by Suraj Sen, a local ruler, in the 3rd century, though the fort saw significant expansion under various rulers. The Tomar dynasty, particularly under Raja Man Singh Tomar in the 15th century, is credited with constructing much of the current structure. The fort has witnessed the rise and fall of several dynasties, including the Mughals, Marathas, and Scindias. Renowned for its massive walls and grand architecture, it remains a symbol of India's rich cultural heritage.</Text>
+              <Text style={styles.text}>
+                {showFullText ? fullHistoryText : truncatedHistoryText}
+              </Text>
+
+              <TouchableOpacity onPress={() => setShowFullText(!showFullText)}>
+                <Text style={styles.readMoreText}>
+                  {showFullText ? "Show Less" : "Read More"}
+                </Text>
+              </TouchableOpacity>
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6:00 am – 5:30 pm</Text>
@@ -149,4 +161,12 @@ const styles = StyleSheet.create({
       alignItems: "center",
       marginVertical: height * 0.01
     },
+    readMoreText: {
+      fontSize: width * 0.04,
+      color: '#0066cc', // Color for the Read More/Show Less button
+      paddingBottom: height * 0.01,
+      paddingHorizontal: width * 0.02,
+      textDecorationLine: 'underline',
+      // textAlign: 'center',
+    }
 })
