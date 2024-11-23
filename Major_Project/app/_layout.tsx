@@ -10,6 +10,7 @@ export default function Layout() {
         <Drawer.Screen name='index' options={{title: "Home"}}/>
         <Drawer.Screen name='register' options={{title: "Register"}}/>
         <Drawer.Screen name='login' options={{title: "Login"}}/>
+        <Drawer.Screen name="Gwalior_Fort" options={{ drawerItemStyle: { display: 'none' } }} />
       </Drawer>
     </GestureHandlerRootView>
   );
