@@ -27,6 +27,10 @@ const Gwalior_Fort = () => {
     const fullHistoryText = `Gwalior Fort, located in Madhya Pradesh, India, is an ancient hill fort with a rich history dating back over 1,000 years. It was established by Suraj Sen, a local ruler, in the 3rd century, though the fort saw significant expansion under various rulers. The Tomar dynasty, particularly under Raja Man Singh Tomar in the 15th century, is credited with constructing much of the current structure. The fort has witnessed the rise and fall of several dynasties, including the Mughals, Marathas, and Scindias. Renowned for its massive walls and grand architecture, it remains a symbol of India's rich cultural heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
+    // console.log(hour);
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +63,11 @@ const Gwalior_Fort = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 am – 5:30 pm</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 am – 5 pm</Text>
+                { 6<= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Rs 75 for adults</Text>
@@ -131,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

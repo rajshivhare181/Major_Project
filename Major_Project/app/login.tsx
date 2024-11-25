@@ -6,6 +6,7 @@ const Login = () => {
     <View>
       <Text>Login</Text>
     </View>
+    
   )
 }
 
