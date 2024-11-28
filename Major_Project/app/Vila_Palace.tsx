@@ -27,6 +27,8 @@ const Vila_Palace = () => {
     const fullHistoryText = `History : Vila Palace, also known as Vila Fort Palace, is located in Diu, an island off the coast of Gujarat. Built by the Portuguese during their colonial rule in India, the palace served as the residence of the Portuguese governors in the 16th century. The palace reflects a mix of Portuguese and Indian architectural styles, with its robust structure, intricate carvings, and scenic surroundings. After the end of Portuguese rule in 1961, the palace became a prominent historical landmark in Diu. Today, it stands as a symbol of Diu's colonial past, attracting tourists who come to explore its history and architecture.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Vila_Palace = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
+                { 9 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹20 for adult </Text>
@@ -134,6 +139,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Hirwavan_Garden = () => {
     const fullHistoryText = `Hirwavan_Garden Garden is a well-known park located in Daman, India. Established with the aim of providing a serene and well-maintained space for visitors, the garden showcases lush greenery, flowering plants, and a peaceful atmosphere. The garden has become a popular spot for tourists and locals alike, offering a place for relaxation, photography, and leisurely strolls. Over the years, Hirwavan_Garden Garden has grown in prominence, not just for its beauty but also for its role in promoting eco-tourism in the region. It features various species of plants, along with walking paths, fountains, and a dedicated area for picnics.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Hirwavan_Garden = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :7:00 AM - 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :7 AM - 6 PM</Text>
+                { 7 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹10 to ₹20 for adult </Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

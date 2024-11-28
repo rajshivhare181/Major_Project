@@ -27,6 +27,8 @@ const Scuba_Diving = () => {
     const fullHistoryText = `History :Scuba diving, a method of underwater diving using a self-contained underwater breathing apparatus, was first developed in the 1940s. The modern form of scuba diving was pioneered by French explorer Jacques Cousteau and engineer Emile Gagnan in 1943, who created the Aqua-Lung, the first open-circuit regulator. The technique revolutionized underwater exploration, making it accessible to civilians for recreation, scientific research, and military purposes. Over the years, scuba diving evolved with advanced equipment and safety protocols, becoming a popular recreational activity worldwide. The Andaman and Nicobar Islands, known for their vibrant marine life, are now a prime location for diving enthusiasts`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Scuba_Diving = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 4:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 4 PM</Text>
+                { 6 <= hour && 16 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹1000 to ₹5000 for adult
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

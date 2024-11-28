@@ -27,6 +27,8 @@ const Kovalam= () => {
     const fullHistoryText = `History : Kovalam is a renowned beach town located in the Thiruvananthapuram district of Kerala, India. Once a quiet fishing village, Kovalam gained popularity in the 1970s when European tourists began visiting for its serene beaches and natural beauty. Over time, it became a hub for international tourists seeking relaxation and Ayurveda treatments. The name "Kovalam" means a grove of coconut trees, and the town is famous for its crescent-shaped beaches—Lighthouse Beach, Hawah Beach, and Samudra Beach. Kovalam's picturesque coastline, along with its vibrant culture, makes it one of the top tourist destinations in Kerala.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Kovalam= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
+                { 8 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹10 - 20 for adult
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

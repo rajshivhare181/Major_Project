@@ -27,6 +27,8 @@ const Khajuraho_Temples = () => {
     const fullHistoryText = `Historically, the island has been known for its significance during the British colonial era, where it was used as a location for military activities. Today, it’s more well-known for its tourism and marine life, particularly for water sports and coral viewing. North Bay is part of the Mahatma Gandhi Marine National Park, which aims to protect and preserve the marine ecosystem around the island, including coral reefs, fishes, and other aquatic life.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Khajuraho_Temples = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 4:00 PM </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :9 AM to 4 PM </Text>
+                { 9 <= hour && 16 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹400 to ₹700 for adult
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

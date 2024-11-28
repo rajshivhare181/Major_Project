@@ -27,6 +27,8 @@ const Monuments_at_Hampi = () => {
     const fullHistoryText = `History : Hampi, a UNESCO World Heritage Site, was once the capital of the Vijayanagara Empire (14th-16th centuries) and is renowned for its rich historical and architectural significance. The site features a stunning array of temples, palaces, market streets, and monuments, including the iconic Virupaksha Temple, Vithala Temple, and the Lotus Mahal. Hampi flourished as a cultural, religious, and economic hub before its decline in the 16th century following invasions. Today, the ruins stand as a testament to the grandeur of the Vijayanagara Empire, attracting tourists, archaeologists, and historians alike.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Monuments_at_Hampi = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹30 for adults 
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

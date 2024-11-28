@@ -27,6 +27,8 @@ const Elephant_Beach = () => {
     const fullHistoryText = `Elephant Beach is located on the western side of Havelock Island and is part of the larger Mahatma Gandhi Marine National Park, which is known for its diverse marine life and coral reefs. The beach is surrounded by lush tropical forests, and the vibrant underwater life draws visitors from around the world. It is one of the best places for snorkeling and scuba diving in the Andaman Islands, with crystal-clear waters and an abundant variety of coral reefs and marine species.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Elephant_Beach = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :8:00 AM and 4:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :8 AM and 4 PM</Text>
+                { 8 <= hour && 16 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+              } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹500 to ₹1,500
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Hawa_Mahal = () => {
     const fullHistoryText = `History :Hawa Mahal, also known as the "Palace of Winds," was built in 1799 by Maharaja Sawai Pratap Singh in Jaipur, Rajasthan. Designed by architect Lal Chand Ustad, this five-story palace is an iconic example of Rajput architecture. The structure is made from red and pink sandstone and features 953 small windows (jharokhas), which allowed royal women to observe street life without being seen, as per the purdah system. The palace was primarily a retreat for the royal women and is renowned for its intricate latticework and beautiful facade, making it one of Jaipur's most famous landmarks.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Hawa_Mahal = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :RS 50 For adult </Text>
@@ -134,6 +139,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

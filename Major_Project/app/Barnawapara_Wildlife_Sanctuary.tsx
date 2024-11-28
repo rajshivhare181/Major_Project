@@ -27,6 +27,8 @@ const Barnawapara_Wildlife_Sanctuary = () => {
     const fullHistoryText = `Barnawapara Wildlife Sanctuary, located in the Mahasamund district of Chhattisgarh, was established in 1976 to protect the rich biodiversity of the region. Covering an area of about 245 square kilometers, the sanctuary is named after the nearby village of Barnawapara. It is home to a variety of species, including tiger, leopard, sloth bear, wild boar, and a wide range of birds. The sanctuary's dense forests, grasslands, and riverine areas make it an ideal habitat for wildlife. Over time, Barnawapara has become a significant tourist destination, attracting nature lovers and wildlife enthusiasts to experience its natural beauty. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Barnawapara_Wildlife_Sanctuary = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6:00AM to 6:00PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+                } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹10 to ₹50 for adults</Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Jal_Mahal = () => {
     const fullHistoryText = `History :Jal Mahal, located in the middle of Man Sagar Lake in Jaipur, Rajasthan, is a stunning palace that dates back to the 18th century. Built by Maharaja Madho Singh I, the palace was originally designed as a retreat for royal family members. The palace's architecture blends Mughal, Rajput, and European styles, with five floors, of which four remain submerged under the lake when the water level is high. Over time, Jal Mahal fell into disrepair but has since been restored. The picturesque setting, surrounded by hills and the lake, makes it one of Jaipur's most iconic landmarks.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Jal_Mahal = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 6:00 PM. </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 6 PM. </Text>
+                { 9 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -137,6 +142,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

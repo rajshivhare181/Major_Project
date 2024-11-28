@@ -27,6 +27,8 @@ const Minicoy_Island  = () => {
     const fullHistoryText = `History : Minicoy Island is the southernmost and second-largest island in the Lakshadweep Archipelago, located in the Arabian Sea. It has a distinct culture influenced by both Maldivian and Indian traditions, as the island was historically part of the Maldives before being annexed by India in 1956, following the formation of the Union Territory of Lakshadweep. The island has a long history of trade and seafaring, particularly with the nearby Maldives. Minicoy is known for its unique language, Dhivehi, its vibrant fishing community, and the Laccadive atoll, which is part of its coral ecosystem.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Minicoy_Island  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fees 
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

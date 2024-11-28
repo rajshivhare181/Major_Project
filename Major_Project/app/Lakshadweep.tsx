@@ -27,6 +27,8 @@ const Lakshadweep = () => {
     const fullHistoryText = `The Lakshadweep Marine National Park was established in 1987 to protect and preserve the unique marine ecosystems surrounding the Lakshadweep Islands. Located near the Agatti Island, the park spans over 30 square miles and is home to diverse coral reefs, underwater flora and fauna, and several species of marine life, including endangered turtles and a variety of fish. The park is one of the few marine reserves in India, aimed at conserving the biodiversity of the coral ecosystems while promoting eco-tourism. It is a haven for divers, snorkelers, and marine biology enthusiasts.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Lakshadweep = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :free 
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

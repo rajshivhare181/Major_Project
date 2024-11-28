@@ -27,6 +27,8 @@ const Himalayan_Zoological_Park = () => {
     const fullHistoryText = `The Himalayan Zoological Park, located in Gangtok, Sikkim, was established in 1991 to protect and conserve the region’s unique wildlife. Situated at an altitude of 1,780 meters, the park spans 205 hectares of forested land and is home to a variety of endangered species native to the Eastern Himalayas. The park is renowned for housing the rare red panda, as well as other species like the Himalayan Monal, barking deer, and several types of pheasants. Its primary mission is wildlife conservation, and it offers a chance for visitors to explore the natural biodiversity of Sikkim`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Himalayan_Zoological_Park = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 4:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 4 PM</Text>
+                { 9 <= hour && 16 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹30 for adult </Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Sai_Ka_Angan = () => {
     const fullHistoryText = `History : Sai Ka Angan is a renowned temple dedicated to Sai Baba in Gurugram, Haryana. The temple was established in 2007 with the blessings of Shirdi Sai Baba, and it is considered a place of spiritual solace and healing for devotees. The temple aims to promote peace, love, and compassion, reflecting the teachings of Sai Baba. Devotees visit the temple to seek blessings for their well-being and to experience tranquility. The temple’s serene atmosphere, simple yet beautiful architecture, and association with Shirdi Sai Baba have made it one of the most visited spiritual places in Gurugram.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Sai_Ka_Angan = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5:00 AM to 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free  
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

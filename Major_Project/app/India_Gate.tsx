@@ -27,6 +27,8 @@ const India_Gate = () => {
     const fullHistoryText = `India Gate, an iconic war memorial located in New Delhi, was designed by Sir Edwin Lutyens and completed in 1931. It was originally called the All India War Memorial and commemorates the 82,000 soldiers of the Indian Army who died during World War I and the Third Anglo-Afghan War. The names of more than 13,000 British and Indian soldiers are inscribed on the gate. The memorial also features the Amar Jawan Jyoti, a flame dedicated to unknown soldiers who have died in service. India Gate has become a symbol of national pride and sacrifice and is one of India's most famous landmarks.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const India_Gate = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 8:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :9 AM to 8 PM</Text>
+                { 9 <= hour && 20 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -133,10 +138,25 @@ const styles = StyleSheet.create({
       width: width * 0.9, // 90% of the screen width
       alignSelf: "center", // Center horizontally
     },
+  
     text: {
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

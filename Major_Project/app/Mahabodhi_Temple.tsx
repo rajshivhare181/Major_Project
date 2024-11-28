@@ -27,6 +27,8 @@ const Mahabodhi_Temple = () => {
     const fullHistoryText = `History : Buddha’s Enlightenment: The Mahabodhi Temple marks the exact spot where Siddhartha Gautama meditated under the Bodhi Tree and attained nirvana (enlightenment) around the 6th century BCE. This event marked the beginning of Buddhism and the Buddha's teachings on the Four Noble Truths and the Eightfold Path.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Mahabodhi_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:00 AM - 06:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 5 AM - 6 PM.</Text>
+                { 5 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free 
@@ -141,6 +146,20 @@ const styles = StyleSheet.create({
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.04,
     //   alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     },
     book: {
       backgroundColor: "#8533ff",

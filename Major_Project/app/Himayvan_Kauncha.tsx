@@ -27,6 +27,8 @@ const HIMAYVAN_KAUNCHA = () => {
     const fullHistoryText = `Himayvan Kauncha, located in Dadra and Nagar Haveli and Daman and Diu, is a serene natural site primarily known for its lush greenery, rich biodiversity, and peaceful environment. The region is part of the larger Himachal Wildlife Sanctuary and is a popular destination for nature lovers and tourists. The area is home to various species of flora and fauna, including a variety of birds, making it a hub for eco-tourism and wildlife enthusiasts. Himayvan Kauncha remains a tranquil spot, often frequented by visitors seeking a respite from urban life while enjoying the natural landscapes.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const HIMAYVAN_KAUNCHA = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 6:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM.</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no fixed ticket</Text>
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

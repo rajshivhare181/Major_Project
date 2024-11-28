@@ -27,6 +27,8 @@ const Se_Cathedral = () => {
     const fullHistoryText = `History :The Se Cathedral is one of the largest and most significant churches in Old Goa, built in the 16th century. Completed in 1619, it is dedicated to Saint Catherine of Alexandria. The cathedral was commissioned by the Portuguese to mark their victory over the Bijapur Sultanate at the Battle of Dona Paula in 1510. It is an example of Portuguese-Gothic architecture, with its imposing structure and intricate design. The cathedral houses the Golden Bell, one of the largest bells in the country. It is part of the UNESCO World Heritage Site of Goa’s churches and convents, symbolizing the influence of Portuguese colonization.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Se_Cathedral = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :7:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :7 AM to 6 PM</Text>
+                { 7 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee 
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Marine_National_Park   = () => {
     const fullHistoryText = `History : The Mahatma Gandhi Marine National Park is located in the South Andaman Islands, near Wandoor village, approximately 25 km from Port Blair, the capital of the Andaman and Nicobar Islands. Established in 1983, the park was named after Mahatma Gandhi to honor his legacy in the field of non-violence and conservation of nature. The park spans over 280 square kilometers, including both land and marine areas, and it was created to protect the rich marine biodiversity of the Andaman Islands.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Marine_National_Park   = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹10 for adult
@@ -142,6 +147,20 @@ const styles = StyleSheet.create({
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.04,
     //   alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     },
     book: {
       backgroundColor: "#8533ff",

@@ -27,6 +27,8 @@ const Cherrapunji = () => {
     const fullHistoryText = `Cherrapunji, located in the East Khasi Hills of Meghalaya, is famous for being one of the wettest places on Earth. Historically, it was a prominent settlement for the Khasi tribe. The British named it “Cherrapunji” during their colonial rule, and it served as a major administrative and trading center in the 19th century. It was once the capital of the Khasi Kingdom before the British annexed it. Apart from its environmental significance, Cherrapunji is also known for its rich cultural heritage, including the unique living root bridges, which have been crafted by the Khasi people for centuries.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Cherrapunji = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                { 8 <= hour && 17 >= hour ? 
+                   <Text style={styles.time}>Open</Text> :
+                   <Text style={styles.time1}>Close</Text>
+               } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : no entry fee</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

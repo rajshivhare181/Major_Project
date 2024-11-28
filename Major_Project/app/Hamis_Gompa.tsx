@@ -27,6 +27,8 @@ const Hamis_Gompa = () => {
     const fullHistoryText = `Hamis Gompa (or Hemis Gompa) is a famous Tibetan Buddhist monastery located in the Leh region of Ladakh, India. It belongs to the Drukpa Kagyu sect of Tibetan Buddhism and is one of the largest and wealthiest monasteries in Ladakh. The monastery was originally founded in the 17th century, but it has been rebuilt and renovated several times over the centuries. Hemis Gompa is particularly well-known for hosting the Hemis Festival, a vibrant and colorful celebration of Ladakhi culture, and its collection of precious Buddhist artifacts, manuscripts, and paintings.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Hamis_Gompa = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :RS 30–50 for adult</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Dirang = () => {
     const fullHistoryText = `Dirang is a town in the West Kameng district of Arunachal Pradesh, India, located in the eastern Himalayas. Historically, it has been a significant stopover on the trade route between India and Tibet. The area is inhabited primarily by the Monpa tribe, known for their distinct culture and traditions. During the British colonial period, Dirang was part of the region known as the “North East Frontier Agency,” which later became Arunachal Pradesh. Over time, Dirang developed as a small administrative and military base. Today, it is recognized for its scenic beauty, diverse wildlife, and as a gateway to the Tawang region.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Dirang = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+                } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : No entry fee</Text>
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

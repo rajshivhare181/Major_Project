@@ -27,6 +27,8 @@ const Wokha = () => {
     const fullHistoryText = `Wokha is a town in Nagaland, located in the Wokha District and known for its scenic beauty and cultural significance. It is predominantly inhabited by the Lotha Naga tribe, one of the major tribes in Nagaland. Wokha has historically been a center for agriculture, with rice, millet, and vegetables being the main crops. The region played a role in the state's movement for self-rule and independence, as well as in promoting the Naga identity. Wokha is also known for its natural attractions, such as Mount Tiyi and Dzüko Valley, making it a popular spot for trekking and nature tourism.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Wokha = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 5 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Spituk_Monastery = () => {
     const fullHistoryText = `History :Spituk Monastery, located about 8 km from Leh, was founded in the 11th century by Od-de, a famous Tibetan Buddhist scholar. The monastery belongs to the Gelugpa sect of Tibetan Buddhism and has a rich history of spiritual significance. It is renowned for its stunning location on a hilltop overlooking the Indus River and its vast collection of ancient relics, manuscripts, and statues. The monastery houses around 100 monks and also holds an annual festival called "Spituk Gustor" which features traditional dances and religious ceremonies, drawing numerous visitors..`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Spituk_Monastery = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :7:00 AM to 7:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :7 AM to 7 PM.</Text>
+                { 7 <= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

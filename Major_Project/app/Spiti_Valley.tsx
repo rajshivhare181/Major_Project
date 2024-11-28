@@ -27,6 +27,8 @@ const Spiti_Valley = () => {
     const fullHistoryText = `History :Spiti Valley, often referred to as "Little Tibet," is a remote, high-altitude region in Himachal Pradesh, India. The valley's history dates back centuries, with its roots in Tibetan Buddhism. Historically, Spiti was part of the Buddhist kingdom of Guge, which flourished from the 9th to the 15th century. The region has seen a blend of Tibetan and Indian cultures, with monasteries like Key Monastery and Tabo Monastery playing significant roles in preserving its spiritual heritage. Due to its inaccessibility, Spiti has remained relatively untouched by modern influences, offering a glimpse into ancient Tibetan traditions and lifestyle.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Spiti_Valley = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

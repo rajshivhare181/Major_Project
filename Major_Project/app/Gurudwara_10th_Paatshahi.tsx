@@ -27,6 +27,8 @@ const Gurudwara_10th_Paatshahi = () => {
     const fullHistoryText = `History : Gurudwara 10th Paatshahi, also known as Gurudwara Guru Gobind Singh Ji, is a significant Sikh shrine located in Gurugram, Haryana. This Gurudwara is dedicated to Guru Gobind Singh Ji, the 10th Sikh Guru, who visited the region in the 17th century. It is believed that Guru Gobind Singh Ji stayed here for some time during his travels, and the site has been a place of pilgrimage for Sikhs ever since. The Gurudwara serves as a center of spiritual learning and community service, offering daily prayers, kirtan (devotional singing), and langar (community kitchen).`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Gurudwara_10th_Paatshahi = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :4:00 AM - 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :4 AM - 9 PM</Text>
+                { 9 <= hour && 21 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

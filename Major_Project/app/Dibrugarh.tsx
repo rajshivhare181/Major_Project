@@ -27,6 +27,8 @@ const Dibrugarh = () => {
     const fullHistoryText = `Dibrugarh, like much of Assam, has a rich history influenced by various dynasties and cultures. The area was originally inhabited by various indigenous tribes, including the Bodos, Mishing, and Assamese people. The region came under the influence of the Ahom Kingdom in the 13th century, which ruled over Assam for nearly six centuries.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Dibrugarh = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 8:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 8 PM</Text>
+                { 6 <= hour && 20 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : INR 100 to INR 500</Text>
@@ -134,6 +139,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

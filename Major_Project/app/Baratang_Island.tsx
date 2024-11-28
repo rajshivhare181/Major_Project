@@ -27,6 +27,8 @@ const Baratang_Island = () => {
     const fullHistoryText = `History :Baratang Island, located in the Andaman and Nicobar Islands, is known for its unique geological features, including limestone caves and mud volcanoes. Historically, the island was inhabited by indigenous tribes like the Great Andamanese. The island’s strategic location made it an important site during colonial times. After independence, Baratang remained relatively undeveloped but gradually became known for its natural beauty and biodiversity. The island’s limestone caves, located amidst dense forests, and the nearby mud volcanoes became key attractions for eco-tourism. It is a quieter and less-visited destination compared to other Andaman islands but remains an important part of the region’s natural heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Baratang_Island = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 17 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+                } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee  </Text>
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

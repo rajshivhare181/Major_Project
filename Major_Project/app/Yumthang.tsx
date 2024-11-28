@@ -27,6 +27,8 @@ const Yumthang = () => {
     const fullHistoryText = `History : Yumthang, often referred to as the "Valley of Flowers," is located in the north of Sikkim at an altitude of 3,564 meters. It is renowned for its stunning natural beauty, with lush meadows, hot springs, and a wide array of alpine flowers that bloom from March to June. The valley is surrounded by snow-capped peaks, including the Kanchenjunga range. Historically, Yumthang was used by locals for grazing cattle, but over time, it has become a popular tourist destination due to its serene environment, diverse flora, and the nearby Yumthang Hot Springs and the Shingba Rhododendron Sanctuary.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Yumthang = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 7:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 7 AM to 5 PM.</Text>
+                { 7 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free</Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

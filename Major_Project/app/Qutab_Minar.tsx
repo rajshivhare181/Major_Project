@@ -27,6 +27,8 @@ const Qutab_Minar = () => {
     const fullHistoryText = `History : The Qutub Minar is a UNESCO World Heritage site and one of Delhi’s most iconic landmarks. Built in 1193 by Qutb-ud-din Aibak, the founder of the Delhi Sultanate, it stands at 73 meters (240 feet), making it the tallest brick minaret in the world. The Qutub Minar is a fine example of Indo-Islamic Afghan architecture, featuring intricate carvings and inscriptions in Arabic. The tower was originally constructed to celebrate Aibak's victory over the Rajputs. It also holds historical significance, marking the beginning of Muslim rule in India. Over the centuries, it has been renovated and preserved as a heritage monument.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Qutab_Minar = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 7:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 7 AM to 5 PM</Text>
+                { 7 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹40 for adult  
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

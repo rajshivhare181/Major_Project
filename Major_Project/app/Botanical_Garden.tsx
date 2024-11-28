@@ -28,6 +28,8 @@ const Botanical_Garden = () => {
     const fullHistoryText = `The Botanical Garden in Pondicherry was established in 1826 by the French colonial government to promote botanical research and introduce a variety of plant species. The garden spans 22 acres and is laid out in a well-planned design, featuring several sections such as the French-style formal garden, tropical plants, and a special section for medicinal plants. Over the years, the garden has evolved into an important center for conservation and public education on plant species. It also houses a large variety of trees, shrubs, and flowering plants, making it a serene retreat for visitors and a haven for plant lovers.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -61,7 +63,10 @@ const Botanical_Garden = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 10:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 10 <= hour && 17 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+                } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹20 for adults</Text>
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

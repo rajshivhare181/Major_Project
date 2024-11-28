@@ -27,6 +27,8 @@ const Elephant_Beach = () => {
     const fullHistoryText = `The Folklore Museum in Kochi, Kerala, is a cultural treasure trove dedicated to preserving the rich traditions, art, and heritage of Kerala. Established in 2009, the museum houses a vast collection of traditional artifacts, including costumes, masks, musical instruments, household items, and religious objects. It offers visitors a glimpse into Kerala’s vibrant folk traditions, including classical dance forms like Kathakali, Theyyam, and Mohiniyattam. The museum also displays a variety of old agricultural tools, paintings, and sculptures, reflecting the cultural and historical evolution of Kerala’s rural life. It plays an important role in promoting and preserving Kerala’s folklore and artistic heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Elephant_Beach = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 5 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
+    <Text style={styles.time}>Open</Text> :
+    <Text style={styles.time1}>Close</Text>
+} 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹30-50 for adult
@@ -134,6 +139,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

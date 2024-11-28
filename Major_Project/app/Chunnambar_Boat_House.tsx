@@ -27,6 +27,8 @@ const Chunnambar_Boat_House = () => {
     const fullHistoryText = `The Chunnambar Boat House is located along the backwaters of the Chunnambar River, about 8 km from Pondicherry. It is a popular destination for water-based activities and nature walks. The site is known for its scenic views of the river and its proximity to the Chunnambar Nature Resort. The Boat House offers boat rides, including options for visiting Paradise Beach, a secluded and serene spot accessible only by boat. The area has been developed to promote eco-tourism and is a favorite among locals and tourists seeking a peaceful retreat in nature.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Chunnambar_Boat_House = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 5:30 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9:00 AM to 5:00 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹10 - ₹20 for adults</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

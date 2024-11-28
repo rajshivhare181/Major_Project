@@ -27,6 +27,8 @@ const Jagannath_Mandir = () => {
     const fullHistoryText = `History : Jagannath Mandir in Ranchi is a prominent Hindu temple dedicated to Lord Jagannath, an incarnation of Lord Vishnu, along with his siblings, Lord Balabhadra and Goddess Subhadra. The temple was constructed in 1691 by the local king Ishwar Singh of Barkagarh. The architecture of the temple is inspired by the famous Jagannath Temple in Puri, Odisha. Over time, it has become a major religious and cultural center for devotees, particularly during the Rath Yatra, when the deity’s chariot procession is celebrated with great fervor. The temple is situated on a hill, offering panoramic views of Ranchi.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Jagannath_Mandir = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:00 AM - 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 5 AM - 9 PM</Text>
+                { 5 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

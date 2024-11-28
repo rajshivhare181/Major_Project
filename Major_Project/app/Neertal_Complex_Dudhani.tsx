@@ -27,6 +27,8 @@ const Neertal_Complex_Dudhani = () => {
     const fullHistoryText = `History :The Neertal Tourist Complex is located in Dudhani, a scenic village in the Mungeli district of Chhattisgarh, India. This tourist complex is situated near the Neertal Lake, a popular spot for picnics and boating. The lake, surrounded by lush greenery and hills, has gained attention for its serene environment and natural beauty. Over the years, Neertal has developed into a notable tourist destination, offering a peaceful retreat and recreational activities like boating and fishing. The development of the Neertal Tourist Complex aimed to promote eco-tourism, making it a family-friendly location for both relaxation and adventure.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Neertal_Complex_Dudhani = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
+                { 8 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹100 to ₹300 for adult
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

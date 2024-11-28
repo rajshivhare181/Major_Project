@@ -27,6 +27,8 @@ const Nandankanan_Zoological_Park = () => {
     const fullHistoryText = `History : Nandankanan Zoological Park, located near Bhubaneswar, Odisha, was established in 1960 and is one of India’s premier zoos. Initially set up as a sanctuary for animals, it became a zoo in 1979 and later achieved the status of a National Park. The park spans over 400 hectares and is home to a wide variety of flora and fauna. It is especially known for its successful breeding programs of rare species such as the white tiger and the Indian pangolin. Nandankanan is also a botanical garden, hosting a diverse collection of plants and providing a natural habitat for its inhabitants.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Nandankanan_Zoological_Park = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :7:00 AM to 5:00 pm </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :7 AM to 5 pm </Text>
+                { 7 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹30 for adult 
@@ -137,6 +142,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const State_Museum = () => {
     const fullHistoryText = `History :The Manipur State Museum in Imphal, established in 1969, showcases the rich cultural heritage and history of Manipur. The museum's collection includes artifacts from the region’s Meitei civilization, archaeological relics, ethnological exhibits, and traditional art. It also highlights the state’s freedom struggle and the Anglo-Manipur War of 1891. The museum’s diverse collections offer insight into the history, lifestyle, and art forms of the people of Manipur, featuring traditional costumes, musical instruments, weapons, and sculptures. It is an essential institution for understanding the unique history and culture of the state.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const State_Museum = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10:00 AM to 4:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :10 AM to 4 PM.</Text>
+                { 10 <= hour && 16 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹10 - ₹20 for adult
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

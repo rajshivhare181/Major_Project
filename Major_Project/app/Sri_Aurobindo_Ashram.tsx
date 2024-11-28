@@ -27,6 +27,8 @@ const Sri_Aurobindo_Ashram = () => {
     const fullHistoryText = `History :Founded in 1926 by Sri Aurobindo and Mirra Alfassa (The Mother), the Sri Aurobindo Ashram in Puducherry (formerly Pondicherry) is a spiritual center that focuses on the integration of yoga, meditation, and philosophy for human evolution. The ashram grew out of Sri Aurobindo's teachings on Integral Yoga, which emphasizes spiritual development and transformation of the body, mind, and soul. The Ashram became a beacon for followers seeking to experience the higher consciousness and teachings of Sri Aurobindo, and it continues to be a center of spiritual learning and practice, attracting visitors from around the world.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Sri_Aurobindo_Ashram = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :8:00 AM - 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :8 AM - 6 PM</Text>
+                { 8 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

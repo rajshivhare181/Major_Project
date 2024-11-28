@@ -27,6 +27,8 @@ const Kochi = () => {
     const fullHistoryText = `History : Kochi, also known as Cochin, is one of the oldest and most historically significant port cities in India, located on the southwestern coast of Kerala. Its history dates back to at least the 14th century, when it became a major center for trade in spices, especially pepper, with the arrival of Arabs, Chinese, Portuguese, and later Dutch and British traders. The Portuguese arrived in the early 16th century, followed by the Dutch in the 17th century, and the British in the 18th century, each leaving their mark on the city's architecture and culture. Kochi became a significant colonial hub, and it remains a vibrant mix of old-world charm and modern development, with a rich heritage of art, culture, and multicultural influences.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Kochi = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹100 - ₹200 for adult
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

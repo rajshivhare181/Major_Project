@@ -27,6 +27,8 @@ const Jagdish_Temple = () => {
     const fullHistoryText = `History :Jagdish Temple, located in the heart of Udaipur, Rajasthan, is a grand Hindu temple dedicated to Lord Vishnu. Built in 1651 by Maharana Jagat Singh I, it is one of the largest and most important temples in Udaipur. The temple features Indo-Aryan architecture, with a stunning entrance and intricately carved pillars, sculptures, and spires. The central deity, Lord Vishnu, is depicted in the form of Jagannath. The temple is known for its serene atmosphere, attracting both devotees and tourists, and remains a significant cultural and religious site in the city.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Jagdish_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :4:00 AM to 9:00 PM </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :4 AM to 9 PM </Text>
+                { 4 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

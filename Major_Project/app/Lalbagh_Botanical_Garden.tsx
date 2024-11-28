@@ -27,6 +27,8 @@ const Lalbagh_Botanical_Garden = () => {
     const fullHistoryText = `History : Lalbagh Botanical Garden in Bangalore, Karnataka, is one of the most famous botanical gardens in India. Established in 1760 by Hyder Ali, the ruler of Mysore, it was later expanded by his son, Tipu Sultan. The garden was designed with the intention of fostering plant cultivation and botanical research. It features a variety of rare plant species, a glasshouse inspired by London's Crystal Palace, and a historical floral clock. Lalbagh has been a center for scientific research in horticulture and remains an important cultural and tourist attraction, especially known for its annual flower shows during Republic Day and Independence Day.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Lalbagh_Botanical_Garden = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 7:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 7 PM</Text>
+                { 6 <= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹30 for adult
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

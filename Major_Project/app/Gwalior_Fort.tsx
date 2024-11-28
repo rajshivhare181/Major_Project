@@ -63,7 +63,7 @@ const Gwalior_Fort = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6 am – 5 pm</Text>
+                <Text style={styles.text}>Timing : 6 am - 5 pm</Text>
                 { 6<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>

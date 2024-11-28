@@ -29,6 +29,8 @@ const Ins_Kurusura_Submarine_Museum = () => {
 The submarine played a significant role during India-Pakistan wars, notably during the 1971 India-Pakistan War (also known as the Bangladesh Liberation War), where it was part of the naval operations and the blockade of Pakistani ports. It was part of India's strategic defense during the war and was involved in numerous reconnaissance missions.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -61,8 +63,11 @@ The submarine played a significant role during India-Pakistan wars, notably duri
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 8:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :9 AM to 8 PM</Text>
+                { 9 <= hour && 20 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : RS20 .
@@ -137,10 +142,25 @@ const styles = StyleSheet.create({
       width: width * 0.9, // 90% of the screen width
       alignSelf: "center", // Center horizontally
     },
+   
     text: {
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

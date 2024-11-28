@@ -27,6 +27,8 @@ const Qila_Mubarak = () => {
     const fullHistoryText = `History :Qila Mubarak is a historic fort complex in Patiala, built by Maharaja Ala Singh in 1763. It served as the seat of the Patiala royal family and played a crucial role in the region's history. The fort is known for its blend of Mughal and Sikh architectural styles. The complex includes several important structures such as the Mubarak Tower, the main entrance, and the Sheesh Mahal. It was once a center of administration and royal leisure. Today, it stands as a symbol of Patiala's regal heritage and an important tourist attraction.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Qila_Mubarak = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :10 AM to 5 PM</Text>
+                { 10 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :RS 20 - 50 for adult 
@@ -140,6 +145,20 @@ const styles = StyleSheet.create({
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.04,
     //   alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     },
     book: {
       backgroundColor: "#8533ff",

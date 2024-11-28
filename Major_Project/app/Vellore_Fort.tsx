@@ -27,6 +27,8 @@ const Vellore_Fort = () => {
     const fullHistoryText = `Vellore Fort, located in Vellore, Tamil Nadu, is a 16th-century fort built by the Vijayanagar kings. It is renowned for its strong military architecture and well-preserved structures. The fort was later taken over by the Marathas and the Nayaks before falling under the control of the British in the 18th century. The fort is notable for its massive walls, moat, and historical sites, including the Jalagandeeswarar Temple, a mosque, and the Christian cemetery. Vellore Fort is also significant for the 1806 Vellore Mutiny, an early rebellion against British rule.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Vellore_Fort = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :  8:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :  8 AM to 5 PM</Text>
+                { 8 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹25 to ₹50 for adult </Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

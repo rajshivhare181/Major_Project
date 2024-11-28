@@ -27,6 +27,8 @@ const Dimapur = () => {
     const fullHistoryText = `Dimapur, the largest city in Nagaland, holds historical significance as both a cultural hub and an important trading center. Historically, it was the capital of the ancient Kachari Kingdom and is home to Kachari ruins—remnants of an advanced civilization that existed in the region around the 10th century. The city’s name, derived from the Dimapu River, has been synonymous with the growth of Nagaland as a trade route for goods between India and Myanmar. Dimapur also has significant colonial-era history, with its British influence shaping much of its infrastructure. Today, it serves as the gateway to Nagaland with its transport connections.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Dimapur = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :  9:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :  9 AM to 5 PM.</Text>
+                { 9 <= hour && 17 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+             } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :: Free entry.</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

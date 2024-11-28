@@ -27,6 +27,8 @@ const Keshgarh_Sahib = () => {
     const fullHistoryText = `Gurdwara Keshgarh Sahib, located in Anandpur Sahib, Punjab, is one of the most significant and revered Sikh shrines. It marks the place where Guru Gobind Singh, the tenth Sikh Guru, founded the Khalsa in 1699, during the historic event known as Vaisakhi. On this day, Guru Gobind Singh initiated the Panj Pyare (Five Beloved Ones) and established the Sikh code of conduct, laying the foundation for the Khalsa community. The gurdwara also stands as a symbol of courage, spirituality, and Sikh unity. It is a major pilgrimage site and holds deep historical and religious significance for Sikhs worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Keshgarh_Sahib = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :4:00 AM to 9:00 PM. </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :4 AM to 9 PM. </Text>
+                { 4 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free 
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

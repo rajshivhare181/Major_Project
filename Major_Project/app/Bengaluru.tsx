@@ -27,6 +27,8 @@ const Bengaluru = () => {
     const fullHistoryText = `History : Bengaluru (formerly Bangalore) is the capital of Karnataka and one of India's largest cities. It has a rich history dating back to the 16th century when it was founded by Kempegowda, a chieftain under the Vijayanagara Empire. Originally a small town, it grew rapidly in the 19th century under British rule, becoming an important administrative and military center. The city has evolved into a major hub for technology, education, and culture. Known as the "Silicon Valley of India," Bengaluru is also famous for its pleasant climate, gardens, and historical landmarks.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+     const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Bengaluru = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 9 <= hour && 18 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹230 for adult</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

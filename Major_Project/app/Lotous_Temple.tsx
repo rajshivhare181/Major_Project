@@ -27,6 +27,8 @@ const Lotous_Temple = () => {
     const fullHistoryText = `History :The Lotus Temple in New Delhi, completed in 1986, is a Bahá'í House of Worship. Its unique lotus-shaped architecture symbolizes purity and is open to people of all religions. Designed by Iranian architect Fariborz Sahba, the temple is made of 27 marble-clad petals arranged in clusters, creating the shape of a lotus flower. The temple is surrounded by beautiful gardens and reflects the Bahá'í teachings of unity, peace, and equality. It is one of the most visited religious buildings in the world, attracting millions of visitors annually from various faiths and backgrounds.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Lotous_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 7:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :9 AM to 7 PM</Text>
+                { 9 <= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free 
@@ -137,6 +142,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

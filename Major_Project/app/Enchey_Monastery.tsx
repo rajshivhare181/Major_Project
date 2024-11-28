@@ -27,6 +27,8 @@ const Enchey_Monastery = () => {
     const fullHistoryText = `Enchey Monastery, located in Gangtok, Sikkim, was built in 1909 by Lama Dhrupthob Karpo, a prominent lama from Sikkim. It is an important Buddhist monastery belonging to the Nyingma sect of Tibetan Buddhism. The name "Enchey" means "The solitary temple" in Tibetan, which reflects its peaceful and isolated setting. The monastery is known for its beautiful architecture, vibrant prayer flags, and magnificent views of the Kanchenjunga mountain range. It is also a significant place of worship and a popular destination for spiritual seekers and tourists visiting Gangtok.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Enchey_Monastery = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :5:00 AM to 7:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :5 AM to 7 PM</Text>
+                { 5 <= hour && 19 >= hour ? 
+               <Text style={styles.time}>Open</Text> :
+               <Text style={styles.time1}>Close</Text>
+              } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -135,6 +140,21 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

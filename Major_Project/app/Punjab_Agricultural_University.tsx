@@ -27,6 +27,8 @@ const Punjab_Agricultural_University = () => {
     const fullHistoryText = `History :Punjab Agricultural University (PAU), located in Ludhiana, Punjab, was established in 1962 as one of the premier institutions for agricultural education and research in India. Its primary mission is to improve agricultural productivity and address challenges faced by farmers in Punjab and other regions. PAU has contributed significantly to the Green Revolution in India, particularly by developing high-yielding crop varieties. The university offers undergraduate, postgraduate, and doctoral programs in agriculture and related fields. It is known for its research in crop production, plant breeding, horticulture, and veterinary sciences, making it a key player in India's agricultural development.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Punjab_Agricultural_University = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :9 AM to 5 PM.</Text>
+                { 9 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free  
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

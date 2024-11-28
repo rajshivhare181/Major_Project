@@ -27,6 +27,8 @@ const Bhubaneswar = () => {
     const fullHistoryText = `History : Bhubaneswar, the capital city of Odisha, has a rich historical and cultural legacy dating back to ancient times. Known as the "City of Temples," Bhubaneswar was an important center of religious and political power in ancient Kalinga. It became the capital of modern Odisha after independence. The city's architectural heritage includes numerous temples, the most notable being the Lingaraj Temple, dating back to the 11th century. Bhubaneswar has a blend of ancient history with modern urban development and has emerged as a hub for education, technology, and commerce in eastern India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Bhubaneswar = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9:00 AM - 6:00 PM </Text>
-                <Text style={styles.text}>Open</Text>
+                { 9 <= hour && 18 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : free entry</Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

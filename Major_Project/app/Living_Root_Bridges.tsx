@@ -27,6 +27,8 @@ const Living_Root_Bridges = () => {
     const fullHistoryText = `Historical Legacy: Living Root Bridges are a unique marvel of traditional engineering in Meghalaya, primarily created by the Khasi tribe. These bridges are crafted by guiding the roots of the Ficus elastica (rubber tree) over time to form strong, functional structures. The practice dates back over 500 years, and the bridges are still in use today, growing stronger over generations. The Double Decker Root Bridge in Nongriat is one of the most famous examples, attracting tourists worldwide. These bridges are an excellent example of sustainable living and the Khasi people's deep connection with nature, using it to create long-lasting, eco-friendly infrastructure.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Living_Root_Bridges = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 8 AM to 5 PM</Text>
+                { 8 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹20-₹30 for adult
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Lodhi_Garden = () => {
     const fullHistoryText = `Historical Legacy: Lodhi Garden is a historical park located in New Delhi, spread over 90 acres. It was developed during the British colonial period, but it is home to several significant architectural tombs from the Lodhi dynasty (1451–1526). The most notable tombs include those of Sikander Lodi (the last ruler of the Lodhi dynasty), Mohammad Shah, and Bahlul Lodi. The garden, originally a burial ground, was later transformed into a public park by the British. It features lush greenery, well-maintained pathways, and beautiful tombs, making it a popular spot for both history enthusiasts and nature lovers.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Lodhi_Garden = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:00 AM to 7:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 5 AM to 7 PM.</Text>
+                { 5 <= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Rameswaram = () => {
     const fullHistoryText = `History :Rameswaram is a sacred town located on Pamban Island in Tamil Nadu, known for its iconic Ramanathaswamy Temple dedicated to Lord Shiva. The town has great religious significance in Hinduism, especially for devotees following the Ramayana epic. It is believed that Lord Rama, an incarnation of Vishnu, built a bridge (Rama's Setu) to Lanka (Sri Lanka) to rescue his wife Sita. The temple, with its long corridors, grand pillars, and sacred water tanks, has been a site of pilgrimage for centuries and is part of the Char Dham Yatra, offering spiritual importance to Hindus worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Rameswaram = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :5:00 AM to 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :5 AM to 9 PM</Text>
+                { 5 <= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee  
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Banjhakri_Falls = () => {
     const fullHistoryText = `Banjhakri Falls, located about 7 km from Gangtok, Sikkim, is a scenic waterfall nestled in a lush green forest. The name "Banjhakri" is derived from the word "Ban" (forest) and "Jhakri" (shaman), which refers to the mystical forest spirit in local folklore. The falls are believed to be a sacred site where the shaman performs rituals. In addition to the waterfall, the surrounding park features traditional Sikkimese architecture and sculptures, making it a popular cultural and natural attraction. The area is also a center for environmental awareness and is often visited for picnics and relaxation.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Banjhakri_Falls = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 8 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+} 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :RS 50 for adult</Text>
@@ -134,6 +139,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

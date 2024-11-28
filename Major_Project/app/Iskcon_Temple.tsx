@@ -27,6 +27,8 @@ const Iskcon_Temple = () => {
     const fullHistoryText = `The ISKCON movement was founded in 1966 by A.C. Bhaktivedanta Swami Prabhupada in New York, USA, with the aim of promoting devotion to Lord Krishna and spreading the teachings of the Bhagavad Gita. ISKCON has since grown to become a global movement, with temples, centers, and communities around the world dedicated to the worship of Lord Krishna.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Iskcon_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :4:30 AM - 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :4 AM - 9 PM</Text>
+                { 4 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee
@@ -130,10 +135,25 @@ const styles = StyleSheet.create({
       width: width * 0.9, // 90% of the screen width
       alignSelf: "center", // Center horizontally
     },
+   
     text: {
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

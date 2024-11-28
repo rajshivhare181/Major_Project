@@ -27,6 +27,8 @@ const Mon  = () => {
     const fullHistoryText = `History : Mon is a town located in the northeastern part of Nagaland, India, and serves as the district headquarters of Mon District. It is inhabited by the Konyak Naga tribe, one of the most distinct and culturally rich tribes of Nagaland. Historically, the Konyaks were known for their headhunting practices, which were part of their ancient tribal traditions. Over the years, Mon has transformed into a hub for tribal culture, with festivals, folk dances, and traditional practices still being an integral part of life. The town's remoteness and natural beauty make it a sought-after destination for those looking to explore Naga heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Mon  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :8:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :8 AM to 5 PM.</Text>
+                { 8 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free 
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

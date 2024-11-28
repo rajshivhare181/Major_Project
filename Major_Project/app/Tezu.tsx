@@ -27,6 +27,8 @@ const Tezu = () => {
     const fullHistoryText = `History :Tezu is a town located in the northeastern part of India, in the Lohit district of Arunachal Pradesh. It serves as the district headquarters and has historical significance due to its strategic location near the Indo-China border. The town was historically influenced by the indigenous Adi and Mishmi tribes, who have lived in the region for centuries. During the British colonial era, the area was less explored due to its remoteness. Post-independence, Tezu became an important administrative center in Arunachal Pradesh, especially with the growth of infrastructure and development in the region. It continues to be a vital hub for both culture and trade.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Tezu = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :4:00 AM to 6:00 AM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :4 AM to 6 AM</Text>
+                { 4 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee 
@@ -138,6 +143,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

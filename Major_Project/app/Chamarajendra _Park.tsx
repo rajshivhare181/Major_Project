@@ -27,6 +27,8 @@ const Chamarajendra_Park = () => {
     const fullHistoryText = `History :Shri Chāmarajendra Park, popularly known as Cubbon Park, is a large green space located in the heart of Bengaluru, India. It was created in 1870 by the then British Commissioner, Sir John Meade, and was later named after Chamaraja Wodeyar, the Maharaja of Mysore. The park was designed by renowned British engineer Richard Sankey, spanning 300 acres. It serves as a haven for locals and tourists alike, offering serene walking paths, lush greenery, and a variety of flora and fauna. The park has become a symbol of Bengaluru’s commitment to maintaining green spaces amidst urbanization.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Chamarajendra_Park = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5:00 AM to 8:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                { 5 <= hour && 20 >= hour ? 
+                   <Text style={styles.time}>Open</Text> :
+                   <Text style={styles.time1}>Close</Text>
+               }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :free</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const City_Palace = () => {
     const fullHistoryText = `City Palace, located in the heart of Jaipur, Rajasthan, was built between 1729 and 1732 by Maharaja Sawai Jai Singh II, the founder of Jaipur. The palace complex, a blend of Mughal, Rajput, and European architectural styles, served as the royal residence for the Kachwaha dynasty. It houses several courtyards, gardens, temples, and museums, offering insight into the grandeur of Jaipur's royal past. The palace remains the residence of the present royal family of Jaipur, with parts of it open to the public as a museum showcasing artifacts and royal collections.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const City_Palace = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 9 <= hour && 17 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹100 - ₹150 for adults</Text>
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

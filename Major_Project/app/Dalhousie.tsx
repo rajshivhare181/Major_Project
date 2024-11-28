@@ -27,6 +27,8 @@ const Dalhousie = () => {
     const fullHistoryText = `History :Dalhousie is a picturesque hill station in the Chamba district of Himachal Pradesh, named after Lord Dalhousie, the British Governor-General of India (1848–1856). Established as a retreat for British officials due to its cool climate, Dalhousie retains colonial-era architecture, with churches and bungalows that reflect its past. Its serene environment and scenic views of the Dhauladhar mountain range make it a popular tourist destination. The town's history also includes its strategic role as a military post during the British era. Dalhousie today blends natural beauty with historical charm.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Dalhousie = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

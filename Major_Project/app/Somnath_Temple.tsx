@@ -27,6 +27,8 @@ const Somnath_Temple = () => {
     const fullHistoryText = `History :The Somnath Temple, located in Prabhas Patan, near Veraval in Gujarat, is one of the 12 Jyotirlinga shrines dedicated to Lord Shiva and holds great religious significance. The temple's history dates back to ancient times, with the original structure believed to have been constructed by the Moon God, Som. It has been destroyed and rebuilt several times due to invasions, with the most notable destruction by Mahmud of Ghazni in 1025 AD. The temple was rebuilt in 1951, following India's independence. Today, Somnath is a major pilgrimage destination and a symbol of India's rich spiritual and cultural heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Somnath_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 10:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 10 PM</Text>
+                { 6 <= hour && 22 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Fatehgarh_Sahib = () => {
     const fullHistoryText = `Fatehgarh Sahib, located in Punjab, India, is a historic city known for its religious and cultural significance. It is the site of the martyrdom of the two younger sons of Guru Gobind Singh, Sahibzada Zorawar Singh and Sahibzada Fateh Singh, who were bricked alive for refusing to convert to Islam by the Mughal emperor Aurangzeb. The Gurdwara Fatehgarh Sahib was built to honor their sacrifice. The city also houses Gurdwara Mata Gujri, dedicated to the mother of Guru Gobind Singh. Fatehgarh Sahib has become an important pilgrimage destination for Sikhs and is a symbol of courage and faith.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Fatehgarh_Sahib = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :5:00 AM to 9:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :5 AM to 9 PM.</Text>
+                { 5 <= hour && 21 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+             } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

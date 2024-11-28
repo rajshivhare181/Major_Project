@@ -27,6 +27,8 @@ const Bannerghatta_Biological_Park = () => {
     const fullHistoryText = `History : Bannerghatta Biological Park (BBP) was established in 1971 as a sanctuary for the protection of wildlife in the Bannerghatta region near Bengaluru, Karnataka. Over the years, it has expanded to include a zoo, a safari park, a butterfly park, and a rescue center for orphaned and injured animals. The park is dedicated to conserving the rich biodiversity of the region and educating the public about wildlife conservation. The safari, which allows visitors to see animals in their natural habitats, is one of the park's key attractions.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Bannerghatta_Biological_Park = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 9 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+             } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹80 for adults</Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

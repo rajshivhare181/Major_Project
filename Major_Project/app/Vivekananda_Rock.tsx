@@ -27,6 +27,8 @@ const Vivekananda_Rock = () => {
     const fullHistoryText = `Vivekananda Rock Memorial, located in Kanyakumari, Tamil Nadu, is a prominent monument dedicated to Swami Vivekananda. It stands on a small island in the Arabian Sea, where Swami Vivekananda meditated in 1892, gaining spiritual insight. The memorial was constructed in 1970 and consists of two main structures: a meditation hall and the Vivekananda Hall. The design blends elements of traditional Indian and modern architecture. The site is a popular pilgrimage and tourist destination, symbolizing the spiritual unity of India, and offers breathtaking views of the confluence of the Arabian Sea, Bay of Bengal, and Indian Ocean.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Vivekananda_Rock = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8:00 AM to 4:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 8 AM to 4 PM</Text>
+                { 8 <= hour && 16 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :RS 25 for adult</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

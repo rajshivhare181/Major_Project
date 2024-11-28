@@ -27,6 +27,8 @@ const Sheetla_Mandir = () => {
     const fullHistoryText = `History :Shri Mata Sheetla Devi Mandir is a revered Hindu temple located in Gurugram, Haryana. Dedicated to Mata Sheetla Devi, the goddess of smallpox and infectious diseases, the temple has a deep historical and spiritual significance. The temple is believed to have been constructed over a thousand years ago, with the current structure dating back to the 17th century. Devotees visit the temple seeking blessings for good health and protection from diseases. The temple is especially crowded during the Sheetla Ashtami festival, which falls on the eighth day after Holi, a day of worship dedicated to the goddess`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Sheetla_Mandir = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:00 AM to 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 5 AM to 9 PM</Text>
+                { 5 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : no entry fee
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Sabarmati_Ashram = () => {
     const fullHistoryText = `History : Sabarmati Ashram, located on the banks of the Sabarmati River in Ahmedabad, Gujarat, is one of the most significant landmarks in India's struggle for independence. It was here that Mahatma Gandhi lived from 1917 to 1930 and led the Salt March (Dandi March) in 1930, a key moment in India's non-violent resistance against British colonial rule. The ashram, also known as Gandhi Ashram, was established by Gandhi and his followers as a center for self-reliance, education, and non-violence. Today, the ashram serves as a museum showcasing Gandhian principles and life, attracting thousands of visitors each year.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Sabarmati_Ashram = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :8:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹20 for adult  
@@ -137,6 +142,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

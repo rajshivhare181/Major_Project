@@ -27,6 +27,8 @@ const Hanuman_Temple_Jakhu = () => {
     const fullHistoryText = `History : The Jakhu Temple, dedicated to Lord Hanuman, is situated on Jakhu Hill in Shimla, Himachal Pradesh. The temple's origins date back to ancient times, and it is believed that Hanuman rested at this location while searching for the Sanjeevani Booti to revive Lakshmana during the epic Ramayana. The temple became more prominent in the 19th century when it was reconstructed by the local Hindu community. The highlight of the temple is a towering 108-feet statue of Hanuman, one of the tallest in India, which was installed in 2010, making it a significant pilgrimage site and a popular tourist attraction.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Hanuman_Temple_Jakhu = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5:00 AM - 09:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 5 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free Entry </Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

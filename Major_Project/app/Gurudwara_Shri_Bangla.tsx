@@ -27,6 +27,8 @@ const Gurudwara_Shri_Bangla  = () => {
     const fullHistoryText = `HIstory: Gurudwara Shri Bangla Sahib is one of the most prominent Sikh gurdwaras in New Delhi. The gurdwara is dedicated to the eighth Sikh Guru, Guru Har Krishan Ji, who stayed at the place in 1664 during a visit to Delhi. The site is associated with Guru Har Krishan's compassion, as he helped to cure the sick and needy who were affected by a smallpox epidemic. After his passing, a Sarai (rest house) was built at the site, which later became a gurdwara. The gurdwara is also known for its large Sarovar (holy pool) and is a center for spiritual learning.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Gurudwara_Shri_Bangla  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :7:00 AM to 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :7 AM to 9 PM</Text>
+                { 7 <= hour && 21 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

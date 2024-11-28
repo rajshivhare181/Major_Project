@@ -27,6 +27,8 @@ const Immaculate_Conception_Church = () => {
     const fullHistoryText = `History : The Immaculate Conception Church in Panaji, Goa, is one of the oldest and most significant churches in the state. Built in 1541 by the Portuguese, the church was originally a small chapel but was expanded in the 17th century. Dedicated to the Immaculate Conception of the Virgin Mary, the church is a prominent example of Baroque architecture. The whitewashed facade, bell towers, and ornate altar are characteristic of the colonial-era churches of Goa. The church holds a special place in the hearts of Goans and is known for hosting the annual Feast of the Immaculate Conception on December.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Immaculate_Conception_Church = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :7:30 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :7 AM to 6 PM</Text>
+                { 7 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free </Text>
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

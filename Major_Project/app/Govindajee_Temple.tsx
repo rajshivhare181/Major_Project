@@ -27,6 +27,8 @@ const Govindajee_Temple = () => {
     const fullHistoryText = `Shree Govindajee Temple, located in Imphal, is one of the most important Hindu temples in Manipur. Dedicated to Lord Vishnu and Radha, the temple has deep cultural and religious significance for the Meitei people. Built in the 18th century, it was constructed during the reign of King Garib Niwaj, who was a devout follower of Vaishnavism. The temple’s architecture is influenced by both Indo-Aryan and local styles, and it houses beautiful murtis (idols) of Govindajee (a form of Lord Krishna) and Radha. The temple is a center for worship and celebrates various Vaishnavite festivals.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Govindajee_Temple = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :5:00 AM - 8:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 5 <= hour && 20 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free.
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

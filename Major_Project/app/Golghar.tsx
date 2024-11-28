@@ -27,6 +27,8 @@ const Golghar = () => {
     const fullHistoryText = `Golghar, meaning "round house" in Hindi, was built in 1786 by Captain John Garstin, a British army officer and engineer. The structure was originally intended as a granary (food storage building) for storing grains, primarily to be used in case of famine or emergencies. It was designed to be a large, circular structure with a high dome, offering a space to store surplus grain that could be distributed in times of need.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Golghar = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10:00 AM - 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :10 AM - 5 PM</Text>
+                { 10 <= hour && 17 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹10 for adults
@@ -142,6 +147,20 @@ const styles = StyleSheet.create({
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.04,
     //   alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     },
     book: {
       backgroundColor: "#8533ff",

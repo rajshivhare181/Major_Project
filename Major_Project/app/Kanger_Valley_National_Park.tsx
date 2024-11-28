@@ -27,6 +27,8 @@ const Kanger_Valley_National_Park = () => {
     const fullHistoryText = `Kanger Valley National Park, located in the Bastar district of Chhattisgarh, was established in 1982 and covers an area of approximately 200 square kilometers. The park is named after the Kanger River, which flows through its dense forests. It is part of the Kanger Wildlife Sanctuary and is known for its rich biodiversity, including rare species like the Indian wolf, leopard, and bison. The park is also home to spectacular limestone caves, such as the Bailadila caves. Over the years, Kanger Valley has become a significant conservation area and a popular eco-tourism destination due to its natural beauty and diverse wildlife.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Kanger_Valley_National_Park = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 10:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 10 PM.</Text>
+                { 6 <= hour && 10 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹25 to ₹50 for adults .
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

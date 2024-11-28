@@ -27,6 +27,8 @@ const Chitrakoot = () => {
     const fullHistoryText = ` History : Chitrakoot is a historic town located on the border of Uttar Pradesh and Madhya Pradesh in India. It is most renowned for its association with Hindu mythology, particularly the Ramayana. Chitrakoot is believed to be the place where Lord Rama, along with his wife Sita and brother Lakshmana, spent a significant portion of their 14 years of exile. The name "Chitrakoot" is derived from the Sanskrit words "Chitra" (meaning beautiful) and "Koot" (meaning mountain), referring to the beautiful hills of the area.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Chitrakoot = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6:00 AM to 8:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 20 >= hour ? 
+                      <Text style={styles.time}>Open</Text> :
+                      <Text style={styles.time1}>Close</Text>
+                  }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Rs ₹50 to ₹100 for adults</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {
