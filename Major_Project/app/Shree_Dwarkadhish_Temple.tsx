@@ -27,6 +27,8 @@ const Shree_Dwarkadhish_Temple = () => {
     const fullHistoryText = `History :The Shree Dwarkadhish Temple, located in Dwarka, Gujarat, is one of the Char Dham pilgrimage sites, dedicated to Lord Krishna. It is believed to have been originally built by Lord Krishna’s grandson, Vajranabh, around 5,000 years ago, though the current structure dates back to the 15th-16th centuries. The temple is situated on the banks of the Gulf of Khambhat and is an important spiritual and cultural center. The temple's architecture reflects traditional Hindu temple designs, with intricate carvings and a 52-meter tall spire. Pilgrims visit to pay homage to Lord Krishna, who is said to have established his kingdom here.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Shree_Dwarkadhish_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 9:00 pm</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 9 pm</Text>
+                { 6 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

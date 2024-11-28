@@ -27,6 +27,8 @@ const Saitual = () => {
     const fullHistoryText = `History : Saitual is a town in the Mamit District of Mizoram, located in the western part of the state. The town is relatively new but has quickly gained importance due to its scenic beauty, rich natural resources, and peaceful environment. Historically, it was inhabited by the Mizo people, and like many other parts of Mizoram, it was significantly affected by the Mizo National Front movement during the late 20th century. Over time, Saitual has developed into a hub for agriculture and eco-tourism. Its picturesque surroundings, including lush hills and valleys, make it an emerging destination for travelers seeking tranquility and natural beauty.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Saitual = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free  
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

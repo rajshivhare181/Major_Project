@@ -27,6 +27,8 @@ const  Champhai = () => {
     const fullHistoryText = `History :Champhai, located in the eastern part of Mizoram, is a picturesque town nestled in the Champhai Valley, near the Myanmar border. The town holds historical importance due to its strategic location and has long been an important center for trade between India and Myanmar. Historically inhabited by the Mizo people, Champhai has also been a key site for the Mizo National Front movement. The town is known for its rich Mizo culture, including traditional festivals, arts, and crafts. Today, Champhai is a growing hub for agriculture (especially fruits like apples and grapes) and tourism in the region.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const  Champhai = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                { 8 <= hour && 17 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹20-₹30 for adult</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Jantar_Mantar_Jaipur = () => {
     const fullHistoryText = `History : Jantar Mantar, located in Jaipur, Rajasthan, is an astronomical observatory built by Maharaja Sawai Jai Singh II in the 18th century. Completed in 1738, it is a collection of 19 architectural astronomical instruments designed for observing celestial bodies and measuring time, angles, and celestial events. The observatory reflects the Maharaja's keen interest in science and his efforts to advance knowledge of astronomy. It is a UNESCO World Heritage Site and one of the five observatories built by Jai Singh II across India, showcasing remarkable precision and innovation for its time.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Jantar_Mantar_Jaipur = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :  9:00 AM to 4:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :  9 AM to 4 PM</Text>
+                { 9 <= hour && 16 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹ 50 for adult
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

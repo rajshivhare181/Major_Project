@@ -27,6 +27,8 @@ const SATMALIA_DEER_SANCTUARY = () => {
     const fullHistoryText = `History :Satmalia Deer Sanctuary is located in the Gir Somnath district of Gujarat, near the famous Gir National Park. Established in 1976, the sanctuary was created with the aim of conserving the Indian deer species, including the Chital (spotted deer) and Sambar deer. The sanctuary's location, with its dense forests and rich wildlife, makes it an ideal habitat for these species. Over the years, it has contributed significantly to the conservation of deers and other wildlife, becoming a popular destination for wildlife enthusiasts and nature lovers. The sanctuary plays a crucial role in preserving the region's biodiversity.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const SATMALIA_DEER_SANCTUARY = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00am- 6:00pm</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM- 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹10 to ₹50 for adult
@@ -134,6 +139,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

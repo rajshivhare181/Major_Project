@@ -27,6 +27,8 @@ const Bombila = () => {
     const fullHistoryText = `Bomdila is located at an altitude of around 2,530 meters (8,300 feet) above sea level and serves as the administrative headquarters of the West Kameng District. The town is positioned on the foothills of the Himalayas and provides a great vantage point for viewing the surrounding mountain ranges, including the Snow-clad peaks of Kangto and Nyegi Kangsang.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+     const hour = time.getHours();  
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Bombila = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : no entry fee</Text>
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

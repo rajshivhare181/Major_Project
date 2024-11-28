@@ -27,6 +27,8 @@ const Golden_Temple = () => {
     const fullHistoryText = `History : Harmandir Sahib, popularly known as the Golden Temple, is one of the holiest Sikh gurdwaras in the world, located in Amritsar, Punjab. It was founded by Guru Ram Das in 1581, with its construction initiated by his successor, Guru Arjan Dev, in 1585. The temple's most striking feature is its gold-covered dome, which was added in the 19th century by Maharaja Ranjit Singh. The Golden Temple is a symbol of Sikhism's values of humility, devotion, and inclusivity. It houses the Adi Granth, the central religious scripture of Sikhism, and attracts millions of pilgrims and visitors each year.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Golden_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM and 6:00 AM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM and 6 AM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+             } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :No entry fee
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

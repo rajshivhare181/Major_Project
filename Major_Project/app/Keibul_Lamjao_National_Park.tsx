@@ -27,6 +27,8 @@ const Keibul_Lamjao_National_Park = () => {
     const fullHistoryText = `Keibul Lamjao National Park is located on the eastern shore of Loktak Lake in Manipur, India. Established in 1977 as a wildlife sanctuary and later designated as a national park in 1982, it is the only floating national park in the world. The park is famous for being the **home of the Sangai, the endangered Manipur brow-antlered deer. This unique ecosystem of floating phumdis (islands) is rich in biodiversity, supporting various species of flora and fauna. The park plays an essential role in conserving the wetland habitat of the region and is a critical part of Manipur's natural heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Keibul_Lamjao_National_Park = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 5:00 PM </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 5 PM </Text>
+                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹10-₹20 for adult 
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

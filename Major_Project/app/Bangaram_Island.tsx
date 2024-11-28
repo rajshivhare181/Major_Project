@@ -27,6 +27,8 @@ const Bangaram_Island = () => {
     const fullHistoryText = `Bangaram Island is part of the Lakshadweep Archipelago, located in the Arabian Sea. Known for its unspoiled beauty and coral reefs, the island has been inhabited for centuries by the local tribes of Lakshadweep. Historically, it was primarily used by fishermen and sailors for shelter. In the modern era, Bangaram gained attention for its serene, untouched environment and became a popular destination for eco-tourism and water sports. The island, along with others in the region, was officially integrated into the Indian Union after independence. Today, it remains a quiet, exclusive retreat for nature lovers and adventure tourists.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Bangaram_Island = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+} 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fees</Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

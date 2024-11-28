@@ -27,6 +27,8 @@ const Meenakshi_Amman_Temple  = () => {
     const fullHistoryText = `History :The Meenakshi Amman Temple, located in Madurai, Tamil Nadu, is a historic Hindu temple dedicated to Goddess Meenakshi (a form of Parvati) and her consort, Lord Sundareswarar (Shiva). Its origins date back to the 6th century CE, with the current structure being built during the 16th century under the rule of the Nayak dynasty. Renowned for its stunning Dravidian architecture, the temple boasts 14 towers (gopurams), intricate sculptures, and vivid paintings. It remains a prominent pilgrimage site, known for the annual Meenakshi Thirukalyanam festival.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Meenakshi_Amman_Temple  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :  5:00 AM to 10:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :  5 AM to 10 PM</Text>
+                { 5 <= hour && 22 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹50 for adults
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Barren_Island = () => {
     const fullHistoryText = `Barren Island, located around 135 km from Port Blair in the Andaman and Nicobar Islands, is India’s only active volcano. The island has a rich geological history, with volcanic activity dating back to the 19th century. First discovered by the British in 1789, it gained significance in the early 19th century when eruptions were recorded. The island is uninhabited due to its volcanic activity and rugged terrain. It remains a focal point for scientists and nature enthusiasts interested in volcanoes and marine biodiversity. The island’s volcanic eruptions, most notably in 1991 and 2005, have shaped its current landscape. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Barren_Island = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 17 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee</Text>
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Lingaraj_Temple = () => {
     const fullHistoryText = `Historical Legacy: The Lingaraj Temple in Bhubaneswar, Odisha, is one of the oldest and most revered temples dedicated to Lord Shiva. Built in the 11th century during the reign of King Jajati Keshari, it is a remarkable example of Kalinga architecture. The temple stands at 180 feet and features a majestic central spire with intricate carvings. The Lingaraj Temple is a fusion of different architectural styles, and it houses a self-manifested Shiva linga, known as the Lingaraj. This temple is a major pilgrimage site for Hindus and is central to the city's religious and cultural identity.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Lingaraj_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00AM to 9:00PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 9 PM.</Text>
+                { 6 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free Entry
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

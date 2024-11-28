@@ -27,6 +27,8 @@ const Shri_Pathar_Sahib = () => {
     const fullHistoryText = `History :Shri Pathar Sahib Gurudwara, located about 25 km from Leh in Ladakh, is a revered Sikh pilgrimage site. The Gurudwara was built in the 16th century to commemorate the visit of Guru Nanak, the founder of Sikhism. According to legend, the Guru, while traveling through the region, encountered a local demon who tried to harm him. However, Guru Nanak's spiritual power caused the stone to soften, saving him from harm. The soft stone, known as "Pathar Sahib," is preserved in the Gurudwara. The shrine serves as a symbol of peace, spirituality, and the shared cultural heritage of Ladakh.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Shri_Pathar_Sahib = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :5:00 AM to 8:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :5 AM to 8 PM</Text>
+                { 5 <= hour && 20 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

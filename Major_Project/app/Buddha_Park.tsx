@@ -27,6 +27,8 @@ const Buddha_Park = () => {
     const fullHistoryText = `Buddha Park, also known as the Tathagata Tsal, is located in Ravangla, Sikkim. It was inaugurated in 2013 and is home to a 130-foot statue of Lord Buddha, which is one of the tallest statues of Buddha in India. The park was built to promote peace and Buddhist culture, and it provides a serene environment for meditation and reflection. The statue is surrounded by beautifully landscaped gardens, stupas, and prayer wheels, making it a popular pilgrimage site and a major tourist attraction in Sikkim.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Buddha_Park = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 17 >= hour ? 
+    <Text style={styles.time}>Open</Text> :
+    <Text style={styles.time1}>Close</Text>
+}
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :RS  50 for adult</Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

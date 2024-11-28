@@ -24,7 +24,7 @@ const Amaravati = () => {
         ]
         }
     });
-    const fullHistoryText = `Ancient Significance: Amaravati has a rich historical and cultural significance, especially in Buddhist heritage. The city was originally known as Dhānyakaṭaka and was an important center of the Mauryan Empire during the reign of Emperor Ashoka in the 3rd century BCE. Amaravati was one of the key cities in ancient Andhra and played a vital role in the spread of Buddhism in India and beyond.`;
+    const fullHistoryText = `Amaravati, located in the Indian state of Andhra Pradesh, has a rich history dating back to ancient times. It was a prominent Buddhist center around the 3rd century BCE and served as the capital of the Satavahana dynasty. The Amaravati Stupa, one of the largest in India, was built during this period. Over time, it declined due to invasions, but its archaeological significance remained. In modern times, Amaravati was chosen as the capital for the newly formed state of Andhra Pradesh in 2014. Today, it is a symbol of both ancient heritage and contemporary development.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
   return (

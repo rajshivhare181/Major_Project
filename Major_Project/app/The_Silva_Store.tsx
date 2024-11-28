@@ -27,6 +27,8 @@ const The_Silva_Store = () => {
     const fullHistoryText = `History :The Silva Store is a well-known and long-established shop located in Daman, a coastal city in India. The store has been catering to the needs of locals and tourists for many years, offering a wide range of products including clothing, footwear, accessories, and home goods. Known for its quality merchandise and customer-friendly service, The Silva Store has become a trusted name in Daman. The shop also features local handicrafts, souvenirs, and goods that reflect the cultural heritage of the region. Over time, it has evolved into a popular retail destination for both residents and visitors alike.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const The_Silva_Store = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 10:00AM - 8:00PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 10 AM - 8 PM</Text>
+                { 10 <= hour && 20 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee 
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

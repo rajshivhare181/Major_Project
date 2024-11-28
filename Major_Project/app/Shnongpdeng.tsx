@@ -27,6 +27,8 @@ const Shnongpdeng = () => {
     const fullHistoryText = `History :Shnongpdeng is a serene village in the West Jaintia Hills of Meghalaya, renowned for its stunning natural beauty and crystal-clear waters. Located along the Umngot River, the village has gained popularity for its unique boating experiences in the pristine river. Historically, the village was an agricultural settlement, with the locals being mostly Jaintia tribals, practicing traditional farming. Over time, Shnongpdeng has evolved into an eco-tourism destination, attracting visitors for its clean river, boating, camping, and trekking experiences. Its tranquil environment and unspoiled landscapes have made it a favorite spot for nature lovers and adventure enthusiasts. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Shnongpdeng = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 5 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹100 - ₹500 for adult
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

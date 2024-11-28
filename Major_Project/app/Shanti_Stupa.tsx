@@ -27,6 +27,8 @@ const Shanti_Stupa = () => {
     const fullHistoryText = `History :Shanti Stupa, located in Leh, Ladakh, is a prominent Buddhist monument built to promote peace and communal harmony. It was inaugurated in 1983 and is part of the global network of peace stupas built under the guidance of Japanese Buddhist monk Gyalwang Drukpa and Japanese Buddhist organizations. The stupa enshrines relics of the Buddha, donated by the people of Japan. The Shanti Stupa offers breathtaking views of the surrounding mountains and Leh town. It is a symbol of unity and spiritual significance, drawing both local devotees and international tourists who seek tranquility and reflection.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Shanti_Stupa = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 9 PM</Text>
+                { 6 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹20 for adult
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

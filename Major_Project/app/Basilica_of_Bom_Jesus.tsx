@@ -27,6 +27,8 @@ const Basilica_of_Bom_Jesus = () => {
     const fullHistoryText = `History : The Basilica of Bom Jesus, located in Old Goa, is one of the most significant churches in India. Completed in 1605, the church is renowned for housing the mortal remains of St. Francis Xavier, a Jesuit missionary who played a key role in spreading Christianity in Asia. The church is a fine example of Baroque architecture and is part of the UNESCO World Heritage Site of the Churches and Convents of Goa. The basilica’s simplicity, intricate woodwork, and golden altars make it a marvel of 16th-century Portuguese influence. It is a major pilgrimage site and an important symbol of Goa’s Christian heritage. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Basilica_of_Bom_Jesus = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :  9:00 AM to 6:30 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :  9:00 AM to 6:00 PM</Text>
+                { 9 <= hour && 18 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free </Text>
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

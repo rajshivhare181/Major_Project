@@ -29,6 +29,8 @@ Architectural Significance: The basilica is known for its impressive Gothic-styl
 Influence: The church was built by French missionaries during the time when Pondicherry was still under French rule. It represents a fusion of French and Indian elements in its construction and design. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+     const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -61,8 +63,11 @@ Influence: The church was built by French missionaries during the time when Pond
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:30 AM to 7:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 5:00 AM to 7:00 PM</Text>
+                { 5 <= hour && 19 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+                 }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free </Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

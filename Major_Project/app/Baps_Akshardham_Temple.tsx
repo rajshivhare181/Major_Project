@@ -27,6 +27,8 @@ const Baps_Akshardham_Temple = () => {
     const fullHistoryText = `History : The BAPS Akshardham Temple, located in Delhi, India, is a cultural and spiritual landmark. The temple was inaugurated on November 6, 2005, by Pramukh Swami Maharaj of the BAPS Swaminarayan Sanstha. It is dedicated to Lord Swaminarayan, with the central deity of Swaminarayan seated in the main hall. The temple's architecture is based on traditional Hindu designs and is built using pink sandstone and white marble. In addition to its grandeur, Akshardham showcases the cultural heritage of India through exhibitions and water shows. It serves as a spiritual hub, emphasizing values of peace, unity, and devotion.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Baps_Akshardham_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:30 AM to 6:30 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9:00 AM to 6:00 PM</Text>
+                { 9 <= hour && 18 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free</Text>
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Leh_Palace = () => {
     const fullHistoryText = `History :Leh Palace, located in the heart of Leh town in Ladakh, was built in the 17th century by King Sengge Namgyal. The palace was once the royal residence of the Namgyal dynasty and was a symbol of their power in the region. Influenced by Tibetan architecture, the structure is a nine-story building that was designed to resemble the Potala Palace in Lhasa. However, after the Dogra invasion in the 19th century, the royal family was forced to flee, and the palace gradually fell into disrepair. Today, Leh Palace is a popular tourist attraction, offering panoramic views of Leh and its surroundings.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Leh_Palace = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 7:00 AM to 7:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 7 AM to 7 PM</Text>
+                { 7 <= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹20 for adult
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

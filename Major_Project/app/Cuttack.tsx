@@ -27,6 +27,8 @@ const Cuttack = () => {
     const fullHistoryText = `Cuttack, located in Odisha, is one of the oldest cities in India, with a history that dates back over a thousand years. It was established as the capital of the ancient Kalinga kingdom and later became a major administrative and military center during the reign of the Ganga dynasty in the 12th century. Known as the "Silver City" for its traditional silver filigree work, Cuttack has played a vital role in the history of Odisha. It was also the judicial capital of the state before Bhubaneswar took over. Today, Cuttack is a thriving city with a blend of historical monuments and modern growth.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Cuttack = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9:00 AM and 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 9 <= hour && 18 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+             }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹10 for adults</Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Ellora_Caves = () => {
     const fullHistoryText = `The Ellora Caves, a UNESCO World Heritage Site, are located in Maharashtra, India, and represent a remarkable confluence of Buddhist, Hindu, and Jain rock-cut architecture. Excavated between the 5th and 10th centuries CE, these 34 caves feature temples, monasteries, and monasteries. The caves are divided into three distinct groups: Buddhist (Caves 1-12), Hindu (Caves 13-29), and Jain (Caves 30-34). The most famous cave is Cave 16, the massive Kailasa Temple, which is considered a remarkable feat of engineering, carved from a single monolithic rock. Ellora is renowned for its intricate sculptures and grand religious artwork.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Ellora_Caves = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 5:30 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+             } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹40 for adult
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

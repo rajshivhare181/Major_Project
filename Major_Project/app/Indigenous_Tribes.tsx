@@ -27,6 +27,8 @@ const Indigenous_Tribes = () => {
     const fullHistoryText = `The Andaman and Nicobar Islands are home to several indigenous tribes, each with a unique history and culture. The Great Andamanese, Onge, Jarwa, and Sentinalese tribes are among the most well-known. These tribes have lived in isolation for thousands of years, with minimal contact with the outside world. Historically, they led a hunter-gatherer lifestyle, adapting to the tropical environment. However, colonialism and modern development greatly impacted their way of life, with many tribes facing challenges due to diseases and cultural disruption. Today, efforts are made to protect their rights, land, and traditions through legal restrictions on contact.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Indigenous_Tribes = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -130,10 +135,25 @@ const styles = StyleSheet.create({
       width: width * 0.9, // 90% of the screen width
       alignSelf: "center", // Center horizontally
     },
+   
     text: {
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Daman_Ganga_River  = () => {
     const fullHistoryText = `The Daman Ganga River is a significant river flowing through the Daman & Diu region of India. Originating from the Western Ghats, it traverses the areas of Vapi in Gujarat before entering the Union Territory of Daman. Historically, the river has played a vital role in the development of the region, serving as a water source for agriculture, industries, and local communities. The river has also been an important part of the maritime trade route, as Daman itself was an important port during the Portuguese colonial period. Today, the river continues to be a key feature of the region's natural landscape.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Daman_Ganga_River  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                   <Text style={styles.time}>Open</Text> :
+                   <Text style={styles.time1}>Close</Text>
+               } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee</Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

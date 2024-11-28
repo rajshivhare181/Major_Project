@@ -27,6 +27,8 @@ const Chitrakot_Fall = () => {
     const fullHistoryText = `Chitrakot Falls, often referred to as the Niagara of India, is located in the Bastar region of Chhattisgarh. This stunning waterfall, approximately 29 meters (95 feet) high, is the largest waterfall in the state and one of the widest in India. The falls flow over a horseshoe-shaped rock formation, creating a breathtaking sight, particularly during the monsoon season when the water flow is at its peak. Chitrakot has become a popular tourist destination, drawing visitors with its scenic beauty and surrounding lush forests. Historically, the falls have been an important natural landmark in the region, known to local tribes.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Chitrakot_Fall = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                   <Text style={styles.time}>Open</Text> :
+                   <Text style={styles.time1}>Close</Text>
+               }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹20 to ₹50 for adults</Text>
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

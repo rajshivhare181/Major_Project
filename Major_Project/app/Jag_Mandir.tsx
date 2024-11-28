@@ -27,6 +27,8 @@ const Jag_Mandir = () => {
     const fullHistoryText = `Jag Mandir is a beautiful island palace located on Lake Pichola in Udaipur, Rajasthan. It was built in the 16th century by Maharana Jagat Singh I, and it served as a retreat for the royal family. The palace is known for its serene setting and stunning architecture, with marble and yellow sandstone used for construction. It consists of three main parts, including the main palace, the Zenana Mahal, and the Gul Mahal. Jag Mandir played an important role in Udaipur's royal history, and it was also used as a refuge by the Mughal prince, Shah Jahan, before he ascended the throne.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Jag_Mandir = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :10 AM to 6 PM</Text>
+                { 10 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :RS 50-100 for adult
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

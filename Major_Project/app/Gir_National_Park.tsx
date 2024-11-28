@@ -27,6 +27,8 @@ const Gir_National_Park = () => {
     const fullHistoryText = `History : Gir National Park, located in Gujarat, India, is the sole home of the Asiatic Lion. Established in 1965 as the Gir Forest Sanctuary, it was later upgraded to a national park in 1975. The park was created to protect the dwindling population of Asiatic lions, whose numbers had significantly reduced due to hunting and habitat destruction. Through dedicated conservation efforts, the lion population in Gir has grown from around 12 in the 1900s to over 600 today, making it one of the great success stories in wildlife conservation. Gir also houses numerous other species of flora and fauna, making it a vital biodiversity hotspot.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Gir_National_Park = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM and 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM and 6 PM</Text>
+                { 6 <= hour && 18 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              } 
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹50 for adult
@@ -138,6 +143,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

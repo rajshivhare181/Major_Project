@@ -27,6 +27,8 @@ const Sangai_Wildlife = () => {
     const fullHistoryText = `History : Sangai Wildlife Sanctuary, located near Loktak Lake in Manipur, is dedicated to the conservation of the Sangai, the state animal of Manipur (Manipur brow-antlered deer). Established in 1977, the sanctuary spans over 40 square kilometers and is known for its unique floating islands or phumdis in Loktak Lake. The sanctuary was created to protect the Sangai deer, which is an endangered species found only in this region. In addition to the Sangai, the sanctuary is home to a variety of other wildlife, including brow-antlered deer, wild boar, Himalayan black bear, and numerous bird species.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Sangai_Wildlife = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 5 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹10 - ₹20 for adult
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,9 @@ const Corbyns_Cove_Beach = () => {
     const fullHistoryText = `Corbyns Cove Beach, located about 8 km from Port Blair in the Andaman and Nicobar Islands, is one of the most famous beaches in the region. Historically, it was a quiet and secluded spot, but with the development of tourism in the area, it has become a prominent attraction. The beach’s calm waters and scenic beauty make it ideal for relaxation and water sports. It also has a rich history tied to the colonial era, and its picturesque views were once a popular site for the British to spend their leisure time.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+  const hour = time.getHours();
+    
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +63,10 @@ const Corbyns_Cove_Beach = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                 <Text style={styles.time}>Open</Text> :
+                 <Text style={styles.time1}>Close</Text>
+             }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : no entry fee</Text>
@@ -132,6 +138,21 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

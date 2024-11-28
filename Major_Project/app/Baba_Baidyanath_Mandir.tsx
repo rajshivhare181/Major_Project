@@ -29,6 +29,8 @@ const Baba_Baidyanath_Mandir  = () => {
 According to myth, Lord Shiva was also known as Baidyanath, the healer of all ailments. "Baidya" means doctor or healer, and "Nath" means lord, which is why the temple is named as Baidyanath Dham. The temple is particularly famous for curing diseases and is believed to have immense healing powers. The shrine is also associated with the worship of Lord Shiva in his form as a healer.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -62,7 +64,10 @@ According to myth, Lord Shiva was also known as Baidyanath, the healer of all ai
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 4:00 AM to 11:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 4<= hour && 23 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹100 to ₹200 for adult</Text>
@@ -136,6 +141,21 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

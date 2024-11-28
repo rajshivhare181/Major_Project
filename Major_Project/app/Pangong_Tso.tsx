@@ -27,6 +27,8 @@ const Pangong_Tso = () => {
     const fullHistoryText = `History :Pangong Tso, a high-altitude lake situated at 4,350 meters (14,270 feet) in the Himalayas, spans across the Indo-China border, with parts of it lying in both India (Ladakh) and Tibet. The lake is 134 km long, with about 60% of it in China. The name "Pangong Tso" means "long, narrow lake" in Tibetan. Historically, it was a remote and sacred place for the local Changpa nomads. The lake gained global fame after being featured in the Bollywood movie 3 Idiots. It is a vital site for migratory birds, especially during the summer months.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Pangong_Tso = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00AM - 7:00PM </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM - 7PM </Text>
+                { 6 <= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹20 - 50 for adult 
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

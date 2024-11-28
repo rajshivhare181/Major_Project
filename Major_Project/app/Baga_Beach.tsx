@@ -27,6 +27,8 @@ const Baga_Beach= () => {
     const fullHistoryText = `History: Baga Beach, located in North Goa, is one of the most popular and vibrant beaches in the region. Though not historically significant in terms of ancient monuments or events, Baga has become a major hub for both domestic and international tourists due to its lively atmosphere, water sports, and beach shacks. The beach got its name from the Baga Creek that flows into the Arabian Sea. Over the years, Baga has evolved into a lively tourist destination, known for its nightlife, bustling markets, and the famous Tito’s Lane, attracting people from around the world.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Baga_Beach= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 10:00 PM </Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 22 >= hour ? 
+    <Text style={styles.time}>Open</Text> :
+    <Text style={styles.time1}>Close</Text>
+}
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free</Text>
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

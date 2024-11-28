@@ -27,6 +27,8 @@ const Pahari_Temple_Ranchi = () => {
     const fullHistoryText = `History :Pahari Temple, located on a hilltop in Ranchi, Jharkhand, is dedicated to Lord Shiva. The temple’s history dates back to the 17th century and is believed to have been established by local kings. The temple is perched atop a hill, offering panoramic views of the city. The name "Pahari" means "hill" in Hindi, reflecting its hilltop location. Pilgrims must climb 400 steps to reach the temple, which is considered a significant religious spot, especially during Shivaratri and other Hindu festivals. The temple attracts devotees for both its spiritual significance and scenic beauty.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Pahari_Temple_Ranchi = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :5:00 AM to 8:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                { 5 <= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free 
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

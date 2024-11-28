@@ -27,6 +27,9 @@ const Calangute_Beach = () => {
     const fullHistoryText = `Calangute Beach, located in North Goa, is one of the most popular and bustling beaches in the state. It was originally a quiet fishing village, but during the 1960s, it began attracting hippies and travelers from around the world, marking the start of Goa's tourism boom. Known as the "Queen of Beaches," Calangute gained prominence as a backpacker haven in the 1970s and later became a popular spot for international tourists. Over time, it transformed into a lively beach destination, famous for its vibrant nightlife, water sports, and beach shacks. Today, it is one of Goa's most visited beaches.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+   const hour = time.getHours();
+
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +63,10 @@ const Calangute_Beach = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 18 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+                 }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free</Text>
@@ -135,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

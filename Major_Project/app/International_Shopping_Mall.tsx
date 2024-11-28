@@ -27,6 +27,8 @@ const International_Shopping_Mall= () => {
     const fullHistoryText = `History :The concept of the "International Shopping Mall" emerged as a global retail phenomenon in the late 20th century, blending shopping, entertainment, and dining experiences in one location. Malls like the Dubai Mall (2008) and Mall of America (1992) became iconic for their massive scale and variety of attractions. These malls host a range of international brands, luxury retailers, cinemas, and amusement parks, becoming cultural and social hubs. With increasing urbanization and globalization, international shopping malls have evolved into places for leisure, family entertainment, and a wide range of consumer goods, serving as a one-stop shopping destination.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const International_Shopping_Mall= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10:00 AM to 10:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :10 AM to 10 PM</Text>
+                { 10 <= hour && 22 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free
@@ -135,6 +140,21 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+  
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

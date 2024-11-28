@@ -27,6 +27,8 @@ const Hanuman_Mandir = () => {
     const fullHistoryText = `The Hanuman Mandir in Patna is believed to have been established during the 17th century, although the exact date of its construction remains uncertain. The temple is one of the oldest and most revered in Patna, with a rich history of devotion and cultural significance.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Hanuman_Mandir = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :4:00 AM - 09:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :4 AM - 9 PM</Text>
+                { 4 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free Entry </Text>
@@ -139,6 +144,20 @@ const styles = StyleSheet.create({
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.04,
     //   alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     },
     book: {
       backgroundColor: "#8533ff",

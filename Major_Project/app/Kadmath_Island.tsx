@@ -27,6 +27,8 @@ const Kadmath_Island = () => {
     const fullHistoryText = `History :Kadmat Island is one of the most beautiful islands in the Lakshadweep Archipelago, located in the Arabian Sea. Known for its long sandy beaches, crystal-clear waters, and vibrant coral reefs, Kadmat has a history shaped by the local fishing community and the broader maritime culture of Lakshadweep. Historically, the island was sparsely inhabited, with most residents engaged in fishing and sea trade. Kadmat became part of the Indian Union in 1956 when Lakshadweep was integrated as a Union Territory. Today, it remains a peaceful retreat, popular for eco-tourism, water sports, and its marine biodiversity.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Kadmath_Island = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : October and May</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 7 AM to 5 PM</Text>
+                { 7 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee 
@@ -132,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

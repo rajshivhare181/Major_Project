@@ -27,6 +27,8 @@ const Chatham_Saw_Mill = () => {
     const fullHistoryText = `The Chatham Saw Mill was established in 1883 during the British colonial era and is the oldest operational sawmill in Asia. It was set up to process the abundant timber found in the Andaman Islands, particularly the rainforests of these islands, which are rich in a variety of valuable timber species.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Chatham_Saw_Mill = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 9 <= hour && 17 >= hour ? 
+                   <Text style={styles.time}>Open</Text> :
+                   <Text style={styles.time1}>Close</Text>
+               }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Rs 10 to 20 for adults</Text>
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

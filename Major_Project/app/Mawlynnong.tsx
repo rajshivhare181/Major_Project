@@ -27,6 +27,8 @@ const Mawlynnong  = () => {
     const fullHistoryText = `History :Mawlynnong, a village in the East Khasi Hills of Meghalaya, is renowned for its cleanliness and natural beauty. Known as "Asia’s cleanest village," it gained global attention for its community-driven efforts to maintain an environmentally sustainable and litter-free environment. The village is inhabited primarily by the Khasi tribe, who have traditionally practiced sustainable agriculture and forest conservation. Besides its cleanliness, Mawlynnong is also famous for its unique living root bridges, bamboo structures, and the stunning Sky View observation tower. The village has become an important eco-tourism destination, offering a glimpse into rural Khasi life and eco-conscious living.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Mawlynnong  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 8 AM to 5 PM.</Text>
+                { 8 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry free 
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

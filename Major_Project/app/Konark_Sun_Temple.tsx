@@ -27,6 +27,8 @@ const Konark_Sun_Temple = () => {
     const fullHistoryText = `History :The Konark Sun Temple, located in Konark, Odisha, is a UNESCO World Heritage Site dedicated to the Sun God, Surya. It was built in the 13th century by King Narasimhadeva I of the Eastern Ganga dynasty. The temple is designed as a massive chariot with twelve wheels, drawn by seven horses, symbolizing the movement of the sun across the sky. Its intricate carvings and architectural brilliance reflect the zenith of Kalinga architecture. Although much of the temple was ruined over time, it remains a stunning example of ancient Indian engineering and artistic expression, attracting visitors worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Konark_Sun_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 8:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 8 PM</Text>
+                { 6 <= hour && 20 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹40 for adult
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

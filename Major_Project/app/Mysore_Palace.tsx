@@ -27,6 +27,8 @@ const Mysore_Palace  = () => {
     const fullHistoryText = `History :The Mysore Palace, also known as the Amba Vilas Palace, is a historic royal residence located in the city of Mysore, Karnataka. Originally built in the 14th century, the current structure was constructed in the 20th century after the old palace was damaged by fire. The new palace was designed by the British architect Henry Irwin in an Indo-Saracenic style, blending Hindu, Muslim, Rajput, and Gothic architectural elements. The palace served as the official residence of the Wodeyar dynasty, who ruled the Kingdom of Mysore. It is renowned for its grandeur, intricate artwork, and magnificent interiors.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Mysore_Palace  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :10 AM to 5 PM</Text>
+                { 10 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹70 for adult 
@@ -135,6 +140,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

@@ -27,6 +27,8 @@ const Dawki  = () => {
     const fullHistoryText = `Laitlum Canyons is a stunning natural landscape located in the East Khasi Hills of Meghalaya. The word Laitlum translates to "End of the Hills," reflecting its position at the edge of a deep gorge offering panoramic views of the surrounding valleys and hills. While there is no specific historical narrative attached to Laitlum, the site holds immense cultural significance for the Khasi tribe. It is believed that the place was once used for strategic purposes, offering a vantage point over the surrounding region. Today, it is a popular trekking destination, offering breathtaking views of the lush green hills and valleys.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,7 +62,10 @@ const Dawki  = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                { 6 <= hour && 17 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+              }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :free </Text>
@@ -131,6 +136,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

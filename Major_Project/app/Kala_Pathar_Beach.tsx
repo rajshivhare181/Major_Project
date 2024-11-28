@@ -27,7 +27,10 @@ const Kala_Pathar_Beach = () => {
     const fullHistoryText = `Historically, the area around Kalapathar Beach has been relatively quiet and untouched, which has helped preserve its natural beauty. Unlike the more popular Radhanagar Beach, Kalapathar remains a tranquil spot, offering visitors an opportunity to experience the natural beauty of the Andaman Islands without large crowds. The beach is part of the larger Havelock Island region, which has become a major tourist destination due to its pristine beaches and rich marine life.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
+    
     <>
         <Stack.Screen options={{ 
             headerTransparent: true,
@@ -59,8 +62,11 @@ const Kala_Pathar_Beach = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 5</Text>
+                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : no entry fee .
@@ -136,6 +142,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

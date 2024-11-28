@@ -56,7 +56,7 @@ export default function Index() {
         </TouchableOpacity>
       </View>
       <View style={styles.lang3}>
-        <Text style={styles.name}>"Adopt the pace</Text>
+        <Text style={styles.name}>"Adopt the peace</Text>
         <Text style={styles.name}>of nature. Her</Text>
         <Text style={styles.name}>secret is patience."</Text>
       </View>

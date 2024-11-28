@@ -27,6 +27,8 @@ const Shree_Mangueshi_Temple = () => {
     const fullHistoryText = `History :Shree Mangueshi Temple, located in Priol in South Goa, is one of the oldest and most revered temples in the state. Dedicated to Lord Manguesh, an incarnation of Lord Shiva, the temple dates back to the 16th century. It was originally built in Cortalim but was moved to its present location due to the Portuguese persecution of Hindus. The temple is known for its beautiful whitewashed architecture and a large shivlinga (idol of Shiva) enshrined in the sanctum. The temple is an important pilgrimage site for Goan Hindus and is famous for its vibrant celebrations during festivals like Mahashivaratri.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Shree_Mangueshi_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00AM to 8:00PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :6 AM to 8 PM</Text>
+                { 6 <= hour && 20 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -136,6 +141,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

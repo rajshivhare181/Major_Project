@@ -27,6 +27,8 @@ const Jallianwala_Bagh = () => {
     const fullHistoryText = `History :The Shree Jagannatha Temple in Puri, Odisha, is dedicated to Lord Jagannatha, a form of Lord Vishnu. Its origins trace back to the 12th century, when King Anantavarman Chodaganga Deva commissioned the temple's construction in 1135 CE. The temple is an architectural masterpiece, showcasing the Kalinga style. Lord Jagannatha, along with his siblings Balabhadra and Subhadra, are the deities worshipped here. The temple is famous for its grand Rath Yatra (chariot festival), attracting millions of pilgrims annually. Over centuries, it has remained a significant religious and cultural hub for Hindus worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Jallianwala_Bagh = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:00 AM - 9:00 PM </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 5 AM - 9 PM </Text>
+                { 5 <= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

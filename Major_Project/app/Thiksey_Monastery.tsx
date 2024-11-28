@@ -27,6 +27,8 @@ const Thiksey_Monastery = () => {
     const fullHistoryText = `History :Thiksey Monastery, located in Ladakh, India, is one of the largest and most impressive monasteries in the region. Founded in the 15th century by Lama Sherab Zangpo, it belongs to the Gelugpa sect of Tibetan Buddhism. Perched on a hilltop overlooking the Indus Valley, the monastery resembles the Potala Palace of Lhasa, Tibet. Thiksey is known for its rich collection of Buddhist art, murals, and a towering statue of Maitreya Buddha. It also serves as a spiritual center for monks and hosts several important Buddhist festivals, including Ladakh’s annual prayer festival.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +61,11 @@ const Thiksey_Monastery = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :7:00 AM to 7:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing :7 AM to 7 PM</Text>
+                { 7 <= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹30 for adult
@@ -133,6 +138,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {
