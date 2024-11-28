@@ -1,20 +1,90 @@
-import { View, Text, StyleSheet, TextInput, Button, Pressable, TouchableOpacity, Dimensions } from 'react-native'
-import React, { useState } from 'react'
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Dimensions, Alert, ActivityIndicator } from 'react-native'
+import React, { useState, useEffect, useRef } from 'react'
 import { useRouter } from "expo-router";
 import Mybutton from "@/components/myButton";
+import PhoneInput from 'react-native-phone-number-input';
+import { auth, app } from "../firebase";
+import { signInWithPhoneNumber, RecaptchaVerifier, signInWithCredential, PhoneAuthProvider } from 'firebase/auth';
+import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
+import { getApps } from 'firebase/app';
 
 const { width, height } = Dimensions.get("window");
-const register = () => {
+const register: React.FC = () => {
     const router = useRouter();
 
-  const onRegister = () => {
-    router.back();
+    // console.log(app.name ? 'Firebase Mode Activated!' : 'Firebase not working :(');
+  // console.log(getApps());
+  // console.log('Auth Instance:', auth);
+  // console.log('Firebase App Options:', app.options);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        router.navigate("/");
+      }
+    });
+    return unsubscribe;
+  }, []);
+
+
+  const requestOTP = async (): Promise<void> => {
+    if (!recaptchaVerifier.current) {
+      console.log('Error', 'Recaptcha verifier is not ready. Please try again.');
+      return;
+    }
+
+    // console.log(userNumber);
+    try {
+      setLoading(true); // Show loading indicator
+      const phoneProvider = new PhoneAuthProvider(auth);
+      const verificationId = await phoneProvider.verifyPhoneNumber(
+        userNumber,
+        recaptchaVerifier.current as any
+      );
+      setVerificationId(verificationId);
+      Alert.alert('OTP Sent', 'Please check your phone for the OTP.');
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Failed to send OTP. Please try again.');
+    } finally {
+      setLoading(false); // Hide loading indicator
+    }
+  };
+  
+  const verifyOtp = async (): Promise<void> => {
+    if (!verificationId) {
+      Alert.alert('Error', 'Please request an OTP first.');
+      return;
+    }
+
+    if (!userotp) {
+      Alert.alert('Error', 'Please enter the OTP.');
+      return;
+    }
+
+    try {
+      setLoading(true); // Show loading indicator
+      const credential = PhoneAuthProvider.credential(verificationId, userotp);
+      const result = await signInWithCredential(auth, credential);
+      console.log('User signed in:', result.user);
+      Alert.alert('Success', 'Phone number verified successfully!');
+      // You can redirect the user to the next screen here
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Error', 'Invalid OTP. Please try again.');
+    } finally {
+      setLoading(false); // Hide loading indicator
+    }
   };
 
   const [userName, setUserName] = useState('');
   const [userEmail, setUserEmail] = useState('');
-  const [userNumber, setUserNumber] = useState('');
+  const [userNumber, setUserNumber] = useState<string>('');
   const [userotp, setUserotp] = useState('');
+  const [loading, setLoading] = useState(false);
+  const phoneInput = useRef<PhoneInput>(null);
+  const recaptchaVerifier = useRef<FirebaseRecaptchaVerifierModal>(null);
+  const [verificationId, setVerificationId] = useState<string | null>(null);
   const [preference, setPrefernce] = useState({
     waterfall: false,
     mountain: false,
@@ -27,6 +97,11 @@ const register = () => {
         justifyContent: "center",
         alignItems: "center",
       }}>
+        <FirebaseRecaptchaVerifierModal
+        ref={recaptchaVerifier}
+        firebaseConfig={app.options}
+        attemptInvisibleVerification={true}
+      />
       <Text style= {styles.heading}>Register</Text>
       <TextInput
         value={userName}
@@ -41,39 +116,39 @@ const register = () => {
         style={styles.input}
       />
       <View style={styles.otp}>
-        <TextInput
-          value={userNumber}
-          onChangeText={setUserNumber}
-          placeholder="Enter Your Phone No."
-          style={styles.number}
-          keyboardType="phone-pad"
+      <PhoneInput
+          ref={phoneInput}
+          defaultValue={userNumber}
+          defaultCode="IN"
+          layout="first"
+          placeholder='User Number'
+          onChangeFormattedText={setUserNumber}
+          containerStyle={styles.number}
+          textContainerStyle={styles.phoneInputText}
         />
-        <TouchableOpacity activeOpacity={0.7} style = {styles.button}>
-          <Text style={styles.text}>Send</Text>
-        </TouchableOpacity>
-
+          <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={requestOTP}>
+            {loading ? (
+              <ActivityIndicator size='small' color='white' />
+            ) : (
+              <Text style={styles.text}>Send</Text>
+            )}
+          </TouchableOpacity>
       </View>
-      <View style={styles.otp}>
-        <TextInput
-          value={userotp}
-          onChangeText={setUserotp}
-          placeholder="Enter Your OTP"
-          style={styles.number}
-          keyboardType="phone-pad"
-        />
-        <TouchableOpacity activeOpacity={0.7} style = {styles.button}>
-          <Text style={styles.text}>Verify</Text>
-        </TouchableOpacity>
 
-      </View>
+      {verificationId && (
+        <>
+          <TextInput
+            value={userotp}
+            onChangeText={setUserotp}
+            placeholder="Enter Your OTP"
+            style={styles.input}
+            keyboardType="phone-pad"
+          />
+        </>
+      )}
+
       <Text style= {styles.subheading}>Preference(Optional)</Text>
       <View>
-        {/* <CheckBox preference={preference.waterfall} 
-        onClick={() => setPrefernce({...preference, waterfall: !preference.waterfall})}
-        rightText= "Waterfall"
-        rightTextStyle={{fontsize:18, }}
-        checkedCheckBoxColor= "blue"
-        /> */}
         <View style={styles.preferenceRow}>
           <TouchableOpacity onPress={() => setPrefernce({...preference, waterfall: !preference.waterfall})} style={styles.checkbox}>
             <View style={[styles.checkboxCircle, preference.waterfall && styles.checkboxChecked]} />
@@ -96,7 +171,7 @@ const register = () => {
         </View>
       </View>
       
-      <Mybutton title={"Register"} onPress={onRegister}/>
+      <Mybutton title={"Register"} onPress={verifyOtp}/>
       {/* <link href='/login'>If</link> */}
     </View>
   )
@@ -125,28 +200,33 @@ input: {
     borderColor: 'black',
     borderWidth: 2,
     borderRadius: 10,
-    marginVertical: height * 0.015, // Dynamic margin
+    marginVertical: height * 0.01, // Dynamic margin
     paddingLeft: width * 0.05, // 5% padding left
 },
 number: {
     fontSize: width * 0.045, // Dynamic font size
     height: height * 0.06, // 6% of screen height
-    width: width * 0.65, // 65% of screen width
+    width: width * 0.70, // 65% of screen width
     justifyContent: 'center',
     borderColor: 'black',
     borderWidth: 2,
     borderRadius: 10,
-    marginVertical: height * 0.015, // Dynamic margin
     paddingLeft: width * 0.05, // 5% padding left
 },
 otp: {
   flexDirection: 'row',
   alignItems: 'center',
-  marginBottom: height * 0.02, // Space between OTP inputs
+  marginVertical: height * 0.01, // Dynamic margin
+},
+phoneInputText: {
+  paddingVertical: 0,
+  paddingLeft: width * 0.05,
+  borderRadius: 10, // Ensure rounded corners
+  // backgroundColor: 'transparent', // Adjust background to avoid styling conflicts
 },
 button: {
   backgroundColor: "#8533ff",
-  width: width * 0.25, // Button width is 25% of screen width
+  width: width * 0.20, // Button width is 20% of screen width
   height: height * 0.06, // Button height is 6% of screen height
   borderRadius: 10,
   justifyContent: "center",

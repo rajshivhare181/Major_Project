@@ -27,6 +27,9 @@ const Archaeological_Park= () => {
     const fullHistoryText = `History: The Archaeological Park in Gujarat, specifically in areas like Lothal and Dholavira, showcases some of the oldest and most significant archaeological sites related to the Indus Valley Civilization (Harappan Civilization). Lothal was a major trade and manufacturing center of the ancient civilization, known for its dockyard and bead-making industry. Dholavira, located in Kutch, is a city that offers insight into advanced urban planning with its large reservoirs, water management systems, and well-organized streets. These sites are of immense historical importance, shedding light on the daily life, architecture, and trade practices of the Harappan people.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Archaeological_Park= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
+                { 9<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹10</Text>
@@ -172,5 +178,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

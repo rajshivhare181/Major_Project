@@ -28,6 +28,9 @@ const Aurobindo_ashrm = () => {
 Growth: The ashram grew with the support of his followers and became a hub of spiritual practice, offering a place for meditation and integral yoga. The ashram is dedicated to the teachings of Sri Aurobindo and his spiritual collaborator, The Mother (Mirra Alfassa), who played a key role in guiding the ashram and its philosophy.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -60,8 +63,11 @@ Growth: The ashram grew with the support of his followers and became a hub of sp
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
+                { 8<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free</Text>
@@ -168,5 +174,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

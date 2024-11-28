@@ -27,6 +27,9 @@ const Agatti_Island = () => {
     const fullHistoryText = `History :Agatti Island is one of the Lakshadweep Islands, located in the Arabian Sea, off the southwestern coast of India. Known for its stunning coral reefs and pristine beaches, Agatti has a rich cultural history influenced by various seafaring communities. It was initially inhabited by the local Maldives people and later became part of the Indian Union after independence. Agatti has a strategic location and is also an important site for the Indian Navy. Over time, the island has developed as a popular tourist destination, renowned for its natural beauty and water sports activities.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Agatti_Island = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fees</Text>
@@ -131,6 +137,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

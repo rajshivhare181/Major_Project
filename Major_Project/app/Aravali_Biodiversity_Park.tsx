@@ -27,6 +27,9 @@ const Aravali_Biodiversity_Park = () => {
     const fullHistoryText = `History : The Aravalli Biodiversity Park in Gurugram, Haryana, is a significant green area spread over 692 acres. The park was established in 1991 by the Forest Department of Haryana with the aim of preserving the natural biodiversity of the Aravalli hills. Once a barren and degraded area, the park has been transformed into a thriving ecological zone with over 1,000 species of plants, 190 species of birds, and various mammals, reptiles, and insects. It serves as an important urban green space for environmental conservation, research, and eco-tourism, making it a valuable resource for both nature lovers and researchers.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Aravali_Biodiversity_Park = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :5:00 AM to 7:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 5 AM to 7 PM</Text>
+                { 5<= hour && 19 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee</Text>
@@ -171,5 +177,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

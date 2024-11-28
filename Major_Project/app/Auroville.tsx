@@ -27,6 +27,9 @@ const Auroville= () => {
     const fullHistoryText = `History: Auroville, founded in 1968 by Mirra Alfassa (The Mother), a disciple of Sri Aurobindo, is an international township located near Puducherry, India. The vision behind Auroville was to create a universal community where people of all nationalities, cultures, and beliefs could live in peace and harmony, transcending religious and cultural barriers. The purpose of Auroville is to support human evolution and integrate spiritual, social, and environmental progress. It is governed by the principles of sustainable living, collective growth, and personal transformation. Auroville continues to thrive as a global experiment in unity and human potential.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Auroville= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 5:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 5 PM</Text>
+                { 9<= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :Free</Text>
@@ -170,5 +176,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

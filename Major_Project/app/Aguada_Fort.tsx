@@ -27,6 +27,9 @@ const Aguada_Fort= () => {
     const fullHistoryText = `History : Aguada Fort, located in North Goa, was built by the Portuguese in 1612 to defend against Dutch and Maratha invasions. The fort, situated on the banks of the Mandovi River, played a vital role in controlling the region's coastline. Its name, "Aguada," means "water" in Portuguese, referring to the freshwater spring inside the fort, which was used to supply water to ships. The fort also features a lighthouse, which was later constructed in 1864. Today, Aguada Fort is a popular tourist destination, offering panoramic views of the Arabian Sea and showcasing Goa's colonial history.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Aguada_Fort= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:30 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
+                { 9<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹25 for adult</Text>
@@ -136,6 +142,20 @@ const styles = StyleSheet.create({
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
       paddingHorizontal: width * 0.02,
+      alignSelf: "center",
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
       alignSelf: "center",
     },
     text_address: {

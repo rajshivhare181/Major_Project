@@ -27,6 +27,9 @@ const Anandpur_Sahib = () => {
     const fullHistoryText = `History :Anandpur Sahib, located in Punjab, India, was founded in 1665 by Guru Tegh Bahadur, the ninth Sikh Guru. It is a sacred town for Sikhs, as it is home to several important gurdwaras, including Takht Sri Keshgarh Sahib, where Guru Gobind Singh, the tenth Guru, founded the Khalsa in 1699. Anandpur Sahib played a pivotal role during the Sikh battles and is a center for Sikhism, promoting spiritual and cultural teachings. The town also witnessed the formation of the Khalsa Panth, marking a major turning point in Sikh history and faith.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Anandpur_Sahib = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 4:00 AM to 9:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 4 AM to 9 PM</Text>
+                { 4<= hour && 21 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee</Text>
@@ -168,5 +174,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

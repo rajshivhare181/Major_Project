@@ -27,6 +27,9 @@ const Amber_Palace = () => {
     const fullHistoryText = `Amber Palace, located in Jaipur, Rajasthan, was constructed in the 16th century by Raja Man Singh I, with later additions by Maharaja Jai Singh I. Built in red sandstone and marble, it blends Hindu and Mughal architectural styles. The palace served as the main seat of the Kachwaha dynasty until Jaipur was established as the capital. Known for its stunning architecture, the palace features grand courtyards, intricate carvings, and the famous Sheesh Mahal (Mirror Palace). Amber Palace is a UNESCO World Heritage Site and one of Jaipur’s most popular tourist destinations.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Amber_Palace = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :  8:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
+                { 8<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :RS 100 to 200 for adult</Text>
@@ -170,5 +176,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

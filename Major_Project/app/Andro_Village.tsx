@@ -27,6 +27,9 @@ const Andro_Village = () => {
     const fullHistoryText = `History :Andro Village, located about 25 km east of Imphal, is a picturesque and historically rich village in Manipur. Known for its cultural and traditional significance, the village is home to the Meitei people, who practice Sanamahism (a traditional belief system) alongside Hinduism. Andro is famous for its traditional pottery and the Andro Museum, which showcases artifacts related to the region’s cultural heritage. The village is also notable for its unique celebration of festivals such as Yaoshang (Holi) and Lai Haraoba, preserving centuries-old customs and rituals that reflect the deep spiritual connection of the Meitei community.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Andro_Village = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 4:30 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 4 PM</Text>
+                { 9<= hour && 16 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹10-₹20 for adult</Text>
@@ -168,5 +174,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

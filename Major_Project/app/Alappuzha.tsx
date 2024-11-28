@@ -27,6 +27,9 @@ const Alappuzha= () => {
     const fullHistoryText = `History : Alappuzha, also known as Alleppey, is a coastal town in Kerala, India, with a rich history tied to its ancient port and trade routes. Established in 1772 by the Maharaja of Travancore, it became an important center for trade in the region, especially for rice, coir, and spices. Alappuzha developed into a prominent maritime hub during British rule and was known for its picturesque backwaters and canals. Today, it is famous for its houseboat cruises, the annual Nehru Trophy Boat Race, and its vibrant cultural heritage, reflecting Kerala’s traditional art, architecture, and community life.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Alappuzha= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8:00 AM and 5:00 PM.</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 8 AM and 5 PM.</Text>
+                { 8<= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free</Text>
@@ -87,6 +93,20 @@ const styles = StyleSheet.create({
     photo: {
         width: width,
         height: imgHeight,
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     },
     nav_icon: {
         backgroundColor: 'white',

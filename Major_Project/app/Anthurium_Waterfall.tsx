@@ -27,6 +27,9 @@ const Anthurium_Waterfall = () => {
     const fullHistoryText = `History :Anthurium Waterfall, located on Havelock Island in the Andaman and Nicobar Islands, is a relatively lesser-known but stunning natural attraction. Named after the Anthurium flower, which is abundant in the region, the waterfall is nestled in a lush green forest. While the area has long been known to locals, it gained recognition among tourists in recent years as an eco-tourism destination. The waterfall is surrounded by dense tropical forests, creating a serene and untouched atmosphere. It is ideal for nature enthusiasts and adventure lovers, offering a picturesque and tranquil experience.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Anthurium_Waterfall = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : no entry fee</Text>
@@ -169,5 +175,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

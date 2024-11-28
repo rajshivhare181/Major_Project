@@ -27,6 +27,9 @@ const Amini_Island= () => {
     const fullHistoryText = `History :Amini Island is part of the Lakshadweep Archipelago, located in the Arabian Sea. It is one of the largest and most populous islands in Lakshadweep and is known for its distinct culture and traditions. Historically, Amini was a major center for the copra trade (dried coconut meat), which formed the basis of the island's economy for centuries. The island’s residents speak a unique version of Malayalam influenced by the Maldives dialect. Over time, Amini has remained relatively isolated, with its development focused on preserving its indigenous lifestyle, fishing, and coconut farming traditions.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Amini_Island= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee</Text>
@@ -168,5 +174,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

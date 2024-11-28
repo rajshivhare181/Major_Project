@@ -27,6 +27,9 @@ const Ambience_Mall_Gurugram = () => {
     const fullHistoryText = `History : Ambience Mall in Gurugram, Haryana, is one of the largest and most popular shopping malls in the National Capital Region (NCR) of India. Opened in 2007, it was developed by Ambience Group, known for its luxury developments. The mall is located near the NH-8 highway, making it a prime destination for both local residents and tourists. It features a wide range of high-end brands, entertainment options, and food courts, attracting shoppers from across the city. Over the years, Ambience Mall has become a hub for retail, dining, and leisure activities, contributing to the region's urban growth.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Ambience_Mall_Gurugram = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10:00 AM to 10:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 10 AM to 10 PM</Text>
+                { 10<= hour && 22 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee</Text>
@@ -172,5 +178,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

@@ -27,6 +27,9 @@ const Andrott_Island = () => {
     const fullHistoryText = `History :Andrott Island, the largest island in Lakshadweep, holds significant historical and cultural importance. It is believed to have been inhabited for centuries, with early settlers being fishermen and traders. Andrott was historically a prominent center for Islamic culture and religion in the archipelago. The island has several ancient mosques and tombs, with the most notable being the tomb of Saint Ubaidullah, which draws religious pilgrims. The island's role in local trade, especially in pearls and fish, has shaped its economy. Despite being less developed compared to other islands, Andrott remains a peaceful retreat, known for its scenic beauty and rich heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Andrott_Island = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM. </Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM. </Text>
+                { 6<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : ₹4000-₹10000 for adult</Text>
@@ -168,5 +174,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })

@@ -27,6 +27,9 @@ const Arikamedu= () => {
     const fullHistoryText = `History: Arikamedu is an ancient Roman trading port and archaeological site located near Pondicherry. It dates back to the 1st century BCE and was an active center for trade between the Roman Empire and India. The site was discovered in the early 20th century and has yielded a wealth of artifacts, including Roman pottery, beads, and coins, confirming the maritime trade routes that connected South India to Rome. Arikamedu was a major center for the export of goods like pepper, textiles, and other spices. It offers valuable insights into the early cultural exchange between the East and West.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Arikamedu= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
+                { 9<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :₹10 for adult</Text>
@@ -167,5 +173,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })
