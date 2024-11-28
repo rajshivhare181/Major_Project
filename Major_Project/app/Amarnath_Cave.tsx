@@ -27,6 +27,9 @@ const Amarnath_Cave = () => {
     const fullHistoryText = `Amarnath Cave is a sacred Hindu shrine dedicated to Lord Shiva, located in the Indian state of Jammu & Kashmir. The cave, situated at an altitude of 3,888 meters in the Himalayas, is famous for the naturally occurring ice Shiva Lingam, a symbol of Lord Shiva. The Amarnath Yatra, a pilgrimage to the cave, is held annually during the summer months of July to August, attracting thousands of devotees. According to legend, Lord Shiva revealed the secret of immortality to Goddess Parvati here. The cave has been a significant site of worship for centuries, drawing both religious and spiritual seekers.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
+    const time = new Date();
+    const hour = time.getHours();
   return (
     <>
         <Stack.Screen options={{ 
@@ -59,8 +62,11 @@ const Amarnath_Cave = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 6:00 PM</Text>
-                <Text style={styles.text}>Open</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6<= hour && 18 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket :no entry fee</Text>
@@ -168,5 +174,19 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
+    },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
     }
 })
