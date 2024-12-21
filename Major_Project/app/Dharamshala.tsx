@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Dharamshala = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=32.219042,76.323404`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Dharamshala, located in the Kangra district of Himachal Pradesh, is known for its association with Tibetan culture and Buddhism. It gained prominence when the 14th Dalai Lama, Tenzin Gyatso, took refuge here in 1959 after fleeing Tibet. The town, set against the backdrop of the Dhauladhar mountain range, became the seat of the Tibetan government-in-exile. Dharamshala has since grown into a popular hill station and spiritual hub, attracting travelers seeking tranquility, adventure, and a glimpse into Tibetan culture through its monasteries and Tibetan settlements.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Dharamshala = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                { 6 <= hour && 17 >= hour ? 
                  <Text style={styles.time}>Open</Text> :
                  <Text style={styles.time1}>Close</Text>
              }
@@ -76,8 +80,8 @@ const Dharamshala = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Dharamshala, Kangra District, Himachal Pradesh, India.   </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

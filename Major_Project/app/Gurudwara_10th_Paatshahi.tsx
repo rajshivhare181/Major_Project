@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Gurudwara_10th_Paatshahi = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Gurudwara 10th Paatshahi, also known as Gurudwara Guru Gobind Singh Ji, is a significant Sikh shrine located in Gurugram, Haryana. This Gurudwara is dedicated to Guru Gobind Singh Ji, the 10th Sikh Guru, who visited the region in the 17th century. It is believed that Guru Gobind Singh Ji stayed here for some time during his travels, and the site has been a place of pilgrimage for Sikhs ever since. The Gurudwara serves as a center of spiritual learning and community service, offering daily prayers, kirtan (devotional singing), and langar (community kitchen).`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Gurudwara_10th_Paatshahi = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :4 AM - 9 PM</Text>
-                { 9 <= hour && 21 >= hour ? 
+                { 9 <= hour && 20 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
               } 
@@ -70,9 +74,9 @@ const Gurudwara_10th_Paatshahi = () => {
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : Free
                </Text>
-                <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
-                    <Text style={styles.text}>Book</Text>
-                </TouchableOpacity>
+               <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                  </TouchableOpacity>
             </View>
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Gurudwara 10th Paatshahi
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Baratang_Island = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Baratang Island, located in the Andaman and Nicobar Islands, is known for its unique geological features, including limestone caves and mud volcanoes. Historically, the island was inhabited by indigenous tribes like the Great Andamanese. The island’s strategic location made it an important site during colonial times. After independence, Baratang remained relatively undeveloped but gradually became known for its natural beauty and biodiversity. The island’s limestone caves, located amidst dense forests, and the nearby mud volcanoes became key attractions for eco-tourism. It is a quieter and less-visited destination compared to other Andaman islands but remains an important part of the region’s natural heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const Baratang_Island = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 5:00 PM</Text>
-                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing : 6 AM to 5 PM</Text>
+                { 6 <= hour && 16 >= hour ? 
                  <Text style={styles.time}>Open</Text> :
                  <Text style={styles.time1}>Close</Text>
                 } 
@@ -77,8 +81,8 @@ const Baratang_Island = () => {
                 <Text style={styles.text_address}>Address :Baratang Island
                 Andaman and Nicobar Islands, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

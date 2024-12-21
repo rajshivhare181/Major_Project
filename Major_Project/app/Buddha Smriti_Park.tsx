@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Buddha_Smriti_Park = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.606714,85.13615`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Buddha Smriti Park was inaugurated on October 18, 2010, by the Chief Minister of Bihar, Nitish Kumar, in the presence of the then Dalai Lama and other prominent Buddhist leaders. It was established as part of Bihar's efforts to preserve and promote the heritage of Buddhism, particularly to honor the association of Lord Buddha with Bihar.
 The park was built on the grounds of a former railway colony, and it spans across 22 acres of land in the heart of Patna, near Bailey Road.`;
   
@@ -62,8 +66,8 @@ const hour = time.getHours();
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 8:00 PM</Text>
-                { 6 <= hour && 20 >= hour ? 
+                <Text style={styles.text}>Timing : 6 AM to 8 PM</Text>
+                { 6 <= hour && 19 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
                }
@@ -78,8 +82,8 @@ const hour = time.getHours();
                 <Text style={styles.text_address}>Address : Bailey Road, Patna, Bihar, India
                 Pincode: 800001</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

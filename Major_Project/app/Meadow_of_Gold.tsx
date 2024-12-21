@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Meadow_of_Gold  = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Meadow of Gold (Sonamarg) is a picturesque valley located in the Kashmir region, known for its stunning natural beauty. The name "Sonamarg" translates to "Meadow of Gold" due to the golden-hued flowers that bloom in the summer, creating a mesmerizing sight. Historically, Sonamarg has been a vital stop along the ancient Silk Route, serving as a base for traders traveling through the region. It is also famous for its association with the Amarnath Yatra and has been a popular destination for trekkers and adventure enthusiasts. The valley offers breathtaking views of snow-capped mountains, alpine meadows, and glacial streams.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Meadow_of_Gold  = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
-                { 8 <= hour && 18 >= hour ? 
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ const Meadow_of_Gold  = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Sonamarg, Ganderbal District, Jammu & Kashmir, 191202, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

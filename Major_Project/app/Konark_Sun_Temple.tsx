@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Konark_Sun_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=19.887595,86.094536`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Konark Sun Temple, located in Konark, Odisha, is a UNESCO World Heritage Site dedicated to the Sun God, Surya. It was built in the 13th century by King Narasimhadeva I of the Eastern Ganga dynasty. The temple is designed as a massive chariot with twelve wheels, drawn by seven horses, symbolizing the movement of the sun across the sky. Its intricate carvings and architectural brilliance reflect the zenith of Kalinga architecture. Although much of the temple was ruined over time, it remains a stunning example of ancient Indian engineering and artistic expression, attracting visitors worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Konark_Sun_Temple = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM to 8 PM</Text>
-                { 6 <= hour && 20 >= hour ? 
+                { 6 <= hour && 19 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹40 for adult
+                <Text style={styles.text}>Ticket : ₹400 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -80,8 +84,8 @@ Konark, Puri District,
 Odisha 752111,
 India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -164,7 +168,7 @@ const styles = StyleSheet.create({
     },
     book: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

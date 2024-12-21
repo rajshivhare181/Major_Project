@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Pahari_Temple_Ranchi = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.375429,85.31075`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Pahari Temple, located on a hilltop in Ranchi, Jharkhand, is dedicated to Lord Shiva. The temple’s history dates back to the 17th century and is believed to have been established by local kings. The temple is perched atop a hill, offering panoramic views of the city. The name "Pahari" means "hill" in Hindi, reflecting its hilltop location. Pilgrims must climb 400 steps to reach the temple, which is considered a significant religious spot, especially during Shivaratri and other Hindu festivals. The temple attracts devotees for both its spiritual significance and scenic beauty.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const Pahari_Temple_Ranchi = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :5:00 AM to 8:00 PM.</Text>
-                { 5 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing :5 AM to 8 PM.</Text>
+                { 5 <= hour && 19 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -79,8 +83,8 @@ const Pahari_Temple_Ranchi = () => {
 Pahari Mandir Road,
 Ranchi, Jharkhand, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Jagannatha_Temple_Puri = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=19.804938,85.8315`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Shree Jagannatha Temple in Puri, Odisha, is dedicated to Lord Jagannatha, a form of Lord Vishnu. Its origins trace back to the 12th century, when King Anantavarman Chodaganga Deva commissioned the temple's construction in 1135 CE. The temple is an architectural masterpiece, showcasing the Kalinga style. Lord Jagannatha, along with his siblings Balabhadra and Subhadra, are the deities worshipped here. The temple is famous for its grand Rath Yatra (chariot festival), attracting millions of pilgrims annually. Over centuries, it has remained a significant religious and cultural hub for Hindus worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Jagannatha_Temple_Puri = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5 AM - 9 PM </Text>
-                { 5 <= hour && 21 >= hour ? 
+                { 5 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ const Jagannatha_Temple_Puri = () => {
                 <Text style={styles.text_address}>Address :Shree Jagannatha Temple, Grand Road, Puri, Odisha, India, 752001
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

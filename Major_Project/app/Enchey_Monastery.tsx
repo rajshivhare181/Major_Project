@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Enchey_Monastery = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Enchey Monastery, located in Gangtok, Sikkim, was built in 1909 by Lama Dhrupthob Karpo, a prominent lama from Sikkim. It is an important Buddhist monastery belonging to the Nyingma sect of Tibetan Buddhism. The name "Enchey" means "The solitary temple" in Tibetan, which reflects its peaceful and isolated setting. The monastery is known for its beautiful architecture, vibrant prayer flags, and magnificent views of the Kanchenjunga mountain range. It is also a significant place of worship and a popular destination for spiritual seekers and tourists visiting Gangtok.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const hour = time.getHours();
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :5 AM to 7 PM</Text>
-                { 5 <= hour && 19 >= hour ? 
+                { 5 <= hour && 18 >= hour ? 
                <Text style={styles.time}>Open</Text> :
                <Text style={styles.time1}>Close</Text>
               } 
@@ -80,8 +84,8 @@ Gangtok, East Sikkim,
 Sikkim, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

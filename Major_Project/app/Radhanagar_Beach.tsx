@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Panchmarhi = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The name "Radhanagar" comes from the Radhanagar Village located near the beach. Historically, this area was part of a larger ecological conservation project to protect the unique marine and forest ecosystems of the region. The beach is part of the Havelock Island which is a popular tourist destination due to its natural beauty, pristine waters, and coral reefs. Over the years, it has evolved into a popular spot for both international and domestic tourists, offering a serene and picturesque environment for relaxation, swimming, and water activities.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Panchmarhi = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :5 AM to 5 PM</Text>
-                { 5 <= hour && 17 >= hour ? 
+                { 5 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }

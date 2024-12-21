@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,11 @@ const Anandpur_Sahib = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=31.235532,76.501273`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+
     const fullHistoryText = `History :Anandpur Sahib, located in Punjab, India, was founded in 1665 by Guru Tegh Bahadur, the ninth Sikh Guru. It is a sacred town for Sikhs, as it is home to several important gurdwaras, including Takht Sri Keshgarh Sahib, where Guru Gobind Singh, the tenth Guru, founded the Khalsa in 1699. Anandpur Sahib played a pivotal role during the Sikh battles and is a center for Sikhism, promoting spiritual and cultural teachings. The town also witnessed the formation of the Khalsa Panth, marking a major turning point in Sikh history and faith.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -63,7 +68,7 @@ const Anandpur_Sahib = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 4 AM to 9 PM</Text>
-                { 4<= hour && 21 >= hour ? 
+                { 4<= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +82,8 @@ const Anandpur_Sahib = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Anandpur Sahib, Rupnagar District, Punjab, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -160,7 +165,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

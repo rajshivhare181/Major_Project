@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Elephant_Beach = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=9.933011,76.298979`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `The Folklore Museum in Kochi, Kerala, is a cultural treasure trove dedicated to preserving the rich traditions, art, and heritage of Kerala. Established in 2009, the museum houses a vast collection of traditional artifacts, including costumes, masks, musical instruments, household items, and religious objects. It offers visitors a glimpse into Kerala’s vibrant folk traditions, including classical dance forms like Kathakali, Theyyam, and Mohiniyattam. The museum also displays a variety of old agricultural tools, paintings, and sculptures, reflecting the cultural and historical evolution of Kerala’s rural life. It plays an important role in promoting and preserving Kerala’s folklore and artistic heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const hour = time.getHours();
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 5 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
     <Text style={styles.time}>Open</Text> :
     <Text style={styles.time1}>Close</Text>
 } 
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹30-50 for adult
+                <Text style={styles.text}>Ticket :₹300-500 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -79,8 +83,8 @@ const hour = time.getHours();
                 Thevara, Kochi, Kerala 682013, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

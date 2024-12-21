@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const  Mysuru_Zoo  = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=12.302409,76.663819`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Mysuru Zoo, also known as Sri Chamarajendra Park, was established in 1892 by Chamaraja Wodeyar, the ruler of the Mysore Kingdom. Originally created to house the royal collection of animals, the zoo is one of the oldest and most well-maintained zoos in India. Over the years, it has evolved into a major conservation center and a popular tourist destination, known for its diverse species, including endangered ones. The zoo is spread across 25 acres and is recognized for its emphasis on animal welfare, research, and education.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const  Mysuru_Zoo  = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :8 AM to 5 PM</Text>
-                { 8 <= hour && 17 >= hour ? 
+                { 8 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹60 for adult 
+                <Text style={styles.text}>Ticket : ₹600 for adult 
 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
@@ -80,8 +84,8 @@ const  Mysuru_Zoo  = () => {
 Indiranagar,
 Mysuru, Karnataka 570010, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Ellora_Caves = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=20.026784,75.177087`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `The Ellora Caves, a UNESCO World Heritage Site, are located in Maharashtra, India, and represent a remarkable confluence of Buddhist, Hindu, and Jain rock-cut architecture. Excavated between the 5th and 10th centuries CE, these 34 caves feature temples, monasteries, and monasteries. The caves are divided into three distinct groups: Buddhist (Caves 1-12), Hindu (Caves 13-29), and Jain (Caves 30-34). The most famous cave is Cave 16, the massive Kailasa Temple, which is considered a remarkable feat of engineering, carved from a single monolithic rock. Ellora is renowned for its intricate sculptures and grand religious artwork.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const hour = time.getHours();
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
                  <Text style={styles.time}>Open</Text> :
                  <Text style={styles.time1}>Close</Text>
              } 
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹40 for adult
+                <Text style={styles.text}>Ticket : ₹400 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -78,9 +82,10 @@ const hour = time.getHours();
                 <Text style={styles.text_address}>Address :Ellora Caves, Ellora, Maharashtra, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+  <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
+
                 </View>
             </View>
         </Animated.ScrollView>
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

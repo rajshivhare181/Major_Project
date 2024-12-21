@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Jagdish_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Jagdish Temple, located in the heart of Udaipur, Rajasthan, is a grand Hindu temple dedicated to Lord Vishnu. Built in 1651 by Maharana Jagat Singh I, it is one of the largest and most important temples in Udaipur. The temple features Indo-Aryan architecture, with a stunning entrance and intricately carved pillars, sculptures, and spires. The central deity, Lord Vishnu, is depicted in the form of Jagannath. The temple is known for its serene atmosphere, attracting both devotees and tourists, and remains a significant cultural and religious site in the city.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Jagdish_Temple = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :4 AM to 9 PM </Text>
-                { 4 <= hour && 21 >= hour ? 
+                { 4 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -81,8 +85,8 @@ Udaipur, Rajasthan,
 India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Kasauli = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=30.90129,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `history :Kasauli has a rich colonial history. It was established by the British East India Company in 1842 as a hill station and sanatorium. The British found Kasauli's cool climate and proximity to Shimla, then the summer capital of British India, to be ideal for their soldiers and civilians who needed respite from the heat of the plains.
 
 Over the years, Kasauli evolved into a charming town with British-style cottages, churches, and other colonial-era buildings. Today, it still retains much of its colonial charm while being a quiet hill station that attracts both domestic and international tourists.`;
@@ -64,7 +68,7 @@ Over the years, Kasauli evolved into a charming town with British-style cottages
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :7 AM - 7 PM</Text>
-                { 7 <= hour && 19 >= hour ? 
+                { 7 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -79,8 +83,8 @@ Over the years, Kasauli evolved into a charming town with British-style cottages
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Kasauli, Solan, Himachal Pradesh, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

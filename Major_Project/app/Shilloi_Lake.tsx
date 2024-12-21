@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Shilloi = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Mythological Significance: According to local Naga legend, the lake has a mythological connection to the origin of the first Naga people. The lake is believed to have formed after a battle between two serpents. One of the serpents, feeling defeated, fled into the lake, which became its dwelling place. This myth adds a layer of cultural significance to the lake.
 Cultural Importance: The lake is considered sacred by the people of the area, especially the Pochury tribe. It holds religious and spiritual significance, with many local rituals being performed here, particularly during festivals.`;
   
@@ -63,7 +67,7 @@ Cultural Importance: The lake is considered sacred by the people of the area, es
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5 AM to 6 PM</Text>
-                { 5 <= hour && 18 >= hour ? 
+                { 5 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,9 +82,10 @@ Cultural Importance: The lake is considered sacred by the people of the area, es
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Shilloi Lake, Phek District, Nagaland, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
+
                 </View>
             </View>
         </Animated.ScrollView>
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

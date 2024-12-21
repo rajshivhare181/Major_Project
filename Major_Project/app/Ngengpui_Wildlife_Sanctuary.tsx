@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Ngengpui_Wildlife_Sanctuary = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Ngengpui Wildlife Sanctuary is located in the Mamit District of Mizoram, near the border with Myanmar. Established in 1987, this sanctuary spans an area of around 110 square kilometers and is one of the most biodiverse regions in Mizoram. The sanctuary is named after the Ngengpui River, which flows through the area. It is home to various species of flora and fauna, including rare animals like the Hoolock Gibbon and Sambar Deer, as well as a wide range of bird species. Ngengpui has significant ecological importance and serves as a key conservation area for Mizoram's wildlife.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Ngengpui_Wildlife_Sanctuary = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM to 5 PM</Text>
-                { 6 <= hour && 17 >= hour ? 
+                { 6 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹20 - ₹50 for adult 
+                <Text style={styles.text}>Ticket : ₹200 - ₹500 for adult 
 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
@@ -78,8 +82,8 @@ const Ngengpui_Wildlife_Sanctuary = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Ngengpui Wildlife Sanctuary, Mamit District, Mizoram 796441, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

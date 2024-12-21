@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Nandankanan_Zoological_Park = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=20.39577,85.825964`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Nandankanan Zoological Park, located near Bhubaneswar, Odisha, was established in 1960 and is one of India’s premier zoos. Initially set up as a sanctuary for animals, it became a zoo in 1979 and later achieved the status of a National Park. The park spans over 400 hectares and is home to a wide variety of flora and fauna. It is especially known for its successful breeding programs of rare species such as the white tiger and the Indian pangolin. Nandankanan is also a botanical garden, hosting a diverse collection of plants and providing a natural habitat for its inhabitants.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Nandankanan_Zoological_Park = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :7 AM to 5 pm </Text>
-                { 7 <= hour && 17 >= hour ? 
+                { 7 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹30 for adult 
+                <Text style={styles.text}>Ticket :₹300 for adult 
 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
@@ -82,8 +86,8 @@ Bhubaneswar,
 Odisha 751002,
 India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -179,7 +183,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

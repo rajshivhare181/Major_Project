@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Kovalam= () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Kovalam is a renowned beach town located in the Thiruvananthapuram district of Kerala, India. Once a quiet fishing village, Kovalam gained popularity in the 1970s when European tourists began visiting for its serene beaches and natural beauty. Over time, it became a hub for international tourists seeking relaxation and Ayurveda treatments. The name "Kovalam" means a grove of coconut trees, and the town is famous for its crescent-shaped beaches—Lighthouse Beach, Hawah Beach, and Samudra Beach. Kovalam's picturesque coastline, along with its vibrant culture, makes it one of the top tourist destinations in Kerala.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Kovalam= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
-                { 8 <= hour && 18 >= hour ? 
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹10 - 20 for adult
+                <Text style={styles.text}>Ticket :₹100 - 200 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -77,8 +81,8 @@ const Kovalam= () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Kovalam Lighthouse: Lighthouse Road, Kovalam, Thiruvananthapuram, Kerala 695527, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

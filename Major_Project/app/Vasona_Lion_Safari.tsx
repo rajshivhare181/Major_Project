@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Vasona_Lion_Safari = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Vasona Lion Safari is located near Gir National Park in Gujarat, India. Established as part of wildlife conservation efforts, it offers a safe habitat for the Asiatic lion, one of the world’s most endangered species. The safari was created to give visitors the opportunity to witness these majestic creatures in their natural environment while promoting eco-tourism. The area around the safari park has been carefully preserved to maintain the lions' natural behavior and habitat. Vasona Lion Safari is part of broader conservation efforts to protect the Asiatic lion population and other wildlife species in the region.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Vasona_Lion_Safari = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 7 AM to 6 PM</Text>
-                { 7 <= hour && 18 >= hour ? 
+                { 7 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹50 to ₹100 for adult </Text>
+                <Text style={styles.text}>Ticket : ₹100 to ₹200 for adult </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -79,8 +83,8 @@ Near Gir National Park,
 Gir Somnath District,
 Gujarat, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

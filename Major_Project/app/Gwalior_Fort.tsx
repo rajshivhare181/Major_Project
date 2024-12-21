@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Gwalior_Fort = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Gwalior Fort, located in Madhya Pradesh, India, is an ancient hill fort with a rich history dating back over 1,000 years. It was established by Suraj Sen, a local ruler, in the 3rd century, though the fort saw significant expansion under various rulers. The Tomar dynasty, particularly under Raja Man Singh Tomar in the 15th century, is credited with constructing much of the current structure. The fort has witnessed the rise and fall of several dynasties, including the Mughals, Marathas, and Scindias. Renowned for its massive walls and grand architecture, it remains a symbol of India's rich cultural heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -64,13 +68,13 @@ const Gwalior_Fort = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 am - 5 pm</Text>
-                { 6<= hour && 17 >= hour ? 
+                { 6<= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : Rs 75 for adults</Text>
+                <Text style={styles.text}>Ticket : Rs 200 for adults</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -78,8 +82,8 @@ const Gwalior_Fort = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Urvai gate, Gwalior (M.P.)</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

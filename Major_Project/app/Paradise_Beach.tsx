@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Paradise_Beach = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Historically, the beach was less accessible and not as commercialized, making it a hidden gem for many years. Over time, however, it has become one of Puducherry’s most visited tourist attractions.
 The beach was once somewhat isolated but has since become more accessible with the development of tourist infrastructure and boat services from the main town area.
 The beach is situated near the Chunnambar River, and it is often noted for its lush green surroundings and the picturesque views it offers, making it a perfect spot for relaxation and recreation.`;
@@ -64,13 +68,13 @@ The beach is situated near the Chunnambar River, and it is often noted for its l
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM - 7 PM </Text>
-                { 6 <= hour && 19 >= hour ? 
+                { 6 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹20 - 50 for adult 
+                <Text style={styles.text}>Ticket : ₹200 - 500 for adult 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -82,8 +86,8 @@ The beach is situated near the Chunnambar River, and it is often noted for its l
     Puducherry, 605007,
     India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -179,7 +183,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

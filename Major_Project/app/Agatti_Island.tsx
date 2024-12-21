@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Agatti_Island = () => {
         ]
         }
     });
+      const openGoogleMaps = () => {
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=10.857561,72.193442`;
+        Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+      };
     const fullHistoryText = `History :Agatti Island is one of the Lakshadweep Islands, located in the Arabian Sea, off the southwestern coast of India. Known for its stunning coral reefs and pristine beaches, Agatti has a rich cultural history influenced by various seafaring communities. It was initially inhabited by the local Maldives people and later became part of the Indian Union after independence. Agatti has a strategic location and is also an important site for the Indian Navy. Over time, the island has developed as a popular tourist destination, renowned for its natural beauty and water sports activities.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -63,7 +67,7 @@ const Agatti_Island = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
-                { 6<= hour && 18 >= hour ? 
+                { 6<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Agatti_Island = () => {
             <View style={styles.address}>
                     <Text style={styles.text_address}>Address :Agatti Island, Lakshadweep, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Govindajee_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Shree Govindajee Temple, located in Imphal, is one of the most important Hindu temples in Manipur. Dedicated to Lord Vishnu and Radha, the temple has deep cultural and religious significance for the Meitei people. Built in the 18th century, it was constructed during the reign of King Garib Niwaj, who was a devout follower of Vaishnavism. The temple’s architecture is influenced by both Indo-Aryan and local styles, and it houses beautiful murtis (idols) of Govindajee (a form of Lord Krishna) and Radha. The temple is a center for worship and celebrates various Vaishnavite festivals.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const hour = time.getHours();
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :5:00 AM - 8:00 PM</Text>
-                { 5 <= hour && 20 >= hour ? 
+                <Text style={styles.text}>Timing :5 AM - 8 PM</Text>
+                { 5 <= hour && 19 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
               } 
@@ -78,8 +82,8 @@ const hour = time.getHours();
                 <Text style={styles.text_address}>Address : Near the Royal Palace, Imphal, Manipur 795001, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

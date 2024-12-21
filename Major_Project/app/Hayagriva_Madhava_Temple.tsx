@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Himayvan_Kauncha = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `The Hayagriva Madhava Temple in Hajo, Assam, has a rich historical and cultural significance. Believed to date back to the 6th or 7th century, it is dedicated to Lord Vishnu in the form of Hayagriva, a horse-headed deity associated with wisdom. The temple is an important pilgrimage site for both Hindus and Buddhists, reflecting the region’s religious diversity. According to local legend, the temple was built by the renowned king Rudra Singha during the Ahom dynasty. The temple's unique architecture and serene atmosphere attract visitors from all over India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Himayvan_Kauncha = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM - 7 PM</Text>
-                { 6 <= hour && 19 >= hour ? 
+                { 6 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Himayvan_Kauncha = () => {
                 <Text style={styles.text_address}>Address :Hajo
                 Kamrup District, Assam, India </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

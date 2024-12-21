@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Shri_Pathar_Sahib = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Shri Pathar Sahib Gurudwara, located about 25 km from Leh in Ladakh, is a revered Sikh pilgrimage site. The Gurudwara was built in the 16th century to commemorate the visit of Guru Nanak, the founder of Sikhism. According to legend, the Guru, while traveling through the region, encountered a local demon who tried to harm him. However, Guru Nanak's spiritual power caused the stone to soften, saving him from harm. The soft stone, known as "Pathar Sahib," is preserved in the Gurudwara. The shrine serves as a symbol of peace, spirituality, and the shared cultural heritage of Ladakh.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Shri_Pathar_Sahib = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :5 AM to 8 PM</Text>
-                { 5 <= hour && 20 >= hour ? 
+                { 5 <= hour && 19 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ const Shri_Pathar_Sahib = () => {
                 <Text style={styles.text_address}>Address : Shri Pathar Sahib Gurudwara
                 Leh, Ladakh, Jammu & Kashmir, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

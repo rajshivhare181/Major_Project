@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Basilica_of_Bom_Jesus = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=15.500824,73.911406`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : The Basilica of Bom Jesus, located in Old Goa, is one of the most significant churches in India. Completed in 1605, the church is renowned for housing the mortal remains of St. Francis Xavier, a Jesuit missionary who played a key role in spreading Christianity in Asia. The church is a fine example of Baroque architecture and is part of the UNESCO World Heritage Site of the Churches and Convents of Goa. The basilica’s simplicity, intricate woodwork, and golden altars make it a marvel of 16th-century Portuguese influence. It is a major pilgrimage site and an important symbol of Goa’s Christian heritage. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const Basilica_of_Bom_Jesus = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :  9:00 AM to 6:00 PM</Text>
-                { 9 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing :  9 AM to 6 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
                  <Text style={styles.time}>Open</Text> :
                  <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ North Goa,
 Goa,
 India - 403402.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

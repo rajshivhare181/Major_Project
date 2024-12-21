@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Meenakshi_Amman_Temple  = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query= 9.919505,78.119342`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Meenakshi Amman Temple, located in Madurai, Tamil Nadu, is a historic Hindu temple dedicated to Goddess Meenakshi (a form of Parvati) and her consort, Lord Sundareswarar (Shiva). Its origins date back to the 6th century CE, with the current structure being built during the 16th century under the rule of the Nayak dynasty. Renowned for its stunning Dravidian architecture, the temple boasts 14 towers (gopurams), intricate sculptures, and vivid paintings. It remains a prominent pilgrimage site, known for the annual Meenakshi Thirukalyanam festival.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Meenakshi_Amman_Temple  = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :  5 AM to 10 PM</Text>
-                { 5 <= hour && 22 >= hour ? 
+                { 5 <= hour && 21 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹50 for adults
+                <Text style={styles.text}>Ticket :₹500 for adults
 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
@@ -78,8 +82,8 @@ const Meenakshi_Amman_Temple  = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Meenakshi Amman Temple, Madurai, Tamil Nadu, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

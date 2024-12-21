@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -8,7 +8,7 @@ import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewO
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const  Champhai = () => {
+const Champhai = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -24,7 +24,11 @@ const  Champhai = () => {
         ]
         }
     });
-    const fullHistoryText = `History :Champhai, located in the eastern part of Mizoram, is a picturesque town nestled in the Champhai Valley, near the Myanmar border. The town holds historical importance due to its strategic location and has long been an important center for trade between India and Myanmar. Historically inhabited by the Mizo people, Champhai has also been a key site for the Mizo National Front movement. The town is known for its rich Mizo culture, including traditional festivals, arts, and crafts. Today, Champhai is a growing hub for agriculture (especially fruits like apples and grapes) and tourism in the region.`;
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.477516,93.32367`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+    const fullHistoryText = `History :Champhai is a picturesque town in Mizoram, India, located near the Myanmar border. Known as the "Rice Bowl of Mizoram," it boasts a rich agricultural heritage. Historically, Champhai has been a cultural crossroads due to its proximity to Myanmar, facilitating trade and cultural exchange. The area is home to significant landmarks like Rih Dil, a lake revered in Mizo folklore as the passage to the afterlife, and ancient megaliths that tell stories of early settlers. Its stunning landscapes, vibrant local culture, and connection to Mizo history make it a compelling destination.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -61,24 +65,24 @@ const  Champhai = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8:00 AM to 5:00 PM.</Text>
-                { 8 <= hour && 17 >= hour ? 
-                  <Text style={styles.time}>Open</Text> :
-                  <Text style={styles.time1}>Close</Text>
-              }
+                <Text style={styles.text}>Timing : 5 AM to 8 PM</Text>
+                { 5 <= hour && 19 >= hour ? 
+                   <Text style={styles.time}>Open</Text> :
+                   <Text style={styles.time1}>Close</Text>
+               }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹20-₹30 for adult</Text>
+                <Text style={styles.text}>Ticket :₹20 - ₹100 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Champhai District, Mizoram 796321, India</Text>
+                <Text style={styles.text_address}>Address :Champhai District, Mizoram, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
-                  </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                  </TouchableOpacity> 
                 </View>
             </View>
         </Animated.ScrollView>
@@ -86,7 +90,7 @@ const  Champhai = () => {
   )
 }
 
-export default  Champhai
+export default Champhai
 
 const styles = StyleSheet.create({
     photo: {
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

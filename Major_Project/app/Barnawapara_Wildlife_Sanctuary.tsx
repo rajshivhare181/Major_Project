@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Barnawapara_Wildlife_Sanctuary = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=21.401519,82.421929`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Barnawapara Wildlife Sanctuary, located in the Mahasamund district of Chhattisgarh, was established in 1976 to protect the rich biodiversity of the region. Covering an area of about 245 square kilometers, the sanctuary is named after the nearby village of Barnawapara. It is home to a variety of species, including tiger, leopard, sloth bear, wild boar, and a wide range of birds. The sanctuary's dense forests, grasslands, and riverine areas make it an ideal habitat for wildlife. Over time, Barnawapara has become a significant tourist destination, attracting nature lovers and wildlife enthusiasts to experience its natural beauty. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,14 +65,14 @@ const Barnawapara_Wildlife_Sanctuary = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00AM to 6:00PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
                 } 
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹10 to ₹50 for adults</Text>
+                <Text style={styles.text}>Ticket : ₹100 to ₹500 for adults</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -78,8 +82,8 @@ const Barnawapara_Wildlife_Sanctuary = () => {
 Mahasamund District,
 Chhattisgarh, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

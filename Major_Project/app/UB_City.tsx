@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,11 @@ const UB_City= () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=12.971977,77.596605`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+
     const fullHistoryText = `History : UB City, located in the heart of Bengaluru, is a luxury commercial complex that opened in 2008. It was developed by the UB Group, one of India's largest conglomerates, and is part of the city's growing skyline. The project was envisioned to bring world-class infrastructure to the city, offering high-end office spaces, retail outlets, and luxury residences. UB City is also home to several international brands, fine dining restaurants, and a vibrant cultural space. The complex has become a symbol of modern Bengaluru, representing urban development, luxury, and global connectivity.
 
 `;
@@ -64,7 +69,7 @@ const UB_City= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :10 AM - 9 PM</Text>
-                { 10 <= hour && 21 >= hour ? 
+                { 10 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -82,8 +87,8 @@ Vittal Mallya Road,
 Kumara Park West,
 Bengaluru, Karnataka 560001, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -179,7 +184,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

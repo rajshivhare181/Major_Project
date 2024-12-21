@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Aurobindo_ashrm = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History: Founding: Sri Aurobindo Ashram was founded by Sri Aurobindo in 1926 in Pondicherry. Sri Aurobindo was an Indian philosopher, poet, and spiritual leader who played a key role in the Indian independence movement. He later withdrew from politics to focus on spiritual pursuits and integral yoga.
 Growth: The ashram grew with the support of his followers and became a hub of spiritual practice, offering a place for meditation and integral yoga. The ashram is dedicated to the teachings of Sri Aurobindo and his spiritual collaborator, The Mother (Mirra Alfassa), who played a key role in guiding the ashram and its philosophy.`;
   
@@ -64,7 +68,7 @@ Growth: The ashram grew with the support of his followers and became a hub of sp
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
-                { 8<= hour && 18 >= hour ? 
+                { 8<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ Growth: The ashram grew with the support of his followers and became a hub of sp
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Sri Aurobindo Ashram is located in the heart of Pondicherry city.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

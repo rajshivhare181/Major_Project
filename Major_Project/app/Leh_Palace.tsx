@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Leh_Palace = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Leh Palace, located in the heart of Leh town in Ladakh, was built in the 17th century by King Sengge Namgyal. The palace was once the royal residence of the Namgyal dynasty and was a symbol of their power in the region. Influenced by Tibetan architecture, the structure is a nine-story building that was designed to resemble the Potala Palace in Lhasa. However, after the Dogra invasion in the 19th century, the royal family was forced to flee, and the palace gradually fell into disrepair. Today, Leh Palace is a popular tourist attraction, offering panoramic views of Leh and its surroundings.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Leh_Palace = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 7 AM to 7 PM</Text>
-                { 7 <= hour && 19 >= hour ? 
+                { 7 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹20 for adult
+                <Text style={styles.text}>Ticket :₹200 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -77,8 +81,8 @@ const Leh_Palace = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Leh, Ladakh, Jammu & Kashmir, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

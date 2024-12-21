@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -25,6 +25,10 @@ const Botanical_Garden = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=11.930214,79.822421`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `The Botanical Garden in Pondicherry was established in 1826 by the French colonial government to promote botanical research and introduce a variety of plant species. The garden spans 22 acres and is laid out in a well-planned design, featuring several sections such as the French-style formal garden, tropical plants, and a special section for medicinal plants. Over the years, the garden has evolved into an important center for conservation and public education on plant species. It also houses a large variety of trees, shrubs, and flowering plants, making it a serene retreat for visitors and a haven for plant lovers.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,14 +66,14 @@ const Botanical_Garden = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 10:00 AM to 5:00 PM</Text>
-                { 10 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing : 10 AM to 5 PM</Text>
+                { 10 <= hour && 16 >= hour ? 
                  <Text style={styles.time}>Open</Text> :
                  <Text style={styles.time1}>Close</Text>
                 } 
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹20 for adults</Text>
+                <Text style={styles.text}>Ticket :₹200 for adults</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -77,8 +81,8 @@ const Botanical_Garden = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Botanical Garden, No. 1, Sivanandha Salai, Puducherry 605001, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

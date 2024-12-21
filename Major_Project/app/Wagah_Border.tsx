@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const  Wagah_Border = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=31.604809,74.57411`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `The Wagah Border is located between India and Pakistan, approximately 28 kilometers from Amritsar in India and 24 kilometers from Lahore in Pakistan. It became significant after the partition of British India in 1947, which divided the Punjab region into two parts—one for India and one for Pakistan. The Wagah Border marks the line of division between these two nations.
 
 Post-Partition: After the 1947 partition, the Wagah Border emerged as a prominent crossing point, and the military personnel from both countries began carrying out ceremonial activities at the border.`;
@@ -64,7 +68,7 @@ Post-Partition: After the 1947 partition, the Wagah Border emerged as a prominen
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 5 PM.</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ Post-Partition: After the 1947 partition, the Wagah Border emerged as a prominen
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Wagah Border, Attari, Amritsar District, Punjab, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

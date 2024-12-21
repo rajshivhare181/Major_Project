@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Padmanabhaswamy_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=8.480465,76.945122`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Sree Padmanabhaswamy Temple is an ancient Hindu temple dedicated to Lord Vishnu, located in Thiruvananthapuram (formerly Trivandrum), Kerala, India. The temple is known for its magnificent architecture and its rich cultural history. The deity of the temple is Lord Vishnu in the Anantha Shayana (eternal repose) posture, lying on the serpent Adi Sesha.
 The temple has historical significance dating back to the 8th century CE, though it is believed to have been rebuilt and renovated multiple times over the centuries. The present structure was largely developed in the 16th and 18th centuries, particularly under the reign of the Travancore dynasty, which considered the temple as the spiritual center of their kingdom. The Travancore kings also served as the temple’s custodians.`;
   
@@ -63,7 +67,7 @@ The temple has historical significance dating back to the 8th century CE, though
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :3 AM to 12 PM</Text>
-                { 3 <= hour && 24 >= hour ? 
+                { 3 <= hour && 23 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ The temple has historical significance dating back to the 8th century CE, though
 East Fort, Thiruvananthapuram,
 Kerala, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

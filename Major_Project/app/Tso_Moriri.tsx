@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Tso_Moriri = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=32.911229,78.315941`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Tso Moriri, also known as the "Mountain Lake," is a high-altitude lake located in the Ladakh region of India, at an elevation of 4,595 meters (15,075 feet). The lake is situated within the Tso Moriri Wetland Conservation Reserve, which was established in 2003 to protect its unique ecosystem. Historically, the lake has been a sacred site for the local nomadic Changpa herders. Tso Moriri is famous for its stunning natural beauty, surrounded by snow-capped mountains, and is a critical habitat for migratory birds, including the bar-headed goose. It is less visited than Pangong Tso but offers a peaceful and pristine environment.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Tso_Moriri = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
-                { 8 <= hour && 18 >= hour ? 
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹20 - 30 for adult
+                <Text style={styles.text}>Ticket :₹50 - 100 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -78,8 +82,8 @@ const Tso_Moriri = () => {
                 <Text style={styles.text_address}>Address : Tso Moriri Lake
                 Leh, Ladakh, Jammu & Kashmir, India.</Text>
                 <View style={styles.buttonWrapper}>
-                 <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

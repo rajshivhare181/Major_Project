@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Se_Cathedral = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=15.503974,73.912634`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Se Cathedral is one of the largest and most significant churches in Old Goa, built in the 16th century. Completed in 1619, it is dedicated to Saint Catherine of Alexandria. The cathedral was commissioned by the Portuguese to mark their victory over the Bijapur Sultanate at the Battle of Dona Paula in 1510. It is an example of Portuguese-Gothic architecture, with its imposing structure and intricate design. The cathedral houses the Golden Bell, one of the largest bells in the country. It is part of the UNESCO World Heritage Site of Goa’s churches and convents, symbolizing the influence of Portuguese colonization.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Se_Cathedral = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :7 AM to 6 PM</Text>
-                { 7 <= hour && 18 >= hour ? 
+                { 7 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -81,8 +85,8 @@ North Goa,
 Goa,
 India - 403402.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

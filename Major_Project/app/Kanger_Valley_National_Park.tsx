@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -23,7 +23,10 @@ const Kanger_Valley_National_Park = () => {
             }
         ]
         }
-    });
+    }); const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=18.77866,81.997111`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Kanger Valley National Park, located in the Bastar district of Chhattisgarh, was established in 1982 and covers an area of approximately 200 square kilometers. The park is named after the Kanger River, which flows through its dense forests. It is part of the Kanger Wildlife Sanctuary and is known for its rich biodiversity, including rare species like the Indian wolf, leopard, and bison. The park is also home to spectacular limestone caves, such as the Bailadila caves. Over the years, Kanger Valley has become a significant conservation area and a popular eco-tourism destination due to its natural beauty and diverse wildlife.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +65,13 @@ const Kanger_Valley_National_Park = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM to 10 PM.</Text>
-                { 6 <= hour && 10 >= hour ? 
+                { 6 <= hour && 21 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹25 to ₹50 for adults .
+                <Text style={styles.text}>Ticket :₹250 to ₹500 for adults .
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -81,8 +84,8 @@ Chhattisgarh, India
 
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

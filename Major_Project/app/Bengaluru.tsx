@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -23,7 +23,10 @@ const Bengaluru = () => {
             }
         ]
         }
-    });
+    });const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Bengaluru (formerly Bangalore) is the capital of Karnataka and one of India's largest cities. It has a rich history dating back to the 16th century when it was founded by Kempegowda, a chieftain under the Vijayanagara Empire. Originally a small town, it grew rapidly in the 19th century under British rule, becoming an important administrative and military center. The city has evolved into a major hub for technology, education, and culture. Known as the "Silicon Valley of India," Bengaluru is also famous for its pleasant climate, gardens, and historical landmarks.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,14 +64,14 @@ const Bengaluru = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 6:00 PM</Text>
-                { 9 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹230 for adult</Text>
+                <Text style={styles.text}>Ticket : ₹5000 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -76,8 +79,8 @@ const Bengaluru = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :  Bangalore Palace, Vasanth Nagar, Bengaluru, Karnataka M.P.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -173,7 +176,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

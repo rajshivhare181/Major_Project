@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Red_Fort = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.656159,77.24102`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Red Fort (Lal Qila) in New Delhi, built by Emperor Shah Jahan between 1638 and 1648, is an iconic symbol of Mughal architecture. It was the main residence of the Mughal emperors for around 200 years. Constructed from red sandstone, the fort complex features impressive structures such as the Diwan-i-Aam, Diwan-i-Khas, and the Moti Masjid. The fort was the site of several significant events in Indian history, including the first war of Indian independence in 1857. Today, it stands as a UNESCO World Heritage site and a symbol of India's rich cultural and political history.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Red_Fort = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 4 PM </Text>
-                { 9 <= hour && 16 >= hour ? 
+                { 9 <= hour && 15 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹35 for adult  
+                <Text style={styles.text}>Ticket : ₹350 for adult  
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>

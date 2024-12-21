@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Tribal_Museum_Silvassa = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : The Tribal Museum in Silvassa, the capital of Dadra and Nagar Haveli and Daman and Diu, was established to preserve and showcase the unique culture, traditions, and heritage of the indigenous tribes of the region. The museum highlights the history, lifestyle, art, crafts, and customs of various tribal communities such as the Warli, Koli, Nayak, and Dubla. It offers a fascinating glimpse into the rich tribal heritage of the region, with exhibits featuring traditional costumes, ornaments, tools, and artifacts. The museum plays a key role in promoting awareness and appreciation for tribal culture and history.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Tribal_Museum_Silvassa = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :10 AM to 5 PM.</Text>
-                { 10 <= hour && 17 >= hour ? 
+                { 10 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹20 to ₹30 for adult
+                <Text style={styles.text}>Ticket :₹50 to ₹100 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -80,8 +84,8 @@ Near Satyam Shivam Sundaram Temple,
 Silvassa, Dadra and Nagar Haveli,
 India – 396230.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

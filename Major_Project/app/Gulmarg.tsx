@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Gulmarg = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=34.04837,74.380479`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Gulmarg, which translates to "The Meadow of Flowers," has a rich history that spans centuries. The area was originally a popular spot for the Mughal emperors. Emperor Jahangir visited Gulmarg in the early 17th century and admired its natural beauty, even naming it "Gulmarg" due to the lush, colorful meadows full of wildflowers during the spring and summer months.
 
 Gulmarg gained prominence as a tourist destination in the early 20th century under the British, who developed the area for leisure and summer activities. It became particularly famous as a skiing destination during the 1960s, and over time it evolved into a year-round tourist spot for both winter and summer activities.`;
@@ -64,7 +68,7 @@ Gulmarg gained prominence as a tourist destination in the early 20th century und
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
               } 
@@ -80,8 +84,8 @@ Gulmarg gained prominence as a tourist destination in the early 20th century und
                 <Text style={styles.text_address}>Address : Gulmarg, Kupwara District, Jammu & Kashmir, 193402, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

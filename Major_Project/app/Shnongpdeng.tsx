@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Shnongpdeng = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.207195,92.009568`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Shnongpdeng is a serene village in the West Jaintia Hills of Meghalaya, renowned for its stunning natural beauty and crystal-clear waters. Located along the Umngot River, the village has gained popularity for its unique boating experiences in the pristine river. Historically, the village was an agricultural settlement, with the locals being mostly Jaintia tribals, practicing traditional farming. Over time, Shnongpdeng has evolved into an eco-tourism destination, attracting visitors for its clean river, boating, camping, and trekking experiences. Its tranquil environment and unspoiled landscapes have made it a favorite spot for nature lovers and adventure enthusiasts. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Shnongpdeng = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM to 5 PM</Text>
-                { 6 <= hour && 17 >= hour ? 
+                { 6 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Shnongpdeng = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :  Shnongpdeng Village, West Jaintia Hills, Meghalaya 793160, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

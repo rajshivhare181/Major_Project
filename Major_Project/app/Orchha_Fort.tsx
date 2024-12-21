@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,8 +24,12 @@ const Orchha = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.350675,78.642703`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : The most famous of these structures include the Jehangir Mahal, Raja Mahal, and the Chaturbhuj Temple, as well as the Orchha Fort Complex, which still stands as a testament to the grandeur of the Bundela dynasty.
-Orchha is also historically significant for its connection to the Mughal Empire, as it was ruled for a time under the Mughal Emperor Jahangir, who visited Orchha, and the town was known for its involvement in the broader political landscape of medieval India.`;
+   Orchha is also historically significant for its connection to the Mughal Empire, as it was ruled for a time under the Mughal Emperor Jahangir, who visited Orchha, and the town was known for its involvement in the broader political landscape of medieval India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -63,7 +67,7 @@ Orchha is also historically significant for its connection to the Mughal Empire,
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :10 AM to 5 PM.</Text>
-                { 10 <= hour && 17 >= hour ? 
+                { 10 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ Orchha is also historically significant for its connection to the Mughal Empire,
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Orchha, Tikamgarh District, Madhya Pradesh, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

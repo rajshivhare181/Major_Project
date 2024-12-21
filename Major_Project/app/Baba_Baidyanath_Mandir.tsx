@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Baba_Baidyanath_Mandir  = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=24.492549,86.700018`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History:The Baidyanath Jyotirlinga is believed to be one of the most revered and ancient shrines of Lord Shiva in India. The legend behind the temple states that Lord Shiva, in the form of Baidyanath, appeared to grant a boon to the demon Ravana who had worshiped him sincerely to attain immortality. However, the story takes a twist in that Ravana wanted to take the Shiva Lingam back to Lanka, but the gods intervened and the lingam got installed at the current location.
 
 According to myth, Lord Shiva was also known as Baidyanath, the healer of all ailments. "Baidya" means doctor or healer, and "Nath" means lord, which is why the temple is named as Baidyanath Dham. The temple is particularly famous for curing diseases and is believed to have immense healing powers. The shrine is also associated with the worship of Lord Shiva in his form as a healer.`;
@@ -63,14 +67,14 @@ According to myth, Lord Shiva was also known as Baidyanath, the healer of all ai
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 4:00 AM to 11:00 PM</Text>
-                { 4<= hour && 23 >= hour ? 
+                <Text style={styles.text}>Timing : 4 AM to 11 PM</Text>
+                { 4<= hour && 22 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹100 to ₹200 for adult</Text>
+                <Text style={styles.text}>Ticket : ₹150 to ₹200 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -82,8 +86,8 @@ Jharkhand - 814112,
 India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -179,7 +183,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

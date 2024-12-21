@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Vivekananda_Rock = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Vivekananda Rock Memorial, located in Kanyakumari, Tamil Nadu, is a prominent monument dedicated to Swami Vivekananda. It stands on a small island in the Arabian Sea, where Swami Vivekananda meditated in 1892, gaining spiritual insight. The memorial was constructed in 1970 and consists of two main structures: a meditation hall and the Vivekananda Hall. The design blends elements of traditional Indian and modern architecture. The site is a popular pilgrimage and tourist destination, symbolizing the spiritual unity of India, and offers breathtaking views of the confluence of the Arabian Sea, Bay of Bengal, and Indian Ocean.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Vivekananda_Rock = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8 AM to 4 PM</Text>
-                { 8 <= hour && 16 >= hour ? 
+                { 8 <= hour && 15 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :RS 25 for adult</Text>
+                <Text style={styles.text}>Ticket :RS 100 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -76,8 +80,8 @@ const Vivekananda_Rock = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Vivekananda Rock Memorial, Kanyakumari, Tamil Nadu, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

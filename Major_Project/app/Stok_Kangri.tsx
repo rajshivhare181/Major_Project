@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Stok_Kangri = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Stok Kangri has gained popularity among mountaineers and trekkers due to its relative accessibility, being one of the highest trekking peaks in India at an elevation of 6,153 meters (20,187 feet). The first ascent of Stok Kangri is attributed to a Swiss expedition in the 1940s, although it wasn’t widely publicized until later. Over the years, it has attracted numerous trekkers who seek to experience high-altitude mountaineering without the complexities of technical climbing.
 
 The peak is part of the Stok Range, which lies between the Indus River and the Zanskar Range. The region surrounding the mountain is rich in culture, with several Buddhist monasteries and traditional Ladakhi villages.`;
@@ -64,7 +68,7 @@ The peak is part of the Stok Range, which lies between the Indus River and the Z
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 6 PM</Text>
-                { 9 <= hour && 18 >= hour ? 
+                { 9 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -79,8 +83,8 @@ The peak is part of the Stok Range, which lies between the Indus River and the Z
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Ladakh, Jammu & Kashmir, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",
