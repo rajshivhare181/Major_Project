@@ -24,10 +24,10 @@ const Adalaj_Stepwell = () => {
         ]
         }
     });
-       const openGoogleMaps = () => {
-         const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.16699,72.580153`;
-         Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
-       };
+        const openGoogleMaps = () => {
+          const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.16699,72.580153`;
+          Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+        };
     const fullHistoryText = `History :The Adalaj Stepwell, located in Adalaj near Ahmedabad, Gujarat, is a stunning example of Indian stepwell architecture. It was built in 1499 by Queen Rudabai, the wife of a local ruler, Veer Singh, in memory of her husband. The stepwell served as a water reservoir and a place of rest for travelers. Its intricate carvings and architectural design showcase a blend of Hindu and Islamic styles, with ornate pillars, sculptures, and detailed carvings. The stepwell is not only a functional water source but also a beautiful piece of history, representing Gujarat's rich architectural heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
