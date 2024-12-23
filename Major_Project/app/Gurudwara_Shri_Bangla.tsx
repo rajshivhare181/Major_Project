@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Gurudwara_Shri_Bangla  = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.625865,77.208952`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `HIstory: Gurudwara Shri Bangla Sahib is one of the most prominent Sikh gurdwaras in New Delhi. The gurdwara is dedicated to the eighth Sikh Guru, Guru Har Krishan Ji, who stayed at the place in 1664 during a visit to Delhi. The site is associated with Guru Har Krishan's compassion, as he helped to cure the sick and needy who were affected by a smallpox epidemic. After his passing, a Sarai (rest house) was built at the site, which later became a gurdwara. The gurdwara is also known for its large Sarovar (holy pool) and is a center for spiritual learning.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Gurudwara_Shri_Bangla  = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :7 AM to 9 PM</Text>
-                { 7 <= hour && 21 >= hour ? 
+                { 7 <= hour && 20 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
               } 
@@ -81,8 +85,8 @@ New Delhi,
 India - 110001.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

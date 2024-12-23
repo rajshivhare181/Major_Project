@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Lodhi_Garden = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.2493,91.7201`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Historical Legacy: Lodhi Garden is a historical park located in New Delhi, spread over 90 acres. It was developed during the British colonial period, but it is home to several significant architectural tombs from the Lodhi dynasty (1451–1526). The most notable tombs include those of Sikander Lodi (the last ruler of the Lodhi dynasty), Mohammad Shah, and Bahlul Lodi. The garden, originally a burial ground, was later transformed into a public park by the British. It features lush greenery, well-maintained pathways, and beautiful tombs, making it a popular spot for both history enthusiasts and nature lovers.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Lodhi_Garden = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5 AM to 7 PM.</Text>
-                { 5 <= hour && 19 >= hour ? 
+                { 5 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ Lodhi Road,
 New Delhi,
 India - 110003.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,11 @@ const Archaeological_Park= () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=22.485829,73.537245`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+
     const fullHistoryText = `History: The Archaeological Park in Gujarat, specifically in areas like Lothal and Dholavira, showcases some of the oldest and most significant archaeological sites related to the Indus Valley Civilization (Harappan Civilization). Lothal was a major trade and manufacturing center of the ancient civilization, known for its dockyard and bead-making industry. Dholavira, located in Kutch, is a city that offers insight into advanced urban planning with its large reservoirs, water management systems, and well-organized streets. These sites are of immense historical importance, shedding light on the daily life, architecture, and trade practices of the Harappan people.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -63,13 +68,13 @@ const Archaeological_Park= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
-                { 9<= hour && 18 >= hour ? 
+                { 9<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹10</Text>
+                <Text style={styles.text}>Ticket :₹50 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -82,8 +87,8 @@ Kutch District,
 Gujarat,
 India - 370655.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -164,7 +169,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

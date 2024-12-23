@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Magnetic_Hill = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Magnetic Hill, located about 30 km from Leh in Ladakh, is a popular and mysterious phenomenon where vehicles appear to move uphill slowly, seemingly defying gravity. This optical illusion is caused by the layout of the surrounding land and the slope of the terrain, which creates the illusion of an incline. The area has long been the subject of fascination, with some attributing its unusual characteristics to magnetic fields. However, it is a natural optical illusion, and scientists explain it as a result of the surrounding topography. Magnetic Hill has become a major tourist attraction in Ladakh.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Magnetic_Hill = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :8 AM to 5 PM.</Text>
-                { 8 <= hour && 17 >= hour ? 
+                { 8 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ const Magnetic_Hill = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Magnetic Hill, Leh, Ladakh, Jammu & Kashmir, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

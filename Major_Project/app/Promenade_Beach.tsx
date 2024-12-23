@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Promenade_Beach = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=11.931277,79.835802`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Promenade Beach, also known as the Puducherry Beach, is a popular stretch along the Bay of Bengal in the heart of Pondicherry. The beach has a rich history, being an important location during French colonial rule, where it served as a promenade for the French officers. Over the years, it has evolved into a significant cultural and tourist destination, offering stunning views of the sea and colonial-era landmarks. The beach is famous for its long, clean coastline, iconic landmarks like the Gandhi Memorial, and the French War Memorial, making it an attractive spot for both relaxation and sightseeing.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Promenade_Beach = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM to 6 AM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Promenade_Beach = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Promenade Beach, Beach Road, Puducherry 605001, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

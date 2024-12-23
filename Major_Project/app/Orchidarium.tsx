@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking} from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Orchidarium = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Khonghampat Orchidarium, located about 10 km from Imphal, is a renowned orchid garden and a unique conservation center in Manipur. Established in the late 20th century, the Orchidarium aims to preserve the diverse species of orchids native to the region, including the rare and endangered species. It is situated in a natural environment conducive to the growth of orchids, where over 100 species of orchids, including Cattleya, Dendrobium, and the state flower, Shapla (Manipur Orchid), are cultivated. The Orchidarium is also part of efforts to promote eco-tourism and educate visitors on orchid conservation and cultivation.
 
 `;
@@ -64,13 +68,13 @@ const Orchidarium = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 5 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹10 - ₹20 for adult
+                <Text style={styles.text}>Ticket : ₹100 - ₹200 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -79,8 +83,8 @@ const Orchidarium = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Khonghampat, Imphal, Manipur 795004, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

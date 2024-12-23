@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Buddha_Park = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=27.314362,88.363271`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Buddha Park, also known as the Tathagata Tsal, is located in Ravangla, Sikkim. It was inaugurated in 2013 and is home to a 130-foot statue of Lord Buddha, which is one of the tallest statues of Buddha in India. The park was built to promote peace and Buddhist culture, and it provides a serene environment for meditation and reflection. The statue is surrounded by beautifully landscaped gardens, stupas, and prayer wheels, making it a popular pilgrimage site and a major tourist attraction in Sikkim.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,14 +65,14 @@ const Buddha_Park = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 5:00 PM</Text>
-                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing : 9 AM to 5 PM</Text>
+                { 6 <= hour && 16 >= hour ? 
     <Text style={styles.time}>Open</Text> :
     <Text style={styles.time1}>Close</Text>
 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :RS  50 for adult</Text>
+                <Text style={styles.text}>Ticket :RS  150 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -78,8 +82,8 @@ const Buddha_Park = () => {
 Ravangla, South Sikkim,
 Sikkim, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

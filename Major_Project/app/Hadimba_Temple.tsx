@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Hadimba_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=32.248353,77.181573`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : The Hadimba Devi Temple, located in Manali, Himachal Pradesh, is dedicated to Hadimba Devi, the wife of Bhima (one of the Pandavas from the Mahabharata). The temple is built in a unique pagoda style and is believed to have been constructed in 1553 by Raja Bahadur Singh. The structure is set amidst a cedar forest (Dhungri Van), adding to its mystique. The temple is famous for its wooden architecture, intricate carvings, and religious significance, attracting pilgrims and tourists alike.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Hadimba_Temple = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
-                { 8 <= hour && 18 >= hour ? 
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -76,8 +80,8 @@ const Hadimba_Temple = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Hadimba Temple, Old Manali, Manali, Himachal Pradesh 175131, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

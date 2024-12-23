@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Mysore_Palace  = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=12.305163,76.655175`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Mysore Palace, also known as the Amba Vilas Palace, is a historic royal residence located in the city of Mysore, Karnataka. Originally built in the 14th century, the current structure was constructed in the 20th century after the old palace was damaged by fire. The new palace was designed by the British architect Henry Irwin in an Indo-Saracenic style, blending Hindu, Muslim, Rajput, and Gothic architectural elements. The palace served as the official residence of the Wodeyar dynasty, who ruled the Kingdom of Mysore. It is renowned for its grandeur, intricate artwork, and magnificent interiors.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Mysore_Palace  = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :10 AM to 5 PM</Text>
-                { 10 <= hour && 17 >= hour ? 
+                { 10 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹70 for adult 
+                <Text style={styles.text}>Ticket :₹700 for adult 
 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
@@ -81,8 +85,8 @@ Sayyaji Rao Road,
 Mysore, Karnataka, India
 Postal Code: 570001</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

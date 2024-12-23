@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,11 @@ const Cellular_Jail = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=
+11.674745,92.74786`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `The Cellular Jail, also known as Kala Pani, is a historical prison located in Port Blair, the capital city of the Andaman and Nicobar Islands in India. It was built by the British colonial government between 1896 and 1906 to imprison Indian freedom fighters and political activists during the period of British rule in India. The jail was designed with a unique radial structure, where all the cells were isolated, ensuring that prisoners had no communication with each other.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,14 +66,14 @@ const Cellular_Jail = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9:00 AM to 5:00 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
+                { 9 <= hour && 16 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹30 for adult</Text>
+                <Text style={styles.text}>Ticket : ₹150 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -78,8 +83,8 @@ const Cellular_Jail = () => {
 Port Blair, Andaman and Nicobar Islands, India
 PIN: 744101</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Sai_Ka_Angan = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.459814,77.038217`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Sai Ka Angan is a renowned temple dedicated to Sai Baba in Gurugram, Haryana. The temple was established in 2007 with the blessings of Shirdi Sai Baba, and it is considered a place of spiritual solace and healing for devotees. The temple aims to promote peace, love, and compassion, reflecting the teachings of Sai Baba. Devotees visit the temple to seek blessings for their well-being and to experience tranquility. The temple’s serene atmosphere, simple yet beautiful architecture, and association with Shirdi Sai Baba have made it one of the most visited spiritual places in Gurugram.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const Sai_Ka_Angan = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:00 AM to 9:00 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing : 5 AM to 9 PM</Text>
+                { 5 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ Sector 38,
 Gurugram, Haryana,
 India - 122001.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

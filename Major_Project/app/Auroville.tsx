@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Auroville= () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=12.005248,79.806892`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History: Auroville, founded in 1968 by Mirra Alfassa (The Mother), a disciple of Sri Aurobindo, is an international township located near Puducherry, India. The vision behind Auroville was to create a universal community where people of all nationalities, cultures, and beliefs could live in peace and harmony, transcending religious and cultural barriers. The purpose of Auroville is to support human evolution and integrate spiritual, social, and environmental progress. It is governed by the principles of sustainable living, collective growth, and personal transformation. Auroville continues to thrive as a global experiment in unity and human potential.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -63,7 +67,7 @@ const Auroville= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 5 PM</Text>
-                { 9<= hour && 17 >= hour ? 
+                { 9<= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ Villupuram District,
 Tamil Nadu 605101,
 India   </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -162,7 +166,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

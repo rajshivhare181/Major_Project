@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Ranthambore_Park = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.977587,76.553287`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Ranthambore National Park, located in Rajasthan, India, was established as a wildlife sanctuary in 1955 and became a national park in 1980. The park is named after the historic Ranthambore Fort, which stands within its boundaries. Once the hunting ground of the Maharajas of Jaipur, the park is now a protected area known for its population of Bengal tigers. It is also home to a rich variety of flora and fauna, including leopards, wild boars, crocodiles, and numerous bird species. The park’s scenic landscapes include lakes, dense forests, and ancient ruins, offering a unique wildlife experience.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Ranthambore_Park = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹50 - 100 for adult 
+                <Text style={styles.text}>Ticket : ₹500 - 1000 for adult 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>

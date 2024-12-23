@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity,Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Hanuman_Temple_Jakhu = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=31.101165,77.183983`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : The Jakhu Temple, dedicated to Lord Hanuman, is situated on Jakhu Hill in Shimla, Himachal Pradesh. The temple's origins date back to ancient times, and it is believed that Hanuman rested at this location while searching for the Sanjeevani Booti to revive Lakshmana during the epic Ramayana. The temple became more prominent in the 19th century when it was reconstructed by the local Hindu community. The highlight of the temple is a towering 108-feet statue of Hanuman, one of the tallest in India, which was installed in 2010, making it a significant pilgrimage site and a popular tourist attraction.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const Hanuman_Temple_Jakhu = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:00 AM - 09:00 PM</Text>
-                { 5 <= hour && 21 >= hour ? 
+                <Text style={styles.text}>Timing : 5 AM - 9 PM</Text>
+                { 5 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -76,8 +80,8 @@ const Hanuman_Temple_Jakhu = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Jakhu Temple, Jakhu Hill, Shimla, Himachal Pradesh 171001, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

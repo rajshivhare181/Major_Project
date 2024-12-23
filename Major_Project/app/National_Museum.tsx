@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const National_Museum = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.628522,77.368153`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : The National Museum of India, established in 1949, is one of the largest museums in the country, showcasing a vast collection of art, artifacts, and cultural exhibits. It is located in New Delhi and houses over 200,000 works of art spanning thousands of years of India’s history. The museum's galleries feature collections from the ancient, medieval, and modern periods, with significant items like the Indus Valley Civilization artifacts, Mauryan sculptures, Gandhara art, and Rajput miniatures. The museum serves as a center for research and education, reflecting the rich cultural heritage of India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const National_Museum = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :10 AM to 6 PM</Text>
-                { 10 <= hour && 18 >= hour ? 
+                { 10 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹20 for adult 
+                <Text style={styles.text}>Ticket :₹200 for adult 
 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
@@ -81,8 +85,8 @@ Janpath, Central Secretariat,
 New Delhi,
 India - 110011.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Gurudwara_Panja_Sahib = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=33.820827,72.689811`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Gurudwara Panja Sahib, located in Hassan Abdal, Pakistan, is a significant Sikh pilgrimage site. The gurdwara is famous for a rock with an embedded handprint, believed to be that of Guru Nanak, the founder of Sikhism. According to Sikh tradition, Guru Nanak stopped at the place during his travels, and when locals tried to move a large boulder to obstruct his path, the Guru pressed his hand on it, causing the stone to split. The sacred site is a symbol of strength, humility, and the miraculous powers attributed to Guru Nanak. It attracts numerous devotees from across the world.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Gurudwara_Panja_Sahib = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :5 AM - 9 PM</Text>
-                { 5 <= hour && 21 >= hour ? 
+                { 5 <= hour && 20 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
               } 
@@ -78,8 +82,8 @@ const Gurudwara_Panja_Sahib = () => {
                 <Text style={styles.text_address}>Address :Gurudwara Panja Sahib, Hassan Abdal, Punjab, Pakistan
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

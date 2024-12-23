@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Spituk_Monastery = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Spituk Monastery, located about 8 km from Leh, was founded in the 11th century by Od-de, a famous Tibetan Buddhist scholar. The monastery belongs to the Gelugpa sect of Tibetan Buddhism and has a rich history of spiritual significance. It is renowned for its stunning location on a hilltop overlooking the Indus River and its vast collection of ancient relics, manuscripts, and statues. The monastery houses around 100 monks and also holds an annual festival called "Spituk Gustor" which features traditional dances and religious ceremonies, drawing numerous visitors..`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Spituk_Monastery = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :7 AM to 7 PM.</Text>
-                { 7 <= hour && 19 >= hour ? 
+                { 7 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Spituk_Monastery = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Spituk, Leh, Ladakh, Jammu & Kashmir, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

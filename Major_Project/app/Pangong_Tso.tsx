@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Pangong_Tso = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=33.759513,78.66744`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Pangong Tso, a high-altitude lake situated at 4,350 meters (14,270 feet) in the Himalayas, spans across the Indo-China border, with parts of it lying in both India (Ladakh) and Tibet. The lake is 134 km long, with about 60% of it in China. The name "Pangong Tso" means "long, narrow lake" in Tibetan. Historically, it was a remote and sacred place for the local Changpa nomads. The lake gained global fame after being featured in the Bollywood movie 3 Idiots. It is a vital site for migratory birds, especially during the summer months.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Pangong_Tso = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM - 7PM </Text>
-                { 6 <= hour && 19 >= hour ? 
+                { 6 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹20 - 50 for adult 
+                <Text style={styles.text}>Ticket : ₹200 - 500 for adult 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -78,8 +82,8 @@ const Pangong_Tso = () => {
                 <Text style={styles.text_address}>Address : Pangong Tso
                 Leh, Ladakh, Jammu & Kashmir, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Pahalgam = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=34.016075,75.31498`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Pahalgam, which means "Village of Shepherds," has a rich history tied to its role as a base for the famous Amarnath Yatra, the annual pilgrimage to the Amarnath Cave. The town's history as a tourist destination dates back to the British era when it became a favored retreat for British officers during the summer months due to its cool climate and picturesque surroundings.
 Before becoming a popular tourist spot, Pahalgam was primarily known as a shepherd's settlement. It gained prominence in the 19th and 20th centuries as travelers and pilgrims came to visit the region, particularly during the Amarnath Yatra, which sees thousands of devotees journeying to the holy Amarnath Cave.`;
   
@@ -63,7 +67,7 @@ Before becoming a popular tourist spot, Pahalgam was primarily known as a shephe
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ Before becoming a popular tourist spot, Pahalgam was primarily known as a shephe
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Pahalgam, Anantnag District, Jammu & Kashmir, 192126, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

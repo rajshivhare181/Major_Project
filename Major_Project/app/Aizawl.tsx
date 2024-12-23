@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -8,7 +8,7 @@ import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewO
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Aizawl= () => {
+const Aizawl = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -24,7 +24,11 @@ const Aizawl= () => {
         ]
         }
     });
-    const fullHistoryText = `History :Aizawl, the capital of Mizoram, is a vibrant hill station with a rich cultural and historical heritage. Established in the early 19th century, Aizawl served as the administrative center for the British during colonial rule. The city, situated on a ridge overlooking lush valleys, was primarily inhabited by the Mizo people. Over the years, Aizawl has evolved into a major cultural and political hub in Northeast India. The city played a significant role during the Mizo National Front movement, culminating in the Mizo Peace Accord in 1986. Today, Aizawl is known for its unique blend of indigenous culture, history, and scenic beauty.`;
+       const openGoogleMaps = () => {
+         const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.730718,92.717311`;
+         Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+       };
+    const fullHistoryText = `History :Solomon’s Temple, located in the outskirts of Shillong, Meghalaya, is an interesting and lesser-known site with both cultural and historical significance. The temple is named after the biblical King Solomon, and it is said to have been constructed by a local missionary in the 19th century. Built in a neo-gothic style, the temple is primarily associated with Christian heritage and serves as a peaceful retreat. Its tranquil setting, surrounded by nature, makes it a serene place for visitors seeking a spiritual experience. The temple is also significant for its striking architecture and peaceful ambiance.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
 
@@ -62,7 +66,7 @@ const Aizawl= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9 AM to 5 PM.</Text>
+                <Text style={styles.text}>Timing : 9 AM to 6 PM.</Text>
                 { 9<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
@@ -75,10 +79,14 @@ const Aizawl= () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Aizawl, Mizoram 796001, India</Text>
+                <Text style={styles.text_address}>Address :Solomon's Temple,
+Laitkor,
+Shillong,
+Meghalaya 793010,
+India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,9 +24,13 @@ const Vikramshila = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Vikramshila University was founded by King Dharampala of the Pala dynasty in the 8th century, around 783 CE. It was established as a center for Buddhist learning and became one of the most renowned universities of its time.
-The university is believed to have been dedicated to Mahayana Buddhism and focused on the study of Buddhist philosophy, logic, and arts.
-Unlike other centers like Nalanda, Vikramshila also specialized in Tantric Buddhism and was closely associated with Vajrayana practices.`;
+    The university is believed to have been dedicated to Mahayana Buddhism and focused on the study of Buddhist philosophy, logic, and arts.
+    Unlike other centers like Nalanda, Vikramshila also specialized in Tantric Buddhism and was closely associated with Vajrayana practices.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -64,13 +68,13 @@ Unlike other centers like Nalanda, Vikramshila also specialized in Tantric Buddh
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :10 AM - 5 PM</Text>
-                { 10 <= hour && 17 >= hour ? 
+                { 10 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹10 for adult </Text>
+                <Text style={styles.text}>Ticket : ₹50 for adult </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -79,8 +83,8 @@ Unlike other centers like Nalanda, Vikramshila also specialized in Tantric Buddh
                 <Text style={styles.text_address}>Address : Vikramshila Archaeological Site, Antichak, Bhagalpur District, Bihar, India
                 Pincode: 813208</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

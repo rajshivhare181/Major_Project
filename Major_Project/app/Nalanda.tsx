@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Nalanda  = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.12406,85.459475`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Nalanda University was destroyed in the 12th century by the Turkish invader Bakhtiyar Khilji. The library, known as the Dharmaganja (which housed thousands of manuscripts), was set on fire, and it is believed that the flames burned for several months, resulting in the destruction of the university and its knowledge.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Nalanda  = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM - 5 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹15 per person 
+                <Text style={styles.text}>Ticket : ₹150 for adult 
 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
@@ -79,8 +83,8 @@ const Nalanda  = () => {
                 <Text style={styles.text_address}>Address :Nalanda, Nalanda District, Bihar, India
                 Pincode: 803101</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

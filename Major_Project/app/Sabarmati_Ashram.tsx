@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Sabarmati_Ashram = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=22.841705,72.641204`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Sabarmati Ashram, located on the banks of the Sabarmati River in Ahmedabad, Gujarat, is one of the most significant landmarks in India's struggle for independence. It was here that Mahatma Gandhi lived from 1917 to 1930 and led the Salt March (Dandi March) in 1930, a key moment in India's non-violent resistance against British colonial rule. The ashram, also known as Gandhi Ashram, was established by Gandhi and his followers as a center for self-reliance, education, and non-violence. Today, the ashram serves as a museum showcasing Gandhian principles and life, attracting thousands of visitors each year.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,14 +65,14 @@ const Sabarmati_Ashram = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :8:00 AM to 6:00 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing :8 AM to 6 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹20 for adult  
+                <Text style={styles.text}>Ticket :₹150 for adult  
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -82,8 +86,8 @@ Ahmedabad,
 Gujarat,
 India - 380027.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -179,7 +183,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

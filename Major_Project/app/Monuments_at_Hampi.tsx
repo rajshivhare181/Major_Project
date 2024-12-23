@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Monuments_at_Hampi = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=15.334977,76.461923`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Hampi, a UNESCO World Heritage Site, was once the capital of the Vijayanagara Empire (14th-16th centuries) and is renowned for its rich historical and architectural significance. The site features a stunning array of temples, palaces, market streets, and monuments, including the iconic Virupaksha Temple, Vithala Temple, and the Lotus Mahal. Hampi flourished as a cultural, religious, and economic hub before its decline in the 16th century following invasions. Today, the ruins stand as a testament to the grandeur of the Vijayanagara Empire, attracting tourists, archaeologists, and historians alike.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,19 +65,19 @@ const Monuments_at_Hampi = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹30 for adults 
+                <Text style={styles.text}>Ticket :₹300 for adults 
 
                </Text>
-                <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
-                    <Text style={styles.text}>Book</Text>
-                </TouchableOpacity>
+               <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                  </TouchableOpacity>
             </View>
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Hampi,
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

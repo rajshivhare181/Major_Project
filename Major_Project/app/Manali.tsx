@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Manali = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=32.243187,77.189176`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Manali, located in Himachal Pradesh, is a famous hill station with a rich history rooted in Hindu mythology. According to legend, it is named after Manu, the sage who is believed to have rebuilt human civilization after a great flood. Historically, it was a quiet town, surrounded by lush green valleys and snow-capped mountains, until it gained popularity among British travelers in the 19th century. Over time, it has become a hub for adventure tourism, trekking, and spirituality, while maintaining its cultural connection to the ancient traditions of the Kullu Valley.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Manali = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ const Manali = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Manali, Kullu District, Himachal Pradesh, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

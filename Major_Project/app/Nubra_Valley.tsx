@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Nubra_Valley = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=34.686315,77.567288`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Nubra Valley, located in the northern region of Ladakh, India, is a picturesque high-altitude desert that lies between the Karakoram and Ladakh mountain ranges. Historically, the valley was an important stop on the ancient Silk Route, connecting Tibet with Central Asia. It was known for its strategic location and trade routes, particularly for commodities like wool, silk, and spices. The valley is also significant for its Buddhist monasteries, including Diskit Monastery, and its unique landscape of sand dunes and lush green areas. Nubra's cultural heritage is a blend of Tibetan Buddhism and Central Asian influences, making it a unique destination in Ladakh.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Nubra_Valley = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :8 AM to 6 PM. </Text>
-                { 8 <= hour && 18 >= hour ? 
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹20 - 50 for adult
+                <Text style={styles.text}>Ticket : ₹200 - 500 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -78,8 +82,8 @@ const Nubra_Valley = () => {
                 <Text style={styles.text_address}>Address: Nubra Valley
                 Leh, Ladakh, Jammu & Kashmir, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

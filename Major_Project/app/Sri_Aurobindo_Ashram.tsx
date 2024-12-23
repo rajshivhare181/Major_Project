@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Sri_Aurobindo_Ashram = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=11.936471,79.83405`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Founded in 1926 by Sri Aurobindo and Mirra Alfassa (The Mother), the Sri Aurobindo Ashram in Puducherry (formerly Pondicherry) is a spiritual center that focuses on the integration of yoga, meditation, and philosophy for human evolution. The ashram grew out of Sri Aurobindo's teachings on Integral Yoga, which emphasizes spiritual development and transformation of the body, mind, and soul. The Ashram became a beacon for followers seeking to experience the higher consciousness and teachings of Sri Aurobindo, and it continues to be a center of spiritual learning and practice, attracting visitors from around the world.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Sri_Aurobindo_Ashram = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :8 AM - 6 PM</Text>
-                { 8 <= hour && 18 >= hour ? 
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ Rue de la Marine,
 Puducherry 605001,
 India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Lingaraj_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=20.235194,85.833989`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Historical Legacy: The Lingaraj Temple in Bhubaneswar, Odisha, is one of the oldest and most revered temples dedicated to Lord Shiva. Built in the 11th century during the reign of King Jajati Keshari, it is a remarkable example of Kalinga architecture. The temple stands at 180 feet and features a majestic central spire with intricate carvings. The Lingaraj Temple is a fusion of different architectural styles, and it houses a self-manifested Shiva linga, known as the Lingaraj. This temple is a major pilgrimage site for Hindus and is central to the city's religious and cultural identity.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Lingaraj_Temple = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM to 9 PM.</Text>
-                { 6 <= hour && 21 >= hour ? 
+                { 6 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ Bhubaneswar,
 Odisha 751002,
 India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

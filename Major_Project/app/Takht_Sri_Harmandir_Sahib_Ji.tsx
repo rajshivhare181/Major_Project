@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Takht_Sri_Harmandir_Sahib_Ji = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.59605,85.229956`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Takht Sri Harmandir Sahib Ji is one of the five Takhts in Sikhism, which are considered the highest temporal and spiritual seats of authority in the Sikh faith. It is revered as the place where Guru Gobind Singh, the 10th Guru of Sikhism, was born in 1666 CE. This Takht holds a crucial place in the history of Sikhism.
 `;
   
@@ -62,8 +66,8 @@ const Takht_Sri_Harmandir_Sahib_Ji = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 4 AM - 09 PM</Text>
-                { 4 <= hour && 21 >= hour ? 
+                <Text style={styles.text}>Timing : 4 AM - 9 PM</Text>
+                { 4 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -79,8 +83,8 @@ const Takht_Sri_Harmandir_Sahib_Ji = () => {
                 <Text style={styles.text_address}>Address :Patna City, Bihar, India
                 Pincode: 800008</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

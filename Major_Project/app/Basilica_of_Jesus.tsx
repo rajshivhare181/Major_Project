@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Basilica_of_Jesus = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Inception: The Basilica of the Sacred Heart of Jesus was built in the 19th century, with construction beginning in 1895 and completed in 1907. It is one of the oldest and most beautiful churches in the region and is an example of Gothic Revival architecture.
 Architectural Significance: The basilica is known for its impressive Gothic-style architecture, featuring pointed arches, stained glass windows, and towering spires. The church is dedicated to the Sacred Heart of Jesus, and it holds a special place for both the local Christian community and visitors.
 Influence: The church was built by French missionaries during the time when Pondicherry was still under French rule. It represents a fusion of French and Indian elements in its construction and design. `;
@@ -63,8 +67,8 @@ Influence: The church was built by French missionaries during the time when Pond
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5:00 AM to 7:00 PM</Text>
-                { 5 <= hour && 19 >= hour ? 
+                <Text style={styles.text}>Timing : 5 AM to 7 PM</Text>
+                { 5 <= hour && 18 >= hour ? 
                  <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
                  }
@@ -78,8 +82,8 @@ Influence: The church was built by French missionaries during the time when Pond
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Basilica of the Sacred Heart of Jesus, 10, South Boulevard, Puducherry 605001, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

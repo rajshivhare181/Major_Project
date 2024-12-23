@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const jonha_Falls = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Jonha Falls, located around 40 km from Ranchi, is a scenic waterfall nestled in the dense forests of Jharkhand. Also known as the "Inverted Waterfall," the falls are believed to have been discovered in the 19th century by the British. The area has historical significance, with a nearby temple dedicated to Lord Shiva. The falls have been a popular spot for both tourists and locals, drawn by its picturesque surroundings and serene atmosphere. Over the years, Jonha Falls has become a favored destination for nature lovers and adventure enthusiasts, particularly for its peaceful setting and trekking opportunities.
 `;
   
@@ -63,7 +67,7 @@ const jonha_Falls = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 7 AM to 5 PM</Text>
-                { 7 <= hour && 17 >= hour ? 
+                { 7 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -79,8 +83,8 @@ const jonha_Falls = () => {
                 <Text style={styles.text_address}>Address :About 40 km from Ranchi, near the village of Jonha in Jharkhand, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>

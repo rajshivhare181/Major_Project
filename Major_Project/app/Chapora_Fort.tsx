@@ -1,5 +1,5 @@
 
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -25,6 +25,10 @@ const Chapora_Fort = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=15.604638,73.736963`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Chapora Fort is a historic military fort located in North Goa, overlooking the Chapora River and the Arabian Sea. Originally built by the Marathas in 1717, it was later reconstructed by the Portuguese in the late 18th century. The fort gained fame as a filming location for the Bollywood movie Dil Chahta Hai (2001), which made it a popular tourist spot. The fort was primarily used to protect the northern borders of Goa from invaders, and its strategic location offers panoramic views of the coastline. Today, Chapora Fort stands as a symbol of Goa’s colonial past and is a must-visit for history and photography enthusiasts.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,8 +66,8 @@ const hour = time.getHours();
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9:00 AM to 6:00 PM</Text>
-                { 9 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
                    <Text style={styles.time}>Open</Text> :
                    <Text style={styles.time1}>Close</Text>
                }
@@ -81,8 +85,8 @@ North Goa,
 Goa,
 India - 403509.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

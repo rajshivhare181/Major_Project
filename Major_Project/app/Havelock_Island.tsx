@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Havelock_Island = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Havelock Island, part of the Andaman and Nicobar Islands, was named after Sir Henry Havelock, a British general. Historically, the island was a quiet and largely uninhabited place. During the colonial period, it was used as a penal settlement, much like the other islands in the archipelago. Over the years, Havelock became known for its strategic importance and scenic beauty. After India’s independence, the island gradually gained popularity as a tourist destination, with its crystal-clear waters, coral reefs, and pristine beaches becoming key attractions. Today, it is one of the most visited islands in the Andaman region.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Havelock_Island = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM and 6 PM.</Text>
-                { 6 <= hour && 18 >= hour ? 
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Havelock_Island = () => {
                 <Text style={styles.text_address}>Address :Havelock Island
                 Andaman and Nicobar Islands, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

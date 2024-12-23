@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Shimla = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=31.104963,77.163987`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Shimla's history dates back to the early 19th century when it was discovered by the British during the British Raj. The town began to develop in the 1820s after the British East India Company realized its potential as a cool retreat from the scorching heat of the plains. It was officially declared the summer capital of British India in 1864, a position it retained until Indian independence in 1947.
 
 Before British colonization, Shimla was a small village inhabited by local tribes. `;
@@ -64,7 +68,7 @@ Before British colonization, Shimla was a small village inhabited by local tribe
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -79,8 +83,8 @@ Before British colonization, Shimla was a small village inhabited by local tribe
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Shimla, Himachal Pradesh, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

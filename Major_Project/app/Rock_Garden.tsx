@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Rock_Garden = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=30.7524,76.8108`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Rock Garden was created by Nek Chand, a government official who began the project in 1957 as a hobby. It started in secret on a patch of forest land in Chandigarh, and it wasn’t until several years later that authorities discovered his work. Despite initial opposition, Nek Chand's vision was eventually embraced, and the garden was officially opened to the public in 1976.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Rock_Garden = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM - 7 PM</Text>
-                { 9 <= hour && 19 >= hour ? 
+                { 9 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹30 for adults  
+                <Text style={styles.text}>Ticket :₹100 for adults  
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>

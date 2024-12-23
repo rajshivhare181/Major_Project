@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,11 @@ const Lachung= () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+
     const fullHistoryText = `History : Lachung is a scenic village located in North Sikkim, nestled at an altitude of about 2,700 meters. Known for its stunning natural beauty, Lachung is famous for its snow-capped mountains, pristine rivers, and alpine meadows. The village is a gateway to popular tourist destinations like Yumthang Valley and Zero Point. Lachung is historically significant for its close ties to Tibetan Buddhism, with the Lachung Monastery being an important spiritual center. Traditionally, the village was home to the Lachungpa people, an ethnic group with a rich cultural heritage that remains intact in the village today.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +67,7 @@ const Lachung= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM to 6 AM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -79,9 +84,9 @@ const Lachung= () => {
 North Sikkim,
 Sikkim, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
-                  </TouchableOpacity>
+                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                                   <Text style={styles.text}>Show on map</Text>
+                               </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>
@@ -176,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

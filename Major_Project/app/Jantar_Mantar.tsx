@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,7 +24,12 @@ const Jantar_Mantar = () => {
         ]
         }
     });
-    const fullHistoryText = `History :Jantar Mantar in New Delhi is an astronomical observatory built in 1724 by Maharaja Jai Singh II of Jaipur. It is one of the five Jantar Mantars constructed by the Maharaja across India. The observatory features a collection of 13 architectural astronomical instruments, which were used for observing celestial bodies and calculating time and space. Some of the most notable instruments include the Samrat Yantra (largest sundial), the Jai Prakash Yantra, and the Rashivalaya Yantra. Jantar Mantar is an important symbol of India's scientific heritage and remains a popular tourist destination for its historical and architectural significance.`;
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+
+    const fullHistoryText = `History : Jantar Mantar in Delhi was built in 1724 by Maharaja Jai Singh II, the ruler of Jaipur, as part of his interest in astronomy and scientific advancements. It is one of the five observatories he constructed in India, with the purpose of measuring time, observing celestial bodies, and studying astronomical events. The observatory in Delhi features a collection of instruments, the most famous being the Samrat Yantra (a giant sundial) and Jaiprakash Yantra (a unique structure to observe stars and planets). The site offers a glimpse into India's rich tradition of scientific discovery and serves as a major historical landmark.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -61,29 +66,25 @@ const Jantar_Mantar = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9 AM to 7 PM</Text>
-                { 9 <= hour && 19 >= hour ? 
+                <Text style={styles.text}>Timing :  9 AM to 4 PM</Text>
+                { 9 <= hour && 15 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹50 for adult
+                <Text style={styles.text}>Ticket : ₹ 100 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Jantar Mantar
-Sansad Marg,
-Connaught Place,
-New Delhi,
-India - 110001.
+                <Text style={styles.text_address}>Address :Jantar Mantar, Parliament Street, Connaught Place, New Delhi, 110001, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>

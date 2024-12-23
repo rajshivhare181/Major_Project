@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Himalayan_Zoological_Park = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `The Himalayan Zoological Park, located in Gangtok, Sikkim, was established in 1991 to protect and conserve the region’s unique wildlife. Situated at an altitude of 1,780 meters, the park spans 205 hectares of forested land and is home to a variety of endangered species native to the Eastern Himalayas. The park is renowned for housing the rare red panda, as well as other species like the Himalayan Monal, barking deer, and several types of pheasants. Its primary mission is wildlife conservation, and it offers a chance for visitors to explore the natural biodiversity of Sikkim`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Himalayan_Zoological_Park = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 4 PM</Text>
-                { 9 <= hour && 16 >= hour ? 
+                { 9 <= hour && 15 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹30 for adult </Text>
+                <Text style={styles.text}>Ticket :₹300 for adults </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -78,8 +82,8 @@ const Himalayan_Zoological_Park = () => {
 Ranka, East Sikkim,
 Gangtok, Sikkim, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

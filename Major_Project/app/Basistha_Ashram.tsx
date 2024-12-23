@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Basistha_Ashram = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.094874,91.784519`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Historical Significance: The area of Bandhavgarh has a long history of being part of the royal hunting grounds of the local Rewa dynasty, and there is a fort located within the park, believed to date back to the 2nd century BC. It is also home to ancient temples and caves. The fort's remnants, including ancient inscriptions and stone carvings, add to the historical significance of the area.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,14 +65,14 @@ const Basistha_Ashram = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00AM to 6:00PM</Text>
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
                 { 6 <= hour && 17 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :No formal entry fee</Text>
+                <Text style={styles.text}>Ticket :No entry fee</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -77,8 +81,8 @@ const Basistha_Ashram = () => {
                 <Text style={styles.text_address}>Address : Basistha Ashram
                 Basistha, Guwahati, Kamrup Metropolitan District, Assam, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

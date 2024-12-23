@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Gurudongmar_Lake = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.025756,88.709693`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Gurudongmar Lake, situated at an altitude of 5,430 meters in northern Sikkim, is one of the highest lakes in the world. The lake is named after Guru Padmasambhava, also known as Guru Rinpoche, who is believed to have visited the site in the 8th century. The lake holds significant spiritual importance for both Buddhists and Hindus. The crystal-clear water is surrounded by snow-capped peaks, and part of the lake never freezes, even in harsh winters. It is a popular destination for trekkers and pilgrims, offering breathtaking views of the Himalayas.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Gurudongmar_Lake = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :8 AM and 5 PM</Text>
-                { 8 <= hour && 17 >= hour ? 
+                { 8 <= hour && 16 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
               } 
@@ -80,8 +84,8 @@ North Sikkim,
 Sikkim, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity , Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Andrott_Island = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Andrott Island, the largest island in Lakshadweep, holds significant historical and cultural importance. It is believed to have been inhabited for centuries, with early settlers being fishermen and traders. Andrott was historically a prominent center for Islamic culture and religion in the archipelago. The island has several ancient mosques and tombs, with the most notable being the tomb of Saint Ubaidullah, which draws religious pilgrims. The island's role in local trade, especially in pearls and fish, has shaped its economy. Despite being less developed compared to other islands, Andrott remains a peaceful retreat, known for its scenic beauty and rich heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -63,7 +67,7 @@ const Andrott_Island = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM to 6 PM. </Text>
-                { 6<= hour && 18 >= hour ? 
+                { 6<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Andrott_Island = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Andrott Island, Lakshadweep, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -160,7 +164,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

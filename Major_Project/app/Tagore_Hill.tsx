@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -23,7 +23,11 @@ const Tagore_Hill = () => {
             }
         ]
         }
-    });
+    }); 
+       const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.40155,85.338074`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Tagore Hill in Ranchi is named after the famous Bengali poet Rabindranath Tagore, who is believed to have visited the hill during his stay in Ranchi. The hill holds cultural and historical significance, as it is associated with Tagore’s family, particularly his cousin, Jyotirindranath Tagore, who spent time in this serene location. The hill offers stunning panoramic views of the city and the surrounding landscape. It is said that Tagore found peace and inspiration here, which contributed to his literary work. The site is now a popular tourist and spiritual destination for visitors seeking tranquility.
 
 `;
@@ -64,7 +68,7 @@ const Tagore_Hill = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 6 AM - 6 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -81,9 +85,9 @@ const Tagore_Hill = () => {
 Morabadi,
 Ranchi, Jharkhand, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
-                  </TouchableOpacity>
+         <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                         <Text style={styles.text}>Show on map</Text>
+                     </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

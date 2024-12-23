@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Vaishno_Devi_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=33.03083,74.949042`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Vaishno Devi Temple is one of the most revered Hindu pilgrimage sites, located in the Trikuta Mountains near Katra, Jammu & Kashmir. The temple is dedicated to Goddess Vaishno Devi, a manifestation of the divine feminine energy. According to legend, the Goddess, after meditating for centuries, appeared in a cave to protect her devotees. The shrine attracts millions of pilgrims annually. The temple has been a place of worship for centuries, with its modern infrastructure developed to accommodate the large number of devotees. It is one of the Char Dham pilgrimage sites and holds great spiritual significance.
 `;
   
@@ -63,7 +67,7 @@ const Vaishno_Devi_Temple = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 4 AM to 10 PM</Text>
-                { 4 <= hour && 22 >= hour ? 
+                { 4 <= hour && 21 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Vaishno_Devi_Temple = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Vaishno Devi Temple, Trikuta Mountains, Katra, Reasi District, Jammu & Kashmir, 182301, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Corbyns_Cove_Beach = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Corbyns Cove Beach, located about 8 km from Port Blair in the Andaman and Nicobar Islands, is one of the most famous beaches in the region. Historically, it was a quiet and secluded spot, but with the development of tourism in the area, it has become a prominent attraction. The beach’s calm waters and scenic beauty make it ideal for relaxation and water sports. It also has a rich history tied to the colonial era, and its picturesque views were once a popular site for the British to spend their leisure time.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,8 +66,8 @@ const Corbyns_Cove_Beach = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 6:00 PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
                  <Text style={styles.time}>Open</Text> :
                  <Text style={styles.time1}>Close</Text>
              }
@@ -78,8 +82,8 @@ const Corbyns_Cove_Beach = () => {
                 <Text style={styles.text_address}>Address :Corbyns Cove Beach
                 Port Blair, South Andaman, Andaman and Nicobar Islands, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -176,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

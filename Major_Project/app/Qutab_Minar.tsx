@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Qutab_Minar = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.524426,77.185206`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : The Qutub Minar is a UNESCO World Heritage site and one of Delhi’s most iconic landmarks. Built in 1193 by Qutb-ud-din Aibak, the founder of the Delhi Sultanate, it stands at 73 meters (240 feet), making it the tallest brick minaret in the world. The Qutub Minar is a fine example of Indo-Islamic Afghan architecture, featuring intricate carvings and inscriptions in Arabic. The tower was originally constructed to celebrate Aibak's victory over the Rajputs. It also holds historical significance, marking the beginning of Muslim rule in India. Over the centuries, it has been renovated and preserved as a heritage monument.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Qutab_Minar = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 7 AM to 5 PM</Text>
-                { 7 <= hour && 17 >= hour ? 
+                { 7 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹40 for adult  
+                <Text style={styles.text}>Ticket :₹400 for adult  
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -80,8 +84,8 @@ Mehrauli,
 New Delhi,
 India - 110030.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

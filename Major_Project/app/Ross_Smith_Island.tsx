@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Ross_Smith_Island = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=13.304419,93.072068`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Historically, Ross Island was once the administrative capital of the Andaman and Nicobar Islands during the British colonial period. However, after the Japanese occupation during World War II, the island was largely abandoned. Smith Island, in contrast, remained largely untouched and is now known for its natural charm.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Ross_Smith_Island = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 3 PM</Text>
-                { 9 <= hour && 15 >= hour ? 
+                { 9 <= hour && 14 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }

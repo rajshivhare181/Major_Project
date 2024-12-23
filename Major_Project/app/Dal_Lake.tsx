@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Dal_Lake = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=34.110586,74.868257`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Dal Lake, often referred to as the "Jewel in the crown of Kashmir," has been an essential part of the culture and heritage of Srinagar for centuries. It is mentioned in various historical texts and has been a site for centuries of Kashmiri lifestyle. The lake has an area of about 18 square kilometers and is an iconic symbol of the region, drawing visitors for its scenic beauty, houseboats, and Shikara rides.
 
 The lake's history dates back to ancient times, with some historical sources suggesting it was formed from the Jhelum River. The Mughal emperors, especially Akbar, built many gardens around the lake, and the floating gardens (known as "Rad") have been a tradition for generations. Over time, it became a major center for houseboats, which became a unique feature of the lake's charm.`;
@@ -64,7 +68,7 @@ const hour = time.getHours();
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :7 AM to 7 PM</Text>
-                { 7 <= hour && 19 >= hour ? 
+                { 7 <= hour && 18 >= hour ? 
                  <Text style={styles.time}>Open</Text> :
                  <Text style={styles.time1}>Close</Text>
              }
@@ -78,8 +82,8 @@ const hour = time.getHours();
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Dal Lake, Srinagar, Jammu & Kashmir, 190001, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

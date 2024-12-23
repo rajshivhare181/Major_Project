@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking} from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Hanuman_Tok = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=27.347835,88.628696`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Hanuman Tok is a sacred temple dedicated to Lord Hanuman, located in the eastern hills of Sikkim, near Gangtok. The temple is perched at an altitude of 7,500 feet and offers panoramic views of the surrounding mountains, including Kanchenjunga. According to local legend, the temple is built at the place where Lord Hanuman rested while carrying the Sanjeevani herb to revive Lord Lakshmana during the war in the Ramayana. The temple is maintained by the Indian Army and has become a popular spot for both spiritual visits and scenic photography.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const Hanuman_Tok = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :5:00 AM to 7:00 PM</Text>
-                { 5 <= hour && 19 >= hour ? 
+                <Text style={styles.text}>Timing :5 AM to 7 PM</Text>
+                { 5 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -78,8 +82,8 @@ const Hanuman_Tok = () => {
 Gangtok,
 Sikkim, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

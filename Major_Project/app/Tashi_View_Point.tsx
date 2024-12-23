@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Tashi_View_Point = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Tashi View Point, located about 8 km from Gangtok, offers panoramic views of the Kanchenjunga mountain range and the surrounding Himalayan peaks. The viewpoint was established by the Sikkim royal family in the 18th century and is named after Tashi Namgyal, the former Chogyal (king) of Sikkim. It has since become a popular tourist destination due to its breathtaking scenery, making it one of the best spots in Gangtok for viewing the snow-capped mountains and the valley below. The spot is also known for its peaceful and serene environment, making it perfect for photography and relaxation.
 `;
   
@@ -63,7 +67,7 @@ const Tashi_View_Point = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 4 AM to 6 PM</Text>
-                { 4 <= hour && 18 >= hour ? 
+                { 4 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,9 +84,10 @@ const Tashi_View_Point = () => {
 Gangtok, East Sikkim,
 Sikkim, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
+
                 </View>
             </View>
         </Animated.ScrollView>
@@ -177,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

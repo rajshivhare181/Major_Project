@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const India_Gate = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.612912,77.22951`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `India Gate, an iconic war memorial located in New Delhi, was designed by Sir Edwin Lutyens and completed in 1931. It was originally called the All India War Memorial and commemorates the 82,000 soldiers of the Indian Army who died during World War I and the Third Anglo-Afghan War. The names of more than 13,000 British and Indian soldiers are inscribed on the gate. The memorial also features the Amar Jawan Jyoti, a flame dedicated to unknown soldiers who have died in service. India Gate has become a symbol of national pride and sacrifice and is one of India's most famous landmarks.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const India_Gate = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 8 PM</Text>
-                { 9 <= hour && 20 >= hour ? 
+                { 9 <= hour && 19 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -82,8 +86,8 @@ India - 110001.
 
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -180,7 +184,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

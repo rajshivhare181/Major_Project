@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Leisure_Valley = () => {
         ]
         }
     });
+     const openGoogleMaps = () => {
+          const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=30.744,76.7823`;
+          Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+        };
     const fullHistoryText = `Leisure Valley Park is a large, well-maintained urban park located in the heart of Gurugram. It was developed to provide a recreational space for the residents of the city and visitors alike. The park has grown in prominence over the years as an important part of the city's green spaces, offering a serene environment amidst the hustle and bustle of urban life. It is known for its well-laid-out gardens, walking paths, and peaceful atmosphere. Over time, the park has become a hub for leisure activities, hosting events, and serving as a social gathering spot.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Leisure_Valley = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5 AM to 9 PM</Text>
-                { 5 <= hour && 21 >= hour ? 
+                { 5 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Leisure_Valley = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Leisure Valley Park, Sector 29, Gurugram, Haryana 122001, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

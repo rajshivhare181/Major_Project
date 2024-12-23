@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,11 @@ const Jal_Mahal = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+
     const fullHistoryText = `History :Jal Mahal, located in the middle of Man Sagar Lake in Jaipur, Rajasthan, is a stunning palace that dates back to the 18th century. Built by Maharaja Madho Singh I, the palace was originally designed as a retreat for royal family members. The palace's architecture blends Mughal, Rajput, and European styles, with five floors, of which four remain submerged under the lake when the water level is high. Over time, Jal Mahal fell into disrepair but has since been restored. The picturesque setting, surrounded by hills and the lake, makes it one of Jaipur's most iconic landmarks.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +67,7 @@ const Jal_Mahal = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 6 PM. </Text>
-                { 9 <= hour && 18 >= hour ? 
+                { 9 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -82,9 +87,10 @@ Jaipur, Rajasthan,
 India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
+
                 </View>
             </View>
         </Animated.ScrollView>

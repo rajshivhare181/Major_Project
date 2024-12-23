@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Dassam_Falls  = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.146252,85.46722`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Dassam Falls, located near Ranchi in Jharkhand, is a stunning waterfall formed by the Kanchi River. The name "Dassam" is derived from the local term "Dassam," meaning "ten," which refers to the ten streams that flow from the waterfall. The falls have been a popular tourist spot for decades due to their scenic beauty and serene environment. Known for its cascading waters and lush greenery, Dassam Falls has also been a place of significance in local folklore, with surrounding villages considering it a sacred spot for offerings and rituals.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const hour = time.getHours();
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
               }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹10 to ₹20 for adult</Text>
+                <Text style={styles.text}>Ticket :₹100 to ₹500 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -77,8 +81,8 @@ const hour = time.getHours();
                 <Text style={styles.text_address}>Address :Dassam Falls,
                 Near Taimara, 40 km from Ranchi, Jharkhand, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

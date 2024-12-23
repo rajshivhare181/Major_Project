@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Lamayuru_Monastery = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Lamayuru Monastery, one of the oldest and most famous Buddhist monasteries in Ladakh, is believed to have been established in the 11th century by the great Tibetan scholar and translator, Rinchen Zangpo. It is located at an altitude of 3,500 meters in the Lamayuru village, about 120 km from Leh. The monastery belongs to the Drukpa Kagyu school of Tibetan Buddhism and is known for its unique architecture, colorful murals, and ancient statues. It is often referred to as the "Moonland" because of the lunar-like landscape surrounding the monastery, which adds to its mystical appeal.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Lamayuru_Monastery = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :6 AM to 7 PM</Text>
-                { 6 <= hour && 19 >= hour ? 
+                { 6 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹30 for adult
+                <Text style={styles.text}>Ticket :₹300 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -77,8 +81,8 @@ const Lamayuru_Monastery = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Lamayuru, Leh, Ladakh, Jammu & Kashmir, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

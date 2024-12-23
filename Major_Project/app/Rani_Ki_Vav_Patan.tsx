@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Rani_Ki_Vav_Patan = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.858924,72.101933`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Rani Ki Vav, located in Patan, Gujarat, is a stunning stepwell that was built in the 11th century by Rani Udayamati, the queen of King Bhimdev I of the Solanki dynasty. It was designed as a tribute to her late husband and is considered an architectural marvel. The stepwell was designed to be both functional and decorative, with intricate carvings and sculptures that depict Hindu mythology. In 2014, Rani Ki Vav was declared a UNESCO World Heritage Site, recognizing its historical and cultural significance. The stepwell is one of the largest and most well-preserved of its kind in India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Rani_Ki_Vav_Patan = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :8 AM to 6 PM</Text>
-                { 8 <= hour && 18 >= hour ? 
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹20 for adult 
+                <Text style={styles.text}>Ticket : ₹200 for adult 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>

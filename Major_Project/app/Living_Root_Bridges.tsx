@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Living_Root_Bridges = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Historical Legacy: Living Root Bridges are a unique marvel of traditional engineering in Meghalaya, primarily created by the Khasi tribe. These bridges are crafted by guiding the roots of the Ficus elastica (rubber tree) over time to form strong, functional structures. The practice dates back over 500 years, and the bridges are still in use today, growing stronger over generations. The Double Decker Root Bridge in Nongriat is one of the most famous examples, attracting tourists worldwide. These bridges are an excellent example of sustainable living and the Khasi people's deep connection with nature, using it to create long-lasting, eco-friendly infrastructure.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Living_Root_Bridges = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8 AM to 5 PM</Text>
-                { 8 <= hour && 17 >= hour ? 
+                { 8 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹20-₹30 for adult
+                <Text style={styles.text}>Ticket :₹200-₹300 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -77,8 +81,8 @@ const Living_Root_Bridges = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Nongriat Village, East Khasi Hills District, Meghalaya 793108, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

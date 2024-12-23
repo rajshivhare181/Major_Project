@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const International_Shopping_Mall= () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=10.027901,76.307738`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The concept of the "International Shopping Mall" emerged as a global retail phenomenon in the late 20th century, blending shopping, entertainment, and dining experiences in one location. Malls like the Dubai Mall (2008) and Mall of America (1992) became iconic for their massive scale and variety of attractions. These malls host a range of international brands, luxury retailers, cinemas, and amusement parks, becoming cultural and social hubs. With increasing urbanization and globalization, international shopping malls have evolved into places for leisure, family entertainment, and a wide range of consumer goods, serving as a one-stop shopping destination.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const International_Shopping_Mall= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :10 AM to 10 PM</Text>
-                { 10 <= hour && 22 >= hour ? 
+                { 10 <= hour && 21 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ Sreekariyam, Thiruvananthapuram,
 Kerala 695017, India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

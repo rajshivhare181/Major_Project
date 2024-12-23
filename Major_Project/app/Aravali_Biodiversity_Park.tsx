@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Aravali_Biodiversity_Park = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.495098,77.097062`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : The Aravalli Biodiversity Park in Gurugram, Haryana, is a significant green area spread over 692 acres. The park was established in 1991 by the Forest Department of Haryana with the aim of preserving the natural biodiversity of the Aravalli hills. Once a barren and degraded area, the park has been transformed into a thriving ecological zone with over 1,000 species of plants, 190 species of birds, and various mammals, reptiles, and insects. It serves as an important urban green space for environmental conservation, research, and eco-tourism, making it a valuable resource for both nature lovers and researchers.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -63,7 +67,7 @@ const Aravali_Biodiversity_Park = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5 AM to 7 PM</Text>
-                { 5<= hour && 19 >= hour ? 
+                { 5<= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ Near Sultanpur National Park,
 Gurugram, Haryana,
 India - 122018.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -163,7 +167,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

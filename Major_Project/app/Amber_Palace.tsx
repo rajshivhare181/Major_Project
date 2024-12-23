@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Amber_Palace = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.985487,75.851345`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Amber Palace, located in Jaipur, Rajasthan, was constructed in the 16th century by Raja Man Singh I, with later additions by Maharaja Jai Singh I. Built in red sandstone and marble, it blends Hindu and Mughal architectural styles. The palace served as the main seat of the Kachwaha dynasty until Jaipur was established as the capital. Known for its stunning architecture, the palace features grand courtyards, intricate carvings, and the famous Sheesh Mahal (Mirror Palace). Amber Palace is a UNESCO World Heritage Site and one of Jaipur’s most popular tourist destinations.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -63,7 +67,7 @@ const Amber_Palace = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 8 AM to 6 PM</Text>
-                { 8<= hour && 18 >= hour ? 
+                { 8<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -80,8 +84,8 @@ Amer,
 Jaipur, Rajasthan,
 India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>

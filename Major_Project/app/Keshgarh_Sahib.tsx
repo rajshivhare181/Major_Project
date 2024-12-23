@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Keshgarh_Sahib = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=31.235036,76.498238`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Gurdwara Keshgarh Sahib, located in Anandpur Sahib, Punjab, is one of the most significant and revered Sikh shrines. It marks the place where Guru Gobind Singh, the tenth Sikh Guru, founded the Khalsa in 1699, during the historic event known as Vaisakhi. On this day, Guru Gobind Singh initiated the Panj Pyare (Five Beloved Ones) and established the Sikh code of conduct, laying the foundation for the Khalsa community. The gurdwara also stands as a symbol of courage, spirituality, and Sikh unity. It is a major pilgrimage site and holds deep historical and religious significance for Sikhs worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Keshgarh_Sahib = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :4 AM to 9 PM. </Text>
-                { 4 <= hour && 21 >= hour ? 
+                { 4 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ const Keshgarh_Sahib = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Gurdwara Keshgarh Sahib, Anandpur Sahib, Rupnagar District, Punjab, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -161,7 +165,7 @@ const styles = StyleSheet.create({
     },
     book: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

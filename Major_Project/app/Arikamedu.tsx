@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Arikamedu= () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=11.901216,79.820123`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History: Arikamedu is an ancient Roman trading port and archaeological site located near Pondicherry. It dates back to the 1st century BCE and was an active center for trade between the Roman Empire and India. The site was discovered in the early 20th century and has yielded a wealth of artifacts, including Roman pottery, beads, and coins, confirming the maritime trade routes that connected South India to Rome. Arikamedu was a major center for the export of goods like pepper, textiles, and other spices. It offers valuable insights into the early cultural exchange between the East and West.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -63,13 +67,13 @@ const Arikamedu= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
-                { 9<= hour && 18 >= hour ? 
+                { 9<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹10 for adult</Text>
+                <Text style={styles.text}>Ticket :₹50 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -77,8 +81,8 @@ const Arikamedu= () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Arikamedu, Arikamedu Village, Near Auroville, Puducherry, 605101, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -159,7 +163,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

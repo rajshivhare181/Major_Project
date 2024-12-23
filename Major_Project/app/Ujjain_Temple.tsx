@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Ujjain_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.176467,75.788516`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Association with Lord Shiva: Ujjain is home to the famous Mahakaleshwar Jyotirlinga temple, one of the twelve Jyotirlingas in India, dedicated to Lord Shiva. It is believed that Lord Shiva himself resided here in his Mahakal (the supreme destroyer) form.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Ujjain_Temple = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5 AM to 11 PM</Text>
-                { 5 <= hour && 23 >= hour ? 
+                { 5 <= hour && 22 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -76,9 +80,10 @@ const Ujjain_Temple = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Mahakaleshwar Temple, Mahakaleshwar Mandir Rd, Ujjain, Madhya Pradesh 456006, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
+
                 </View>
             </View>
         </Animated.ScrollView>
@@ -173,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

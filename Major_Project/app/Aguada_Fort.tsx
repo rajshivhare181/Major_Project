@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,12 +24,17 @@ const Aguada_Fort= () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=15.492252,73.773746`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Aguada Fort, located in North Goa, was built by the Portuguese in 1612 to defend against Dutch and Maratha invasions. The fort, situated on the banks of the Mandovi River, played a vital role in controlling the region's coastline. Its name, "Aguada," means "water" in Portuguese, referring to the freshwater spring inside the fort, which was used to supply water to ships. The fort also features a lighthouse, which was later constructed in 1864. Today, Aguada Fort is a popular tourist destination, offering panoramic views of the Arabian Sea and showcasing Goa's colonial history.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
 
     const time = new Date();
     const hour = time.getHours();
+  
   return (
     <>
         <Stack.Screen options={{ 
@@ -63,13 +68,13 @@ const Aguada_Fort= () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
-                { 9<= hour && 18 >= hour ? 
+                { 9<= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹25 for adult</Text>
+                <Text style={styles.text}>Ticket : ₹50 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -82,8 +87,8 @@ North Goa,
 Goa,
 India - 403515.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -179,7 +184,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

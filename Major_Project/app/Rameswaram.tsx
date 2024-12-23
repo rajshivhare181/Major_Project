@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Rameswaram = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :Rameswaram is a sacred town located on Pamban Island in Tamil Nadu, known for its iconic Ramanathaswamy Temple dedicated to Lord Shiva. The town has great religious significance in Hinduism, especially for devotees following the Ramayana epic. It is believed that Lord Rama, an incarnation of Vishnu, built a bridge (Rama's Setu) to Lanka (Sri Lanka) to rescue his wife Sita. The temple, with its long corridors, grand pillars, and sacred water tanks, has been a site of pilgrimage for centuries and is part of the Char Dham Yatra, offering spiritual importance to Hindus worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +66,7 @@ const Rameswaram = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :5 AM to 9 PM</Text>
-                { 5 <= hour && 19 >= hour ? 
+                { 5 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }

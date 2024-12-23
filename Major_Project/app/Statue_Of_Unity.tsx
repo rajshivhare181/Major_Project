@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Statue_Of_Unity = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=21.838476,73.719295`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Statue of Unity is the world's tallest statue, standing at 182 meters (597 feet) in the Narmada district of Gujarat, India. It was inaugurated on 31st October 2018 to honor Sardar Vallabhbhai Patel, India's first Deputy Prime Minister and Home Minister, who played a pivotal role in unifying India after independence. The statue was designed by Ram V. Sutar and constructed by Larsen & Toubro. Located on the banks of the Narmada River, near the Sardar Sarovar Dam, the monument symbolizes national integration and serves as a tribute to Patel's legacy in shaping modern India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Statue_Of_Unity = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 6 PM</Text>
-                { 9 <= hour && 18 >= hour ? 
+                { 9 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹120 for adult
+                <Text style={styles.text}>Ticket :₹500 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -82,8 +86,8 @@ Narmada District,
 Gujarat,
 India - 393155.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -179,7 +183,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

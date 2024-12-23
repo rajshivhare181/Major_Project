@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,11 @@ const Jagannath_Mandir = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.316975,85.281632`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+
     const fullHistoryText = `History : Jagannath Mandir in Ranchi is a prominent Hindu temple dedicated to Lord Jagannath, an incarnation of Lord Vishnu, along with his siblings, Lord Balabhadra and Goddess Subhadra. The temple was constructed in 1691 by the local king Ishwar Singh of Barkagarh. The architecture of the temple is inspired by the famous Jagannath Temple in Puri, Odisha. Over time, it has become a major religious and cultural center for devotees, particularly during the Rath Yatra, when the deity’s chariot procession is celebrated with great fervor. The temple is situated on a hill, offering panoramic views of Ranchi.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,7 +67,7 @@ const Jagannath_Mandir = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 5 AM - 9 PM</Text>
-                { 5 <= hour && 21 >= hour ? 
+                { 5 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -81,8 +86,8 @@ Ranchi, Jharkhand, India.
 Postal Code: 834001
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -178,7 +183,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

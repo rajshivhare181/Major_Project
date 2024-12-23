@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Yadavindra_Gardens = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=30.794088,76.914711`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History : Yadavindra Gardens, located in Pinjore, Haryana, is a historical Mughal-style garden built by Nawab Fidai Khan in the 17th century during the reign of the Mughal Emperor Aurangzeb. The garden was later renovated by the Maharaja of Patiala, Yadavindra Singh, in the 19th century, which is how it got its name. Inspired by the famous Shalimar Bagh in Kashmir, Yadavindra Gardens is laid out in a series of terraced levels with beautiful fountains, pavilions, and lush greenery. The garden is a blend of Mughal, Rajasthani, and Persian architecture, and it remains a popular destination for visitors and tourists.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const Yadavindra_Gardens = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing : 7 AM to 9 PM</Text>
-                { 7 <= hour && 21 >= hour ? 
+                { 7 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹10 for adult</Text>
+                <Text style={styles.text}>Ticket :₹100 for adult</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
@@ -80,8 +84,8 @@ District Panchkula,
 Haryana,
 India - 134102.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -177,7 +181,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

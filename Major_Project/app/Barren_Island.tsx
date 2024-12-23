@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Barren_Island = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Barren Island, located around 135 km from Port Blair in the Andaman and Nicobar Islands, is India’s only active volcano. The island has a rich geological history, with volcanic activity dating back to the 19th century. First discovered by the British in 1789, it gained significance in the early 19th century when eruptions were recorded. The island is uninhabited due to its volcanic activity and rugged terrain. It remains a focal point for scientists and nature enthusiasts interested in volcanoes and marine biodiversity. The island’s volcanic eruptions, most notably in 1991 and 2005, have shaped its current landscape. `;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const Barren_Island = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00 AM to 5:00 PM</Text>
-                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing : 6 AM to 5 PM</Text>
+                { 6 <= hour && 16 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
                 }
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

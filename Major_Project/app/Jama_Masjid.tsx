@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,11 @@ const Jama_Masjid = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.650679,77.233442`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+
     const fullHistoryText = `History : The Jama Masjid in Old Delhi is one of the largest and most famous mosques in India. Commissioned by Emperor Shah Jahan, it was completed in 1656 and is an excellent example of Mughal architecture. Constructed with red sandstone and white marble, the mosque can accommodate over 25,000 worshippers. The central courtyard is one of the largest in the world, and the mosque’s grand minarets and domes dominate the skyline. Jama Masjid has a rich history, playing a key role in Delhi’s cultural and religious life. It stands as a symbol of the Mughal era’s artistic and architectural excellence.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,14 +66,14 @@ const Jama_Masjid = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5 AM - 6 </Text>
-                { 5 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing : 5 AM - 6 PM </Text>
+                { 5 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹25 for adult
+                <Text style={styles.text}>Ticket : ₹250 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -82,8 +87,8 @@ New Delhi,
 India - 110006.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>

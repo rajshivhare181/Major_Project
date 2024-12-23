@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const State_Museum = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `History :The Manipur State Museum in Imphal, established in 1969, showcases the rich cultural heritage and history of Manipur. The museum's collection includes artifacts from the region’s Meitei civilization, archaeological relics, ethnological exhibits, and traditional art. It also highlights the state’s freedom struggle and the Anglo-Manipur War of 1891. The museum’s diverse collections offer insight into the history, lifestyle, and art forms of the people of Manipur, featuring traditional costumes, musical instruments, weapons, and sculptures. It is an essential institution for understanding the unique history and culture of the state.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -62,13 +66,13 @@ const State_Museum = () => {
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :10 AM to 4 PM.</Text>
-                { 10 <= hour && 16 >= hour ? 
+                { 10 <= hour && 15 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹10 - ₹20 for adult
+                <Text style={styles.text}>Ticket : ₹50 - ₹100 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
@@ -77,8 +81,8 @@ const State_Museum = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address : Palace Compound, Imphal, Manipur 795001, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

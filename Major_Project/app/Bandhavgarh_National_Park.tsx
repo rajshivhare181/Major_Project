@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Bandhavgarh_National_Park = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.721515,81.019878`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Historical Significance: The area of Bandhavgarh has a long history of being part of the royal hunting grounds of the local Rewa dynasty, and there is a fort located within the park, believed to date back to the 2nd century BC. It is also home to ancient temples and caves. The fort's remnants, including ancient inscriptions and stone carvings, add to the historical significance of the area.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const hour = time.getHours();
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6:00AM to 6:00PM</Text>
-                { 6 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
     <Text style={styles.time}>Open</Text> :
     <Text style={styles.time1}>Close</Text>
 }
@@ -78,8 +82,8 @@ const hour = time.getHours();
 Umaria District, Madhya Pradesh, India
 Postal Code: 484661</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -175,7 +179,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

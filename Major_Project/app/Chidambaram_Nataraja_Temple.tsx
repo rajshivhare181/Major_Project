@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Chidambaram_Nataraja_Temple = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = ` The Chidambaram Nataraja Temple, located in Chidambaram, Tamil Nadu, is one of the oldest and most revered temples dedicated to Lord Shiva in his Nataraja (Lord of Dance) form. The temple's origins date back to the 2nd century BCE, with significant contributions from the Chola dynasty during the 10th to 13th centuries. The temple is unique for its cosmic dance depiction of Shiva and its association with the five elements, representing space (akasha). It is a key pilgrimage site and is considered one of the Pancha Bhuta Stalas (temples dedicated to the five elements).`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -61,8 +65,8 @@ const hour = time.getHours();
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6:00 AM to 12:00 PM</Text>
-                { 6 <= hour && 24 >= hour ? 
+                <Text style={styles.text}>Timing :6 AM to 12 PM</Text>
+                { 6 <= hour && 23 >= hour ? 
                     <Text style={styles.time}>Open</Text> :
                     <Text style={styles.time1}>Close</Text>
                 } 
@@ -76,8 +80,8 @@ const hour = time.getHours();
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Chidambaram Nataraja Temple, Chidambaram, Tamil Nadu, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -173,7 +177,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

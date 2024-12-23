@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,10 @@ const Hazratbal_Shrine = () => {
         ]
         }
     });
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
     const fullHistoryText = `Hazratbal Shrine, also known as Hazratbal Shrine Mosque, holds significant religious importance for Muslims in Kashmir. It is dedicated to Hazratbal, which means "Holy Place," and it is most famous for housing a relic believed by many to be a hair strand of the Prophet Muhammad (PBUH), known as "Moi-e-Muqqadas."
 The shrine was originally built in the 17th century by the Mughal Emperor Shah Jahan's governor, Sadiq Khan, and was later renovated in the 19th century. The relic was brought to the shrine in 1699 and has remained an object of deep veneration and reverence. The shrine has been a center of spiritual and religious activity for centuries, attracting large numbers of pilgrims, especially during special occasions such as the Shab-e-Meraj and Eid festivals.`;
   
@@ -63,7 +67,7 @@ The shrine was originally built in the 17th century by the Mughal Emperor Shah J
             </View>
             <View style={styles.timing}>
                 <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                { 9 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -77,8 +81,8 @@ The shrine was originally built in the 17th century by the Mughal Emperor Shah J
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Hazratbal Shrine, Srinagar, Jammu & Kashmir, 190006, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +178,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

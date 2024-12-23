@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,7 +24,11 @@ const Tezu = () => {
         ]
         }
     });
-    const fullHistoryText = `History :Tezu is a town located in the northeastern part of India, in the Lohit district of Arunachal Pradesh. It serves as the district headquarters and has historical significance due to its strategic location near the Indo-China border. The town was historically influenced by the indigenous Adi and Mishmi tribes, who have lived in the region for centuries. During the British colonial era, the area was less explored due to its remoteness. Post-independence, Tezu became an important administrative center in Arunachal Pradesh, especially with the growth of infrastructure and development in the region. It continues to be a vital hub for both culture and trade.`;
+    const openGoogleMaps = () => {
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+    const fullHistoryText = `History :The Silva Store is a well-known and long-established shop located in Daman, a coastal city in India. The store has been catering to the needs of locals and tourists for many years, offering a wide range of products including clothing, footwear, accessories, and home goods. Known for its quality merchandise and customer-friendly service, The Silva Store has become a trusted name in Daman. The shop also features local handicrafts, souvenirs, and goods that reflect the cultural heritage of the region. Over time, it has evolved into a popular retail destination for both residents and visitors alike.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -61,8 +65,8 @@ const Tezu = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :4 AM to 6 AM</Text>
-                { 4 <= hour && 18 >= hour ? 
+                <Text style={styles.text}>Timing : 10 AM - 8 PM</Text>
+                { 10 <= hour && 19 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
@@ -75,16 +79,14 @@ const Tezu = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Tezu
-Lohit District,
-Arunachal Pradesh,
-India
-Pincode: 792001
-
+                <Text style={styles.text_address}>Address : The Silva Store,
+Near the Jetty in Daman,
+Daman & Diu,
+India.
 </Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -180,7 +182,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",
