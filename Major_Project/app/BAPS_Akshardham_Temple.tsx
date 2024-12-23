@@ -8,7 +8,7 @@ import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewO
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Baps_Akshardham_Temple = () => {
+const BAPS_Akshardham_Temple = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -95,7 +95,7 @@ India - 110092.</Text>
   )
 }
 
-export default Baps_Akshardham_Temple
+export default BAPS_Akshardham_Temple
 
 const styles = StyleSheet.create({
     photo: {

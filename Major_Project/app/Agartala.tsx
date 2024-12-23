@@ -27,7 +27,7 @@ const Agartala = () => {
       const openGoogleMaps = () => {
         const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=15.492252,73.773746`;
         Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
-      };
+      };
     const fullHistoryText = `History :Agartala, the capital city of Tripura, India, has a rich history influenced by tribal, Bengali, and colonial cultures. The city's origins trace back to the reign of Maharaja Krishna Manikya in the 19th century, who shifted the capital from Udaipur to Agartala. It became a cultural and administrative hub under British influence. Agartala played a significant role during India's freedom struggle and the 1971 Bangladesh Liberation War due to its proximity to the border. Known for its heritage sites like Ujjayanta Palace, Neermahal, and its lush greenery, Agartala blends tradition with modernity, representing Tripura's vibrant history and culture.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;

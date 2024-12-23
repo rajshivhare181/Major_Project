@@ -8,7 +8,7 @@ import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewO
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Rani_Ki_Vav_Patan = () => {
+const Rani_Ki_Vav = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -94,7 +94,7 @@ India - 384265.</Text>
   )
 }
 
-export default Rani_Ki_Vav_Patan
+export default Rani_Ki_Vav
 
 const styles = StyleSheet.create({
     photo: {
