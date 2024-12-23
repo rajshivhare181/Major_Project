@@ -8,7 +8,7 @@ import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewO
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Loktak_Lake = () => {
+const Ukhrul = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -26,15 +26,17 @@ const Loktak_Lake = () => {
     });
 
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=24.5016,793.7898`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.096756,94.361727`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
 
-    const fullHistoryText = `Historical Legacy:Loktak Lake, located in Manipur, is the largest freshwater lake in northeastern India, known for its phumdis (floating islands). The lake has been significant for centuries, both for its natural beauty and as a vital resource for the local Meitei community, who rely on it for fishing and agriculture. The lake's historical importance includes its role in the Manipur Liberation War (1891), where it served as a strategic point. It’s also culturally important, featuring in various local myths and legends. The lake was designated a wetland of international importance under the Ramsar Convention in 1990.`;
+    const fullHistoryText = `Ukhrul, a picturesque town in Manipur, India, is home to the Tangkhul Naga tribe. Its history is deeply rooted in tribal traditions and folklore. Known for its scenic beauty and biodiversity, Ukhrul played a significant role in World War II during the Battle of Imphal, witnessing key Allied military operations. The region embraced Christianity in the late 19th century through missionary activities, which significantly influenced its socio-cultural landscape. Ukhrul is renowned for the rare Shirui Lily, found only in its hills. Over the years, it has evolved as a center for cultural heritage, fostering traditional music, dance, and handicrafts.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
+
     const time = new Date();
     const hour = time.getHours();
+    // console.log(hour);
   return (
     <>
         <Stack.Screen options={{ 
@@ -54,7 +56,7 @@ const Loktak_Lake = () => {
             }
         }}/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Loktak_Lake.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Ukhrul.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -67,25 +69,21 @@ const Loktak_Lake = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9 AM to 5 PM.</Text>
-                { 9 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing : 4 am - 10 pm</Text>
+                { 4<= hour && 21 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :Free
-               </Text>
-                <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
-                    <Text style={styles.text}>Book</Text>
-                </TouchableOpacity>
+                <Text style={styles.text}>Ticket : Free Entry</Text>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Imphal, Manipur, India.</Text>
+                <Text style={styles.text_address}>Address : Ukhrul, Manipur</Text>
                 <View style={styles.buttonWrapper}>
-                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
-                  <Text style={styles.text}>Show on map</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                  </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>
@@ -93,7 +91,7 @@ const Loktak_Lake = () => {
   )
 }
 
-export default   Loktak_Lake
+export default Ukhrul
 
 const styles = StyleSheet.create({
     photo: {

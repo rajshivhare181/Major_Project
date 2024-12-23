@@ -8,8 +8,8 @@ export default function Layout() {
       <StatusBar backgroundColor="black" barStyle="light-content" />
       <Drawer screenOptions={{ headerStyle:{backgroundColor: "#fffff"}}}>
         <Drawer.Screen name='index' options={{title: "Home"}}/>
-        <Drawer.Screen name='register' options={{title: "Register"}}/>
-        <Drawer.Screen name='login' options={{title: "Login"}}/>
+        <Drawer.Screen name='register' options={{title: "Register", headerShown: false}}/>
+        <Drawer.Screen name='login' options={{title: "Login", headerShown: false}}/>
         <Drawer.Screen name="Gwalior_Fort" options={{ drawerItemStyle: { display: 'none' } }} />
       </Drawer>
     </GestureHandlerRootView>

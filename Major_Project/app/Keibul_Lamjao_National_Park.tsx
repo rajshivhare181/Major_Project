@@ -1,4 +1,4 @@
-import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity } from 'react-native';
+import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
@@ -24,6 +24,12 @@ const Keibul_Lamjao_National_Park = () => {
         ]
         }
     });
+
+    const openGoogleMaps = () => {
+        const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=24.4752,93.8496`;
+        Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
+    };
+      
     const fullHistoryText = `Keibul Lamjao National Park is located on the eastern shore of Loktak Lake in Manipur, India. Established in 1977 as a wildlife sanctuary and later designated as a national park in 1982, it is the only floating national park in the world. The park is famous for being the **home of the Sangai, the endangered Manipur brow-antlered deer. This unique ecosystem of floating phumdis (islands) is rich in biodiversity, supporting various species of flora and fauna. The park plays an essential role in conserving the wetland habitat of the region and is a critical part of Manipur's natural heritage.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
@@ -77,8 +83,8 @@ const Keibul_Lamjao_National_Park = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Moirang, Bishnupur District, Manipur 795133, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                  <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                    <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -174,7 +180,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",
