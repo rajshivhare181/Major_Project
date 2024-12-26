@@ -25,7 +25,7 @@ const Trimbakeshwar_Temple = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=19.932159,78.73.530782`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=19.932159, 73.530782`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `History :The Trimbakeshwar Temple is one of the 12 Jyotirlingas (sacred shrines dedicated to Lord Shiva) and is located in Trimbak, near Nashik in Maharashtra, India. The temple is dedicated to Lord Shiva in his Trimbakeshwar form, where the deity has three faces symbolizing Brahma, Vishnu, and Shiva. The temple is a highly revered pilgrimage site.
