@@ -180,7 +180,6 @@ export default function Index() {
       router.push("/login");
     }
   }
-
   const ongoCab = async(value: any) => {
     // console.log(value);
     if (user) {

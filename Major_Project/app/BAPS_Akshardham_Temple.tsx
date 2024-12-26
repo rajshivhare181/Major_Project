@@ -1,3 +1,4 @@
+
 import { Image, StyleSheet, Text, View, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import React, { useState } from 'react';
 import {  Dimensions } from 'react-native';
@@ -52,7 +53,7 @@ const BAPS_Akshardham_Temple = () => {
             }
         }}/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Baps_Akshardham_Temple.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/BAPS_Akshardham_Temple.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
