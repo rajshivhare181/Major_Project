@@ -9,14 +9,20 @@ import { onAuthStateChanged, User, signOut } from "firebase/auth";
 import { auth, db } from "../firebase";
 import * as Location from 'expo-location';
 import { collection, getDocs, doc, getDoc, where, limit, query } from "firebase/firestore";
-import { FontAwesome6 } from '@expo/vector-icons';
+import { Entypo } from '@expo/vector-icons';
 import * as Google from 'expo-auth-session/providers/google';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import DrawerScreenAnimation from "@/components/drawerScreenAnimation";
+import { useNavigation } from '@react-navigation/native';
+import { DrawerNavigationProp } from '@react-navigation/drawer'; 
+import Layout from './_layout';
 
 const { width, height } = Dimensions.get("window");
 
 export default function Index() {
   const router = useRouter();
+  type NavigationProps = DrawerNavigationProp<any, any>;
+  const navigation = useNavigation<NavigationProps>();
 
   // Google Sign In
   // const redirectUri = "https://auth.expo.io/raj_shivhare/Major_Project" ;
@@ -62,6 +68,7 @@ export default function Index() {
       setTimeout(() => {
         router.push(item);
         setFLoading(false);
+        console.log('Redirect to:',item);
       }, 1000);
     } else {
       Alert.alert("Please Login First");
@@ -230,6 +237,7 @@ export default function Index() {
   const [islocation, setIsLocation] = useState(false);
   const [region, setRegion] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [lloading, setLLoading] = useState(false);
   const [floading, setFLoading] = useState(false);
   const [isdisplay, setIsDisplay] = useState(false);
   const [searchData, setSearchData] = useState<any[]>([]);
@@ -261,7 +269,8 @@ export default function Index() {
       return;
     }
 
-    // Define the type for locationSubscription
+    try {
+      // Define the type for locationSubscription
     const newLocation = await Location.getCurrentPositionAsync({
       accuracy: Location.Accuracy.Highest,
     });
@@ -273,6 +282,7 @@ export default function Index() {
 
         // Perform reverse geocoding
         try {
+          setLLoading(true);
           const address = await Location.reverseGeocodeAsync({
             latitude: userLat,
             longitude: userLon,
@@ -312,6 +322,11 @@ export default function Index() {
         } catch (error) {
           console.error('Error during reverse geocoding:', error);
         }
+    } catch (error) {
+      console.error('Error during reverse geocoding:', error);
+    } finally {
+      setLLoading(false);
+    }
   };
 
   const stopAutoFetch = () => {
@@ -402,10 +417,11 @@ export default function Index() {
       return;
     }
     try {
+      setLLoading(true);
       const data: any[] = [];
       const type = preferences;
       setSearchData([]);
-      const collections = ['Anbaman And Nicobar Islands', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'Chhattisgarh', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu And Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Lakshadweep', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu',   'Uttar Pradesh'];
+      const collections = ['Anbaman And Nicobar Islands', 'Arunachal Pradesh', 'Assam', 'Bihar', 'Chandigarh', 'Chhattisgarh', 'Delhi', 'Goa', 'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Lakshadweep', 'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Uttar Pradesh'];
       for (const coll of collections) {
         // Reference each collection
         const collRef = collection(db, coll);
@@ -422,6 +438,8 @@ export default function Index() {
       // console.log("All Data:", data);
     } catch (error) {
       console.error('Error fetching filtered data:', error); 
+    } finally {
+      setLLoading(false);
     }
   };
 
@@ -462,6 +480,7 @@ export default function Index() {
     // console.log("Formatted collection name:", fname);
     try {
       setLoading(true); // Show loading spinner
+      setLLoading(true);
       setSearchData([]);
       const querySnapshot = await getDocs(collection(db, `${fname}`));
       const data = querySnapshot.docs.map((doc) => ({
@@ -478,208 +497,197 @@ export default function Index() {
       Alert.alert("Error", "Failed to fetch data. Please try again.");
     } finally {
       setLoading(false); // Hide loading spinner
+      setLLoading(false);
     }
   };
 
   return (
-    <View>
-      {floading ? (
-        <View style={{flex: 1,
-          justifyContent: 'center',
-          alignItems: 'center',}}>
-          <Image source={require('@/assets/images/Mr Bean.gif')} style={styles.gif} contentFit="contain"/>
-          {/* <ActivityIndicator size="large" color="black" /> */}
+    <View style={{ flex: 1, backgroundColor: "#009688" }}>
+      <DrawerScreenAnimation>
+        <View style={styles.stack}>
+          <TouchableOpacity 
+            onPress={() => navigation.openDrawer()} 
+            style={{paddingTop: height * 0.018, marginLeft: width * 0.05, marginRight: width * 0.02 }}
+          >
+            <Entypo name='menu' size={26} />
+          </TouchableOpacity>
+          <Text style={{ color: 'black', paddingTop: height * 0.018, fontSize: width * 0.05, fontWeight: 'bold'}}>Home</Text>
         </View>
-      ) : (
-        <>
-          <ScrollView showsVerticalScrollIndicator={false}>
-            {user ? (
-              <View style={styles.main}>
-                  {/* Toggle switch visible when user is logged in */}
-                  <View style={styles.toggleContainer}>
-                    <Text style={styles.toggleLabel}>Auto Fetch</Text>
-                    <Switch
-                      trackColor={{ false: "red", true: "green" }}
-                      thumbColor={isAutoFetch ? "white" : "white"}
-                      ios_backgroundColor="#3e3e3e"
-                      onValueChange={toggleAutoFetch}
-                      value={isAutoFetch}
-                    />
-                  </View>
-                  <TouchableOpacity style={styles.btn1} onPress={handleLogout}>
-                    <Text style={styles.text}>Log out</Text>
-                  </TouchableOpacity>
-                </View>
+        <View style={{ flex: 1, backgroundColor: '#F3F1F1' }}>
+            {floading ? (
+              <View style={{flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center',}}>
+                <Image source={require('@/assets/images/Mr Bean.gif')} style={styles.gif} contentFit="contain"/>
+                {/* <ActivityIndicator size="large" color="black" /> */}
+              </View>
             ) : (
               <>
-                <View style={styles.main}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onRegister}>
-                    <Text style={styles.text}>Register</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onLogin}>
-                    <Text style={styles.text}>Login</Text>
-                  </TouchableOpacity>
-                </View>
-                {/* <View style={styles.gmain}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.guest} onPress={() => {promptAsync();}}>
-                    <Text style={styles.gtext}><FontAwesome6 name="google" size={25}/>         Sign In With Google</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.guest} onPress={onfacebook}>
-                    <Text style={styles.gtext}><FontAwesome6 name="facebook-f" size={25}/>      Sign In With Facebook</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.guest} onPress={ongithub}>
-                    <Text style={styles.gtext}><FontAwesome6 name="github" size={25}/>         Sign In With GitHub</Text>
-                  </TouchableOpacity>
-                </View> */}
-              
-              </>
-            )}
-            {/* Conditionally render search bar and button if Auto Fetch is OFF */}
-            {!isAutoFetch && (
-              <View style={styles.main}>
-                <TextInput
-                  value={state}
-                  onChangeText={setState}
-                  placeholder="Enter State Name"
-                  style={styles.number}
-                />
-                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={manullySearch}>
-                  {loading ? (
-                    <ActivityIndicator size="small" color="white" />
+                <ScrollView showsVerticalScrollIndicator={false} 
+                  style={{ backgroundColor: '#F3F1F1'}}
+                >
+                  {user ? (
+                    <View style={styles.main}>
+                        {/* Toggle switch visible when user is logged in */}
+                        <View style={styles.toggleContainer}>
+                          <Text style={styles.toggleLabel}>Auto Fetch</Text>
+                          <Switch
+                            trackColor={{ false: "red", true: "green" }}
+                            thumbColor={isAutoFetch ? "white" : "white"}
+                            ios_backgroundColor="#3e3e3e"
+                            onValueChange={toggleAutoFetch}
+                            value={isAutoFetch}
+                          />
+                        </View>
+                        <TouchableOpacity style={styles.btn1} onPress={handleLogout}>
+                          <Text style={styles.text}>Log out</Text>
+                        </TouchableOpacity>
+                      </View>
                   ) : (
-                    <Text style={styles.text}>Search</Text>
+                    <>
+                      <View style={styles.main}>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onRegister}>
+                          <Text style={styles.text}>Register</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.button} onPress={onLogin}>
+                          <Text style={styles.text}>Login</Text>
+                        </TouchableOpacity>
+                      </View>
+                      {/* <View style={styles.gmain}>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.guest} onPress={() => {promptAsync();}}>
+                          <Text style={styles.gtext}><FontAwesome6 name="google" size={25}/>         Sign In With Google</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.guest} onPress={onfacebook}>
+                          <Text style={styles.gtext}><FontAwesome6 name="facebook-f" size={25}/>      Sign In With Facebook</Text>
+                        </TouchableOpacity>
+                        <TouchableOpacity activeOpacity={0.7} style={styles.guest} onPress={ongithub}>
+                          <Text style={styles.gtext}><FontAwesome6 name="github" size={25}/>         Sign In With GitHub</Text>
+                        </TouchableOpacity>
+                      </View> */}
+                    
+                    </>
                   )}
-                </TouchableOpacity>
-              </View>
-            )}
+                  {/* Conditionally render search bar and button if Auto Fetch is OFF */}
+                  {!isAutoFetch && (
+                    <View style={styles.main}>
+                      <TextInput
+                        value={state}
+                        onChangeText={setState}
+                        placeholder="Enter State Name"
+                        style={styles.number}
+                      />
+                      <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={manullySearch}>
+                        {loading ? (
+                          <ActivityIndicator size="small" color="white" />
+                        ) : (
+                          <Text style={styles.text}>Search</Text>
+                        )}
+                      </TouchableOpacity>
+                    </View>
+                  )}
 
-            <View style={styles.dropdownText}>
-              <Text>Restaurant</Text>
-              <Text>Hotel       </Text>
-              <Text>Cabs     </Text>
-            </View>
-            <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
-              <View style={styles.dropdown}>
-                <RNPickerSelect
-                  onValueChange={(value) => {setRestaurant(value); ongoRestaurant(value);}}
-                  items={[
-                    { label: 'Dineout', value: 'Dineout' },
-                    { label: 'EazyDiner', value: 'EazyDiner' },
-                    { label: 'Nearbuy', value: 'nearbuy' },
-                  ]}
-                  placeholder={{ label: 'Choose an option...', value: null }}
-                  style={pickerSelectStyles}
-                />
-              </View>
-              <View style={styles.dropdown}>
-                <RNPickerSelect
-                  onValueChange={(value) => {setHotel(value); ongoHotel(value);}}
-                  items={[
-                    { label: 'MakeMyTrip', value: 'MakeMyTrip' },
-                    { label: 'Goibibo', value: 'Goibibo' },
-                  ]}
-                  placeholder={{ label: 'Choose an option...', value: null }}
-                  style={pickerSelectStyles}
-                />
-              </View>
-              <View style={styles.dropdown}>
-                <RNPickerSelect
-                  onValueChange={(value) => {setCab(value); ongoCab(value);}}
-                  items={[
-                    { label: 'Ola', value: 'Ola' },
-                    { label: 'Uber', value: 'Uber' },
-                    { label: 'Rapido', value: 'Rapido' },
-                  ]}
-                  placeholder={{ label: 'Choose an option...', value: null }}
-                  style={pickerSelectStyles}
-                />
-              </View>
-            </View>
+                  <View style={styles.dropdownText}>
+                    <Text>Restaurant</Text>
+                    <Text>Hotel       </Text>
+                    <Text>Cabs     </Text>
+                  </View>
+                  <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                    <View style={styles.dropdown}>
+                      <RNPickerSelect
+                        onValueChange={(value) => {setRestaurant(value); ongoRestaurant(value);}}
+                        items={[
+                          { label: 'Dineout', value: 'Dineout' },
+                          { label: 'EazyDiner', value: 'EazyDiner' },
+                          { label: 'Nearbuy', value: 'nearbuy' },
+                        ]}
+                        placeholder={{ label: 'Choose an option...', value: null }}
+                        style={pickerSelectStyles}
+                      />
+                    </View>
+                    <View style={styles.dropdown}>
+                      <RNPickerSelect
+                        onValueChange={(value) => {setHotel(value); ongoHotel(value);}}
+                        items={[
+                          { label: 'MakeMyTrip', value: 'MakeMyTrip' },
+                          { label: 'Goibibo', value: 'Goibibo' },
+                        ]}
+                        placeholder={{ label: 'Choose an option...', value: null }}
+                        style={pickerSelectStyles}
+                      />
+                    </View>
+                    <View style={styles.dropdown}>
+                      <RNPickerSelect
+                        onValueChange={(value) => {setCab(value); ongoCab(value);}}
+                        items={[
+                          { label: 'Ola', value: 'Ola' },
+                          { label: 'Uber', value: 'Uber' },
+                          { label: 'Rapido', value: 'Rapido' },
+                        ]}
+                        placeholder={{ label: 'Choose an option...', value: null }}
+                        style={pickerSelectStyles}
+                      />
+                    </View>
+                  </View>
 
-            <View style={styles.lang1}>
-              <Text style={styles.name}>Aao Mahare Desh</Text>
-              <Text style={styles.name}>आओ हमारे देश</Text>
-              <Text style={styles.name}>आवो म्हारे देश</Text>
-            </View>
+                  <View style={styles.lang1}>
+                    <Text style={styles.name}>Aao Mahare Desh</Text>
+                    <Text style={styles.name}>आओ हमारे देश</Text>
+                    <Text style={styles.name}>आवो म्हारे देश</Text>
+                  </View>
+                  
+                  {lloading? (
+                    <View>
+                      <Image source={require('@/assets/images/Mr Bean.gif')} style={styles.lgif} contentFit="contain"/>
+                    </View>
+                  ) : !isdisplay? (
+                    <>
+                      <View style={styles.lang2}>
+                        <Text style={styles.name}>"Nature always</Text>
+                        <Text style={styles.name}> wears the colors</Text>
+                        <Text style={styles.name}> of the spirit"</Text>
+                      </View>
+                      <View style={styles.lang3}>
+                        <Text style={styles.name}>"Adopt the peace</Text>
+                        <Text style={styles.name}>of nature. Her</Text>
+                        <Text style={styles.name}>secret is patience."</Text>
+                      </View>
+                      <View style={styles.lang1}>
+                        <Text style={styles.name}>"The tans will fade,</Text>
+                        <Text style={styles.name}>but the memories</Text>
+                        <Text style={styles.name}>will last forever."</Text>
+                      </View>
+                      <View style={styles.lang2}>
+                        <Text style={styles.name}>"Once a year, go</Text>
+                        <Text style={styles.name}>someplace you've</Text>
+                        <Text style={styles.name}>never been before."</Text>
+                      </View>
+                      <View style={styles.lang3}>
+                        <Text style={styles.name}>"There's hope at</Text>
+                        <Text style={styles.name}>the bottom of the</Text>
+                        <Text style={styles.name}>biggest waterfall."</Text>
+                      </View>
+                    </>
+                  ) : searchData.length > 0 ? (
+                    <>
+                      {searchData.map((item, index) => {
+                        const stylesArray = [styles.lang2, styles.lang3, styles.lang1];
+                        const currentStyle = stylesArray[index % stylesArray.length];
 
-            {!isdisplay? (
-              <>
-                <View style={styles.lang2}>
-                  <Text style={styles.name}>"Nature always</Text>
-                  <Text style={styles.name}> wears the colors</Text>
-                  <Text style={styles.name}> of the spirit"</Text>
-                </View>
-                <View style={styles.lang3}>
-                  <Text style={styles.name}>"Adopt the pace</Text>
-                  <Text style={styles.name}>of nature. Her</Text>
-                  <Text style={styles.name}>secret is patience."</Text>
-                </View>
-                <View style={styles.lang1}>
-                  <Text style={styles.name}>"The tans will fade,</Text>
-                  <Text style={styles.name}>but the memories</Text>
-                  <Text style={styles.name}>will last forever."</Text>
-                </View>
-                <View style={styles.lang2}>
-                  <Text style={styles.name}>"Once a year, go</Text>
-                  <Text style={styles.name}>someplace you've</Text>
-                  <Text style={styles.name}>never been before."</Text>
-                </View>
-                <View style={styles.lang3}>
-                  <Text style={styles.name}>"There's hope at</Text>
-                  <Text style={styles.name}>the bottom of the</Text>
-                  <Text style={styles.name}>biggest waterfall."</Text>
-                </View>
+                        return (
+                          <TouchableOpacity key={index} style={currentStyle} onPress={() => ongo(`${item.name}`)}>
+                            <Text style={styles.name}>{item.dname}</Text>
+                          </TouchableOpacity>
+                        );
+                      })}
+                    </>
+                  ) : (
+                    <Text style={styles.noData}>No data available.</Text>
+                  )}
+                </ScrollView>
               </>
-            ) : searchData.length > 0 ? (
-              <>
-                {searchData.map((item, index) => {
-                  const stylesArray = [styles.lang2, styles.lang3, styles.lang1];
-                  const currentStyle = stylesArray[index % stylesArray.length];
-
-                  return (
-                    <TouchableOpacity key={index} style={currentStyle} onPress={() => ongo(`${item.name}`)}>
-                      <Text style={styles.name}>{item.dname}</Text>
-                    </TouchableOpacity>
-                  );
-                })}
-              </>
-            ) : (
-              <Text style={styles.noData}>No data available.</Text>
             )}
-            {/* <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
-              <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 1</Text>
-            </BlurView>
-            <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
-              <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 2</Text>
-            </BlurView>
-            <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blur
-                <View style={styles.lang3}>
-                  <Text style={styles.name}>"There's hope at</Text>
-                  <Text style={styles.name}>the bottom of the</Text>
-                  <Text style={styles.name}>biggest waterfall."</Text>
-                </View>
-              </>
-            ) : (
-              <Text>No data found.</Text>
-            )}
-            {/* <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
-              <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 1</Text>
-            </BlurView>
-            <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
-              <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 2</Text>
-            </BlurView>
-            <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
-              <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 3</Text>
-            </BlurView>
-            <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
-              <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 4</Text>
-            </BlurView>
-            <BlurView intensity={100} tint="systemChromeMaterialLight" style={styles.blurview}>
-              <Text style={{fontWeight: "bold", fontSize: 40,}}>Tourist Place 5</Text>
-            </BlurView> */}
-          </ScrollView>
-        </>
-      )}
+        </View>
+      </DrawerScreenAnimation>
     </View>
   );
 }
@@ -694,6 +702,22 @@ const styles = StyleSheet.create({
   // gmain: {
   //   alignSelf: 'center',
   // },
+  stack: {
+    height: height * 0.07,
+    backgroundColor: "#ffffff",
+    flexDirection: "row",
+    ...Platform.select({
+      ios: {
+        shadowColor: '#000', // Shadow color
+        shadowOffset: { width: 0, height: 5 }, // Offset for bottom shadow
+        shadowOpacity: 0.2, // Shadow transparency
+        shadowRadius: 8, // Shadow blur radius
+      },
+      android: {
+        elevation: 5, // Elevation for Android
+      },
+    }),
+  },
   btn1: {
     backgroundColor: "#8533ff",
     width: '80%',
@@ -797,7 +821,13 @@ const styles = StyleSheet.create({
     width: width * 1,
     height: height ,
     alignSelf: "center",
-    marginTop: height * 0.8,
+    // marginTop: height * 0.8,
+  },
+  lgif: {
+    width: width * 1,
+    height: height ,
+    alignSelf: "center",
+    marginTop: -215,
   },
   dropdownText: {
     flexDirection: "row",
