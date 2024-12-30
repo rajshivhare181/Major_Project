@@ -25,7 +25,7 @@ const  Shirdi_Sai_Mandir = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=73.647734,-77.530538`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=38.9523868,-77.5305377`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `History :The Shirdi Sai Mandir is a renowned Hindu temple dedicated to Sai Baba of Shirdi, one of India's most revered spiritual leaders. Sai Baba, who lived in Shirdi in Maharashtra, is believed to have been born in the mid-19th century, though his exact birth date is unknown. He is regarded as a saint, fakir, and spiritual guide, and is known for his teachings of love, compassion, forgiveness, and unity across religions.

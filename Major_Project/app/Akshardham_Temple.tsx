@@ -32,7 +32,7 @@ const Akshardham_Temple = () => {
     const time = new Date();
     const hour = time.getHours();
      const openGoogleMaps = () => {
-       const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=40.253689,74.579699`;
+       const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query= 40.2536885,-74.5796987`;
        Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
      };
   return (

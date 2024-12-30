@@ -25,7 +25,7 @@ const Hemis_National_Park = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=33.7187211,77.38822239999999`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `Hemis National Park, located in Ladakh, India, is one of the largest national parks in the country. It was established in 1981 to protect the unique flora and fauna of the region. The park is named after the Hemis Monastery, situated nearby, and is renowned for its stunning landscapes, including rugged mountains, high-altitude plateaus, and deep valleys. Hemis is a critical habitat for the snow leopard, as well as other wildlife such as the Tibetan wolf, bharal (Himalayan blue sheep), and wild yaks. It is also home to various species of birds and rare plant life adapted to the harsh conditions.`;

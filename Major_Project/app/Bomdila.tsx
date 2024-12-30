@@ -59,7 +59,7 @@ const Bombila = () => {
             <View style={styles.ticket}>
                 <Text style={styles.text}>Ticket : no entry fee</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
-                    <Text style={styles.text}>Book</Text>
+                    <Text style={styles.text}>Book</Text> 
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>

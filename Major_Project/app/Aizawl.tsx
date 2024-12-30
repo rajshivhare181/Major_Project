@@ -25,7 +25,7 @@ const Aizawl = () => {
         }
     });
        const openGoogleMaps = () => {
-         const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.730718,92.717311`;
+         const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.7307175,92.71731059999999`;
          Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
        };
     const fullHistoryText = `History :Solomon’s Temple, located in the outskirts of Shillong, Meghalaya, is an interesting and lesser-known site with both cultural and historical significance. The temple is named after the biblical King Solomon, and it is said to have been constructed by a local missionary in the 19th century. Built in a neo-gothic style, the temple is primarily associated with Christian heritage and serves as a peaceful retreat. Its tranquil setting, surrounded by nature, makes it a serene place for visitors seeking a spiritual experience. The temple is also significant for its striking architecture and peaceful ambiance.`;

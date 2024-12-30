@@ -25,7 +25,7 @@ const Leh_Palace = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=34.1660308,77.5871575`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `History :Leh Palace, located in the heart of Leh town in Ladakh, was built in the 17th century by King Sengge Namgyal. The palace was once the royal residence of the Namgyal dynasty and was a symbol of their power in the region. Influenced by Tibetan architecture, the structure is a nine-story building that was designed to resemble the Potala Palace in Lhasa. However, after the Dogra invasion in the 19th century, the royal family was forced to flee, and the palace gradually fell into disrepair. Today, Leh Palace is a popular tourist attraction, offering panoramic views of Leh and its surroundings.`;

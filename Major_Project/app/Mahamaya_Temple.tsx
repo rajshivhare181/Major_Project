@@ -25,7 +25,7 @@ const Mahamaya_Temple = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,89.87039`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.213077,90.120242`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `History : The Mahamaya Temple in Hazaribagh is dedicated to Goddess Mahamaya, a manifestation of Durga. It is one of the most prominent places of worship for devotees in the region. The history of the temple is largely centered around the faith and belief in the Goddess as a protector and a symbol of divine power.`;

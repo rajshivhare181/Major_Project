@@ -25,7 +25,7 @@ const ISKCON_Temple = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=76.7635,76.7635`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=30.7343643,76.76134950000001`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `The ISKCON movement was founded in 1966 by A.C. Bhaktivedanta Swami Prabhupada in New York, USA, with the aim of promoting devotion to Lord Krishna and spreading the teachings of the Bhagavad Gita. ISKCON has since grown to become a global movement, with temples, centers, and communities around the world dedicated to the worship of Lord Krishna.`;

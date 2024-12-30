@@ -25,7 +25,7 @@ const Le_Corbusier_Centre = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=30.7461,76.7849`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query= 30.7298194,76.7995423`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `The Le Corbusier Centre was established in 2015 in Chandigarh as a tribute to the visionary architect who is widely credited with designing the city's master plan. The center was created to preserve his legacy and educate the public about his contributions to architecture and urban design.`;
