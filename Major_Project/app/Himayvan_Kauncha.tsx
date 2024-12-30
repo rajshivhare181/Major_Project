@@ -4,7 +4,7 @@ import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
-
+import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
@@ -35,22 +35,7 @@ const HIMAYVAN_KAUNCHA = () => {
     const hour = time.getHours();
   return (
     <>
-        <Stack.Screen options={{ 
-            headerTransparent: true,
-            headerTitle: "",
-            headerLeft: () => {
-                return (  // Add return here
-                <TouchableOpacity 
-                  onPress={() => router.back()} 
-                  style={{ backgroundColor: "rgba(255, 255, 255, 0.5)", borderRadius: 10, padding: 4, marginLeft: width * 0.05 }}
-                >
-                  <View style={styles.nav_icon}>
-                    <FontAwesome6 name='arrow-left-long' size={20} />
-                  </View>
-                </TouchableOpacity>
-              );
-            }
-        }}/>
+       <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
             <Animated.Image source={require('@/assets/images/Hanuman_Mandir.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>

@@ -4,11 +4,11 @@ import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
-
+import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Zero_Valley = () => {
+const Ziro_Valley = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -35,24 +35,9 @@ const Zero_Valley = () => {
     const hour = time.getHours();
   return (
     <>
-        <Stack.Screen options={{ 
-            headerTransparent: true,
-            headerTitle: "",
-            headerLeft: () => {
-                return (  // Add return here
-                <TouchableOpacity 
-                  onPress={() => router.back()} 
-                  style={{ backgroundColor: "rgba(255, 255, 255, 0.5)", borderRadius: 10, padding: 4, marginLeft: width * 0.05 }}
-                >
-                  <View style={styles.nav_icon}>
-                    <FontAwesome6 name='arrow-left-long' size={20} />
-                  </View>
-                </TouchableOpacity>
-              );
-            }
-        }}/>
+        <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Zero_Valley.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Ziro_Valley.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -94,7 +79,7 @@ Pincode: 791120</Text>
   )
 }
 
-export default Zero_Valley
+export default Ziro_Valley
 
 const styles = StyleSheet.create({
     photo: {

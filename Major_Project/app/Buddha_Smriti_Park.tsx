@@ -4,11 +4,11 @@ import {  Dimensions } from 'react-native';
 import { router, Stack } from 'expo-router';
 import { FontAwesome6 } from '@expo/vector-icons';
 import Animated, { interpolate, useAnimatedRef, useAnimatedStyle, useScrollViewOffset } from 'react-native-reanimated';
-
+import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Humayuns_Tomb= () => {
+const Buddha_Smriti_Park = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,34 +25,20 @@ const Humayuns_Tomb= () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.593285,77.250749`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.606714,85.13615`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `Humayun’s Tomb in New Delhi, completed in 1572, is the tomb of Emperor Humayun of the Mughal dynasty. It was commissioned by his widow, Empress Bega Begum, and designed by Persian architect Mirak Mirza Ghiyas. The tomb is one of the finest examples of Mughal architecture and a precursor to the Taj Mahal. Built with red sandstone and white marble, the tomb is set amidst lush gardens, reflecting the Islamic concept of paradise. A UNESCO World Heritage site, it was the first garden tomb on the Indian subcontinent and inspired the design of other Mughal tombs.`;
+    const fullHistoryText = `Buddha Smriti Park was inaugurated on October 18, 2010, by the Chief Minister of Bihar, Nitish Kumar, in the presence of the then Dalai Lama and other prominent Buddhist leaders. It was established as part of Bihar's efforts to preserve and promote the heritage of Buddhism, particularly to honor the association of Lord Buddha with Bihar.
+The park was built on the grounds of a former railway colony, and it spans across 22 acres of land in the heart of Patna, near Bailey Road.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
-    const hour = time.getHours();
+const hour = time.getHours();
   return (
     <>
-        <Stack.Screen options={{ 
-            headerTransparent: true,
-            headerTitle: "",
-            headerLeft: () => {
-                return (  // Add return here
-                <TouchableOpacity 
-                  onPress={() => router.back()} 
-                  style={{ backgroundColor: "rgba(255, 255, 255, 0.5)", borderRadius: 10, padding: 4, marginLeft: width * 0.05 }}
-                >
-                  <View style={styles.nav_icon}>
-                    <FontAwesome6 name='arrow-left-long' size={20} />
-                  </View>
-                </TouchableOpacity>
-              );
-            }
-        }}/>
+    <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Humayuns_Tomb.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Buddha_Smriti_Park.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -65,24 +51,21 @@ const Humayuns_Tomb= () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 9 AM to 6 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
-                <Text style={styles.time}>Open</Text> :
-                <Text style={styles.time1}>Close</Text>
-                }
+                <Text style={styles.text}>Timing : 6 AM to 8 PM</Text>
+                { 6 <= hour && 19 >= hour ? 
+                  <Text style={styles.time}>Open</Text> :
+                  <Text style={styles.time1}>Close</Text>
+               }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹400 for adult </Text>
+                <Text style={styles.text}>Ticket :Free Entry</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Humayun’s Tomb
-Mathura Road,
-Nizamuddin East,
-New Delhi,
-India - 110013.</Text>
+                <Text style={styles.text_address}>Address : Bailey Road, Patna, Bihar, India
+                Pincode: 800001</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>
@@ -94,7 +77,7 @@ India - 110013.</Text>
   )
 }
 
-export default Humayuns_Tomb
+export default Buddha_Smriti_Park
 
 const styles = StyleSheet.create({
     photo: {
