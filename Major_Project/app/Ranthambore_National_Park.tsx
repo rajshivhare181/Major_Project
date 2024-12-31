@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Gurudwara_Shri_Bangla  = () => {
+const Ranthambore_National_Park = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,10 +25,10 @@ const Gurudwara_Shri_Bangla  = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.625865,77.208952`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.977587,76.553287`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `HIstory: Gurudwara Shri Bangla Sahib is one of the most prominent Sikh gurdwaras in New Delhi. The gurdwara is dedicated to the eighth Sikh Guru, Guru Har Krishan Ji, who stayed at the place in 1664 during a visit to Delhi. The site is associated with Guru Har Krishan's compassion, as he helped to cure the sick and needy who were affected by a smallpox epidemic. After his passing, a Sarai (rest house) was built at the site, which later became a gurdwara. The gurdwara is also known for its large Sarovar (holy pool) and is a center for spiritual learning.`;
+    const fullHistoryText = `History :Ranthambore National Park, located in Rajasthan, India, was established as a wildlife sanctuary in 1955 and became a national park in 1980. The park is named after the historic Ranthambore Fort, which stands within its boundaries. Once the hunting ground of the Maharajas of Jaipur, the park is now a protected area known for its population of Bengal tigers. It is also home to a rich variety of flora and fauna, including leopards, wild boars, crocodiles, and numerous bird species. The park’s scenic landscapes include lakes, dense forests, and ancient ruins, offering a unique wildlife experience.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -37,7 +37,7 @@ const Gurudwara_Shri_Bangla  = () => {
     <>
         <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Gurudwara_Shri_Bangla.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Ranthambore_National_Park.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,28 +50,26 @@ const Gurudwara_Shri_Bangla  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :7 AM to 9 PM</Text>
-                { 7 <= hour && 20 >= hour ? 
-                  <Text style={styles.time}>Open</Text> :
-                  <Text style={styles.time1}>Close</Text>
-              } 
+                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.time}>Open</Text> :
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :Free
+                <Text style={styles.text}>Ticket : ₹500 - 1000 for adult 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Gurudwara Shri Bangla Sahib
-Connaught Place,
-New Delhi,
-India - 110001.
-</Text>
+                <Text style={styles.text_address}>Address :Ranthambore National Park,
+Sawai Madhopur,
+Rajasthan, India.</Text>
                 <View style={styles.buttonWrapper}>
-                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
-                      <Text style={styles.text}>Show on map</Text>
+                   <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                    <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -80,7 +78,7 @@ India - 110001.
   )
 }
 
-export default Gurudwara_Shri_Bangla 
+export default Ranthambore_National_Park
 
 const styles = StyleSheet.create({
     photo: {
@@ -167,7 +165,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      // width: '30%', // 30% of the parent's width for the smaller button
+      width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

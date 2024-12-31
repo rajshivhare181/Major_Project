@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Jagannatha_Temple_Puri = () => {
+const Statue_of_Unity = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,19 +25,19 @@ const Jagannatha_Temple_Puri = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=19.804938,85.8315`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=21.838476,73.719295`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :The Shree Jagannatha Temple in Puri, Odisha, is dedicated to Lord Jagannatha, a form of Lord Vishnu. Its origins trace back to the 12th century, when King Anantavarman Chodaganga Deva commissioned the temple's construction in 1135 CE. The temple is an architectural masterpiece, showcasing the Kalinga style. Lord Jagannatha, along with his siblings Balabhadra and Subhadra, are the deities worshipped here. The temple is famous for its grand Rath Yatra (chariot festival), attracting millions of pilgrims annually. Over centuries, it has remained a significant religious and cultural hub for Hindus worldwide.`;
+    const fullHistoryText = `History :The Statue of Unity is the world's tallest statue, standing at 182 meters (597 feet) in the Narmada district of Gujarat, India. It was inaugurated on 31st October 2018 to honor Sardar Vallabhbhai Patel, India's first Deputy Prime Minister and Home Minister, who played a pivotal role in unifying India after independence. The statue was designed by Ram V. Sutar and constructed by Larsen & Toubro. Located on the banks of the Narmada River, near the Sardar Sarovar Dam, the monument symbolizes national integration and serves as a tribute to Patel's legacy in shaping modern India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
     const hour = time.getHours();
   return (
     <>
-        <Pagenav/>
+       <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Jagannatha_Temple_Puri.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Statue_of_Unity.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,22 +50,26 @@ const Jagannatha_Temple_Puri = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5 AM - 9 PM </Text>
-                { 5 <= hour && 20 >= hour ? 
+                <Text style={styles.text}>Timing :9 AM to 6 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :Free
+                <Text style={styles.text}>Ticket :₹500 for adult
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Shree Jagannatha Temple, Grand Road, Puri, Odisha, India, 752001
-</Text>
+                <Text style={styles.text_address}>Address : Statue of Unity
+Sardar Vallabhbhai Patel,
+Kevadia,
+Narmada District,
+Gujarat,
+India - 393155.</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>
@@ -77,7 +81,7 @@ const Jagannatha_Temple_Puri = () => {
   )
 }
 
-export default Jagannatha_Temple_Puri
+export default Statue_of_Unity
 
 const styles = StyleSheet.create({
     photo: {
@@ -179,4 +183,4 @@ const styles = StyleSheet.create({
       textDecorationLine: 'underline',
       // textAlign: 'center',
     }
-})
+}) 

@@ -68,9 +68,9 @@ const Panchmarhi = () => {
 Havelock Island (Swaraj Dweep),
 Andaman and Nicobar Islands, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
-                  </TouchableOpacity>
+                   <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>

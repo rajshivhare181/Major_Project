@@ -132,7 +132,7 @@ import Gulmarg from './Gulmarg';
 import Gurudongmar_Lake from './Gurudongmar_Lake';
 import Gurudwara_10th_Paatshahi from './Gurudwara_10th_Paatshahi';
 import Gurudwara_Panja_Sahib from './Gurudwara_Panja_Sahib';
-import Gurudwara_Shri_Bangla from './Gurudwara_Shri_Bangla';
+import Gurudwara_Shri_Bangla_Sahib  from './Gurudwara_Shri_Bangla_Sahib';
 import Gurugram_Gurudwara from './Gurugram_Gurudwara';
 import Guwahati from './Guwahati';
 import Hadimba_Temple from './Hadimba_Temple';
@@ -167,7 +167,7 @@ import ISKCON_Temple from './ISKCON_Temple';
 import Itanagar from './Itanagar';
 import Jag_Mandir from './Jag_Mandir';
 import Jagannath_Mandir from './Jagannath_Mandir';
-import Jagannatha_Temple_Puri from './Jagannatha_Temple_Puri';
+import Jagannath_Temple_Puri from './Jagannath_Temple_Puri';
 import Jagdish_Temple from './Jagdish_Temple';
 import Jainath_Temple from './Jainath_Temple';
 import Jal_Mahal from './Jal_Mahal';
@@ -298,14 +298,14 @@ import Pune from './Pune';
 import Punjab_Agricultural_University from './Punjab_Agricultural_University';
 import Puri from './Puri';
 import Qila_Mubarak from './Qila_Mubarak';
-import Qutab_Minar from './Qutab_Minar';
+import Qutub_Minar from './Qutub_Minar';
 import Radhanagar_Beach from './Radhanagar_Beach';
 import Raghavendra_Swamy_Temple from './Raghavendra_Swamy_Temple';
 import Rameswaram from './Rameswaram';
 import Ramoji_Film_City from './Ramoji_Film_City';
 import Ranchi_Hill from './Ranchi_Hill';
-import Rani_Ki_Vav from './Rani_Ki_Vav';
-import Ranthambore_Park from './Ranthambore_Park';
+import Rani_ki_Vav from './Rani_ki_Vav';
+import Ranthambore_National_Park from './Ranthambore_National_Park';
 import Ravangla_Monastery from './Ravangla_Monastery';
 import Red_Fort from './Red_Fort';
 import Red_Hill from './Red_Hill';
@@ -357,7 +357,7 @@ import Spituk_Monastery from './Spituk_Monastery';
 import Sri_Aurobindo_Ashram from './Sri_Aurobindo_Ashram';
 import Srinagar from './Srinagar';
 import State_Museum from './State_Museum';
-import Statue_Of_Unity from './Statue_Of_Unity';
+import Statue_of_Unity from './Statue_of_Unity';
 import Stok_Kangri from './Stok_Kangri';
 import Sualkuchi from './Sualkuchi';
 import Suheli_Par from './Suheli_Par';
@@ -935,6 +935,9 @@ export default function Layout() {
         <Drawer.Screen name='Gurudwara_Panja_Sahib' component={Gurudwara_Panja_Sahib} options={{
           title: "Gurudwara_Panja_Sahib", drawerLabel: "Gurudwara_Panja_Sahib", drawerItemStyle: { display: 'none' }
         }} />
+         <Drawer.Screen name='Gurudwara_Shri_Bangla_Sahib' component={Gurudwara_Shri_Bangla_Sahib} options={{
+          title: "Gurudwara_Shri_Bangla_Sahib", drawerLabel: "Gurudwara_Shri_Bangla_Sahib", drawerItemStyle: { display: 'none' }
+        }} />
         <Drawer.Screen name='Gurugram_Gurudwara' component={Gurugram_Gurudwara} options={{
           title: "Gurugram_Gurudwara", drawerLabel: "Gurugram_Gurudwara", drawerItemStyle: { display: 'none' }
         }} />
@@ -1037,8 +1040,8 @@ export default function Layout() {
         <Drawer.Screen name='Jagannath_Mandir' component={Jagannath_Mandir} options={{
           title: "Jagannath_Mandir", drawerLabel: "Jagannath_Mandir", drawerItemStyle: { display: 'none' }
         }} />
-        <Drawer.Screen name='Jagannatha_Temple_Puri' component={Jagannatha_Temple_Puri} options={{
-          title: "Jagannatha_Temple_Puri", drawerLabel: "Jagannatha_Temple_Puri", drawerItemStyle: { display: 'none' }
+        <Drawer.Screen name='Jagannath_Temple_Puri' component={Jagannath_Temple_Puri} options={{
+          title: "Jagannath_Temple_Puri", drawerLabel: "Jagannath_Temple_Puri", drawerItemStyle: { display: 'none' }
         }} />
         <Drawer.Screen name='Jagdish_Temple' component={Jagdish_Temple} options={{
           title: "Jagdish_Temple", drawerLabel: "Jagdish_Temple", drawerItemStyle: { display: 'none' }
@@ -1130,7 +1133,7 @@ export default function Layout() {
          <Drawer.Screen name='Kavaratti_Island' component={Kavaratti_Island} options={{
           title: "Kavaratti_Island", drawerLabel: "Kavaratti_Island", drawerItemStyle: { display: 'none' }
         }} />
-         <Drawer.Screen name='Kaziranga_National_Park' component={Kaziranga_National_Park} options={{
+          <Drawer.Screen name='Kaziranga_National_Park' component={Kaziranga_National_Park} options={{
           title: "Kaziranga_National_Park", drawerLabel: "Kaziranga_National_Park", drawerItemStyle: { display: 'none' }
         }} />
          <Drawer.Screen name='Keibul_Lamjao_National_Park' component={Keibul_Lamjao_National_Park} options={{
@@ -1427,8 +1430,8 @@ export default function Layout() {
          <Drawer.Screen name='Qila_Mubarak' component={Qila_Mubarak} options={{
           title: "Qila_Mubarak", drawerLabel: "Qila_Mubarak", drawerItemStyle: { display: 'none' }
         }} />
-         <Drawer.Screen name='Qutab_Minar' component={Qutab_Minar} options={{
-          title: "Qutab_Minar", drawerLabel: "Qutab_Minar", drawerItemStyle: { display: 'none' }
+         <Drawer.Screen name='Qutub_Minar' component={Qutub_Minar} options={{
+          title: "Qutub_Minar", drawerLabel: "Qutub_Minar", drawerItemStyle: { display: 'none' }
         }} />
          <Drawer.Screen name='Radhanagar_Beach' component={Radhanagar_Beach} options={{
           title: "Radhanagar_Beach ", drawerLabel: "Radhanagar_Beach", drawerItemStyle: { display: 'none' }
@@ -1445,11 +1448,11 @@ export default function Layout() {
          <Drawer.Screen name='Ranchi_Hill' component={Ranchi_Hill} options={{
           title: "Ranchi_Hill", drawerLabel: "Ranchi_Hill", drawerItemStyle: { display: 'none' }
         }} />
-         <Drawer.Screen name='Rani_Ki_Vav' component={Rani_Ki_Vav} options={{
-          title: "Rani_Ki_Vav", drawerLabel: "Rani_Ki_Vav", drawerItemStyle: { display: 'none' }
+         <Drawer.Screen name='Rani_ki_Vav' component={Rani_ki_Vav} options={{
+          title: "Rani_ki_Vav", drawerLabel: "Rani_ki_Vav", drawerItemStyle: { display: 'none' }
         }} />
-         <Drawer.Screen name='Ranthambore_Park' component={Ranthambore_Park} options={{
-          title: "Ranthambore_Park", drawerLabel: "Ranthambore_Park", drawerItemStyle: { display: 'none' }
+         <Drawer.Screen name='Ranthambore_National_Park' component={Ranthambore_National_Park} options={{
+          title: "Ranthambore_National_Park", drawerLabel: "Ranthambore_National_Park", drawerItemStyle: { display: 'none' }
         }} />
          <Drawer.Screen name='Ravangla_Monastery' component={Ravangla_Monastery} options={{
           title: "Ravangla_Monastery", drawerLabel: "Ravangla_Monastery", drawerItemStyle: { display: 'none' }
@@ -1601,8 +1604,8 @@ export default function Layout() {
          <Drawer.Screen name='State_Museum' component={State_Museum} options={{
           title: "State_Museum", drawerLabel: "State_Museum", drawerItemStyle: { display: 'none' }
         }} />
-         <Drawer.Screen name='Statue_Of_Unity' component={Statue_Of_Unity} options={{
-          title: "Statue_Of_Unity", drawerLabel: "Statue_Of_Unity", drawerItemStyle: { display: 'none' }
+         <Drawer.Screen name='Statue_of_Unity' component={Statue_of_Unity} options={{
+          title: "Statue_of_Unity", drawerLabel: "Statue_of_Unity", drawerItemStyle: { display: 'none' }
         }} />
          <Drawer.Screen name='Stok_Kangri' component={Stok_Kangri} options={{
           title: "Stok_Kangri", drawerLabel: "Stok_Kangri", drawerItemStyle: { display: 'none' }

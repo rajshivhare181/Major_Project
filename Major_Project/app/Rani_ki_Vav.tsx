@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Ranthambore_Park = () => {
+const Rani_ki_Vav = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,10 +25,10 @@ const Ranthambore_Park = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.977587,76.553287`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.858924,72.101933`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :Ranthambore National Park, located in Rajasthan, India, was established as a wildlife sanctuary in 1955 and became a national park in 1980. The park is named after the historic Ranthambore Fort, which stands within its boundaries. Once the hunting ground of the Maharajas of Jaipur, the park is now a protected area known for its population of Bengal tigers. It is also home to a rich variety of flora and fauna, including leopards, wild boars, crocodiles, and numerous bird species. The park’s scenic landscapes include lakes, dense forests, and ancient ruins, offering a unique wildlife experience.`;
+    const fullHistoryText = `History :Rani Ki Vav, located in Patan, Gujarat, is a stunning stepwell that was built in the 11th century by Rani Udayamati, the queen of King Bhimdev I of the Solanki dynasty. It was designed as a tribute to her late husband and is considered an architectural marvel. The stepwell was designed to be both functional and decorative, with intricate carvings and sculptures that depict Hindu mythology. In 2014, Rani Ki Vav was declared a UNESCO World Heritage Site, recognizing its historical and cultural significance. The stepwell is one of the largest and most well-preserved of its kind in India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -37,7 +37,7 @@ const Ranthambore_Park = () => {
     <>
         <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Ranthambore_Park.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Rani_ki_Vav.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,26 +50,27 @@ const Ranthambore_Park = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6 AM to 6 PM</Text>
-                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing :8 AM to 6 PM</Text>
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹500 - 1000 for adult 
+                <Text style={styles.text}>Ticket : ₹200 for adult 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Ranthambore National Park,
-Sawai Madhopur,
-Rajasthan, India.</Text>
+                <Text style={styles.text_address}>Address :Rani Ki Vav
+Patan,
+Gujarat,
+India - 384265.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                  <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                    <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -78,7 +79,7 @@ Rajasthan, India.</Text>
   )
 }
 
-export default Ranthambore_Park
+export default Rani_ki_Vav
 
 const styles = StyleSheet.create({
     photo: {
@@ -165,7 +166,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",

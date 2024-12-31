@@ -57,7 +57,7 @@ const Ziro_Valley = () => {
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :RS 2,000 to RS 4,000 for adult</Text>
+                <Text style={styles.text}>Ticket :RS2,000 to RS4,000</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>

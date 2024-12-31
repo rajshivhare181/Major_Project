@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Ranchi_Hill = () => {
+const Loktak_Lake = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,19 +25,19 @@ const Ranchi_Hill = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.375196,85.310714`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.2493,91.7201`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :Ranchi Lake, located in the heart of Ranchi, Jharkhand, was constructed in the 19th century by the then Commissioner of Chotanagpur, Colonel Onsley. The lake was built to provide water to the city and is an important landmark of Ranchi. Over the years, it has become a popular recreational spot for locals and tourists. The serene atmosphere, surrounded by lush greenery and a picturesque setting, has made it a favorite destination for boating and evening walks. Today, it stands as a symbol of Ranchi’s colonial past and urban growth.`;
+    const fullHistoryText = `Historical Legacy: Loktak Lake, situated in Manipur, India, is the largest freshwater lake in northeastern India. It's renowned for its unique floating islands, known as "phumdis," which are masses of vegetation, soil, and organic matter at various stages of decomposition. These phumdis support the world's only floating national park, Keibul Lamjao National Park, the last natural habitat of the endangered Sangai deer. Historically, Loktak has been integral to the local economy, providing resources for hydropower generation, irrigation, and drinking water. The lake also supports local communities who live in traditional huts on the phumdis, maintaining a unique way of life.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
     const hour = time.getHours();
   return (
     <>
-       <Pagenav/>
+        <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Ranchi_Hill.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Loktak_Lake.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,25 +50,25 @@ const Ranchi_Hill = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :8 AM - 6 PM</Text>
-                { 8 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing : 5 AM to 7 PM.</Text>
+                { 5 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :free entry. 
+                <Text style={styles.text}>Ticket :Free
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Ranchi Lake, Ranchi, Jharkhand, India.</Text>
+                <Text style={styles.text_address}>Address :Loktak Lake is located near Moirang in the Bishnupur district of Manipur, India. </Text>
                 <View style={styles.buttonWrapper}>
-                   <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
-                     <Text style={styles.text}>Show on map</Text>
-                    </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                  </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>
@@ -76,7 +76,7 @@ const Ranchi_Hill = () => {
   )
 }
 
-export default Ranchi_Hill
+export default Loktak_Lake
 
 const styles = StyleSheet.create({
     photo: {
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
       },
     btn: {
       backgroundColor: "#8533ff",
-      width: '30%', // 30% of the parent's width for the smaller button
+      // width: '30%', // 30% of the parent's width for the smaller button
       height: height * 0.05, // 6% of screen height
       borderRadius: 10,
       justifyContent: "center",
