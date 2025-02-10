@@ -28,7 +28,7 @@ const Zakir_Hussain_Rose_Garden = () => {
       const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=30.7411,76.7849`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `The Zakir Hussain Rose Garden was established in 1967 and was named after Dr. Zakir Hussain, the 3rd President of India, in honor of his contributions to the nation. The garden was laid out by Dr. M.S. Randhawa, the first Chief Administrator of Chandigarh, and is one of the oldest and most well-maintained parks in the city.`;
+    const fullHistoryText = `Zakir Hussain Rose Garden, located in Sector 16 of Chandigarh, India, is a renowned botanical garden. Established in 1967 under the guidance of Chandigarh's first Chief Commissioner, Dr. M.S. Randhawa, the garden was named in honor of India's former President, Dr. Zakir Hussain. Spanning 30 acres, it boasts approximately 50,000 rose bushes representing 1,600 different species, making it Asia's largest rose garden. Beyond its extensive rose collection, the garden also features trees of medicinal value, including species like bel, bahera, harar, camphor, and yellow gulmohar.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -63,8 +63,7 @@ const Zakir_Hussain_Rose_Garden = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Sector 16, Chandigarh, India
-                Pincode: 160016</Text>
+                <Text style={styles.text_address}>Address : Zakir Hussain Rose GardenJan Marg, 16BSector 16, Chandigarh, 160016, India</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>

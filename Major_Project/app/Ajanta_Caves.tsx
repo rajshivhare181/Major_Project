@@ -66,9 +66,9 @@ const Ajanta_Caves = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Ajanta Caves, Ajanta, Maharashtra, India.</Text>
                 <View style={styles.buttonWrapper}>
-                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
-                      <Text style={styles.text}>Show on map</Text>
-                  </TouchableOpacity>
+                  <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                                      <Text style={styles.text}>Show on map</Text>
+                                  </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>

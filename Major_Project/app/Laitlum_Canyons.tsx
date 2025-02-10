@@ -28,7 +28,7 @@ const Laitlum_Canyons= () => {
       const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.448807,91.908972`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `The Lady of Piety Church (also known as Nuestra Señora de la Piedad Church) is located in Raigarh, Chhattisgarh. The church was built in the 19th century and is one of the oldest Christian landmarks in the region. It was established by the early Christian missionaries who arrived in the area to spread Christianity. The church is known for its unique architectural style, combining Roman Catholic elements with local influences. Over the years, it has become a prominent place of worship for the Christian community in the region and also attracts tourists with an interest in history and`;
+    const fullHistoryText = `Laitlum Canyons, located near Shillong in Meghalaya, is a stunning, lesser-known tourist spot known for its breathtaking panoramic views and deep valleys. "Laitlum" translates to "End of the Hills," symbolizing its position at the edge of a cliff offering spectacular views of the surrounding hills and valleys. This location is historically significant for the Khasi people, the indigenous inhabitants of the region, who have long held the land in reverence for its spiritual and natural beauty. The canyons have become a sought-after destination for trekkers, photographers, and nature enthusiasts, offering an escape into nature’s tranquility.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -57,16 +57,14 @@ const Laitlum_Canyons= () => {
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :free 
+                <Text style={styles.text}>Ticket :₹20 - ₹50
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Lady of Piety Church,
-Raigarh,
-Chhattisgarh, India</Text>
+                <Text style={styles.text_address}>Address :Laitlum Canyons, Laitlum, Shillong, East Khasi Hills, Meghalaya 793002, India.</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>

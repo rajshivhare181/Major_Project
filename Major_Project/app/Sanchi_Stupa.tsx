@@ -28,8 +28,7 @@ const Sanchi_Stupa= () => {
       const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.487339,77.7392`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History : The most famous of these structures include the Jehangir Mahal, Raja Mahal, and the Chaturbhuj Temple, as well as the Orchha Fort Complex, which still stands as a testament to the grandeur of the Bundela dynasty.
-Orchha is also historically significant for its connection to the Mughal Empire, as it was ruled for a time under the Mughal Emperor Jahangir, who visited Orchha, and the town was known for its involvement in the broader political landscape of medieval India.`;
+    const fullHistoryText = `History : The Sanchi Stupa, located in Madhya Pradesh, India, is a prominent Buddhist monument dating back to the 3rd century BCE. It was commissioned by Emperor Ashoka and originally built to enshrine relics of the Buddha. The stupa is known for its intricate stone carvings and gateways, which depict scenes from the life of the Buddha and early Buddhist teachings. Over centuries, the stupa underwent renovations and additions, becoming a significant pilgrimage site. Sanchi represents one of the earliest and most well-preserved examples of Buddhist architecture and is a UNESCO World Heritage Site.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -51,21 +50,21 @@ Orchha is also historically significant for its connection to the Mughal Empire,
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10 AM to 5 PM.</Text>
-                { 10 <= hour && 16 >= hour ? 
+                <Text style={styles.text}>Timing :6 AM to 6 PM.</Text>
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹250 to ₹300 for adult
+                <Text style={styles.text}>Ticket : ₹300
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Orchha, Tikamgarh District, Madhya Pradesh, India.</Text>
+                <Text style={styles.text_address}>Address : Sanchi Stupa, Sanchi, Raisen District, Madhya Pradesh 464661, India.</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>

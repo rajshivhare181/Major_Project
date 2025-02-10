@@ -25,7 +25,7 @@ const Living_Root_Bridges = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.2493,91.7201`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `Historical Legacy: Living Root Bridges are a unique marvel of traditional engineering in Meghalaya, primarily created by the Khasi tribe. These bridges are crafted by guiding the roots of the Ficus elastica (rubber tree) over time to form strong, functional structures. The practice dates back over 500 years, and the bridges are still in use today, growing stronger over generations. The Double Decker Root Bridge in Nongriat is one of the most famous examples, attracting tourists worldwide. These bridges are an excellent example of sustainable living and the Khasi people's deep connection with nature, using it to create long-lasting, eco-friendly infrastructure.`;
