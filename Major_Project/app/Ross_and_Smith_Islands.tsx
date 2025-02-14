@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Rani_Ki_Vav = () => {
+const Ross_and_Smith_Islands = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,10 +25,10 @@ const Rani_Ki_Vav = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.858924,72.101933`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=13.304419,93.072068`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :Rani Ki Vav, located in Patan, Gujarat, is a stunning stepwell that was built in the 11th century by Rani Udayamati, the queen of King Bhimdev I of the Solanki dynasty. It was designed as a tribute to her late husband and is considered an architectural marvel. The stepwell was designed to be both functional and decorative, with intricate carvings and sculptures that depict Hindu mythology. In 2014, Rani Ki Vav was declared a UNESCO World Heritage Site, recognizing its historical and cultural significance. The stepwell is one of the largest and most well-preserved of its kind in India.`;
+    const fullHistoryText = `Historically, Ross Island was once the administrative capital of the Andaman and Nicobar Islands during the British colonial period. However, after the Japanese occupation during World War II, the island was largely abandoned. Smith Island, in contrast, remained largely untouched and is now known for its natural charm.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -37,7 +37,7 @@ const Rani_Ki_Vav = () => {
     <>
         <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Rani_Ki_Vav_Patan.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Ross_and_Smith_Islands.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,28 +50,26 @@ const Rani_Ki_Vav = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :8 AM to 6 PM</Text>
-                { 8 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing :9 AM to 3 PM</Text>
+                { 9 <= hour && 14 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹200 for adult 
+                <Text style={styles.text}>Ticket : ₹100 for adult 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Rani Ki Vav
-Patan,
-Gujarat,
-India - 384265.</Text>
+                <Text style={styles.text_address}>Address :Ross and Smith Islands
+                Andaman and Nicobar Islands, India</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
-                  </TouchableOpacity>
+                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                                       <Text style={styles.text}>Show on map</Text>
+                                   </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>
@@ -79,7 +77,7 @@ India - 384265.</Text>
   )
 }
 
-export default Rani_Ki_Vav
+export default Ross_and_Smith_Islands
 
 const styles = StyleSheet.create({
     photo: {

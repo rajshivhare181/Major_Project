@@ -25,7 +25,7 @@ const Panchmarhi = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.231325,78.169496`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=11.984455,92.950845`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `History :The name "Radhanagar" comes from the Radhanagar Village located near the beach. Historically, this area was part of a larger ecological conservation project to protect the unique marine and forest ecosystems of the region. The beach is part of the Havelock Island which is a popular tourist destination due to its natural beauty, pristine waters, and coral reefs. Over the years, it has evolved into a popular spot for both international and domestic tourists, offering a serene and picturesque environment for relaxation, swimming, and water activities.`;
@@ -68,9 +68,9 @@ const Panchmarhi = () => {
 Havelock Island (Swaraj Dweep),
 Andaman and Nicobar Islands, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
-                  </TouchableOpacity>
+                   <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>

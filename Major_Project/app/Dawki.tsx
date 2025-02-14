@@ -28,7 +28,7 @@ const Dawki  = () => {
       const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=25.184025,92.02487`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `Laitlum Canyons is a stunning natural landscape located in the East Khasi Hills of Meghalaya. The word Laitlum translates to "End of the Hills," reflecting its position at the edge of a deep gorge offering panoramic views of the surrounding valleys and hills. While there is no specific historical narrative attached to Laitlum, the site holds immense cultural significance for the Khasi tribe. It is believed that the place was once used for strategic purposes, offering a vantage point over the surrounding region. Today, it is a popular trekking destination, offering breathtaking views of the lush green hills and valleys.`;
+    const fullHistoryText = `Dawki, located in the East Khasi Hills of Meghalaya, has a rich cultural and historical significance. It was historically a trading post due to its proximity to Bangladesh, facilitating trade between the regions. Over time, Dawki became known for its natural beauty, especially the crystal-clear waters of the Umngot River. The area also holds importance for the Khasi tribe, who have inhabited this region for centuries. With its lush landscapes, waterfalls, and serene river, Dawki has become a prominent tourist destination, attracting visitors to explore its natural beauty and the unique Khasi culture.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -50,20 +50,20 @@ const Dawki  = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6 AM to 5 PM</Text>
-                { 6 <= hour && 16 >= hour ? 
+                <Text style={styles.text}>Timing :8 AM to 4 PM</Text>
+                { 8 <= hour && 15 >= hour ? 
                   <Text style={styles.time}>Open</Text> :
                   <Text style={styles.time1}>Close</Text>
               }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :free </Text>
+                <Text style={styles.text}>Ticket : ₹300-₹500   </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Laitlum, East Khasi Hills District, Meghalaya 793106, India</Text>
+                <Text style={styles.text_address}>Address :Dawki, East Khasi Hills, Meghalaya 793103, India.</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>

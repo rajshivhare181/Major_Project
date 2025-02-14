@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Dimna_lake = () => {
+const Rani_ki_Vav = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,19 +25,19 @@ const Dimna_lake = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=22.863672,86.262838`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.858924,72.101933`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `Dirang is a town in the West Kameng district of Arunachal Pradesh, India, located in the eastern Himalayas. Historically, it has been a significant stopover on the trade route between India and Tibet. The area is inhabited primarily by the Monpa tribe, known for their distinct culture and traditions. During the British colonial period, Dirang was part of the region known as the “North East Frontier Agency,” which later became Arunachal Pradesh. Over time, Dirang developed as a small administrative and military base. Today, it is recognized for its scenic beauty, diverse wildlife, and as a gateway to the Tawang region.`;
+    const fullHistoryText = `History :Rani Ki Vav, located in Patan, Gujarat, is a stunning stepwell that was built in the 11th century by Rani Udayamati, the queen of King Bhimdev I of the Solanki dynasty. It was designed as a tribute to her late husband and is considered an architectural marvel. The stepwell was designed to be both functional and decorative, with intricate carvings and sculptures that depict Hindu mythology. In 2014, Rani Ki Vav was declared a UNESCO World Heritage Site, recognizing its historical and cultural significance. The stepwell is one of the largest and most well-preserved of its kind in India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
-const hour = time.getHours();
+    const hour = time.getHours();
   return (
     <>
         <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Dimna_lake.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Rani_ki_Vav.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,27 +50,27 @@ const hour = time.getHours();
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
-                { 6 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing :8 AM to 6 PM</Text>
+                { 8 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
-                 <Text style={styles.time1}>Close</Text>
-                } 
+                <Text style={styles.time1}>Close</Text>
+                }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : No entry fee</Text>
+                <Text style={styles.text}>Ticket : ₹200 for adult 
+               </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Dirang
-West Kameng District,
-Arunachal Pradesh,
-India
-Pincode: 790101</Text>
+                <Text style={styles.text_address}>Address :Rani Ki Vav
+Patan,
+Gujarat,
+India - 384265.</Text>
                 <View style={styles.buttonWrapper}>
-                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
-                      <Text style={styles.text}>Show on map</Text>
+                  <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                    <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>
@@ -79,7 +79,7 @@ Pincode: 790101</Text>
   )
 }
 
-export default Dimna_lake
+export default Rani_ki_Vav
 
 const styles = StyleSheet.create({
     photo: {

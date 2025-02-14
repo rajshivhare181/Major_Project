@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Statue_Of_Unity = () => {
+const Tam_Dil = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,19 +25,19 @@ const Statue_Of_Unity = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=21.838476,73.719295`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.738565,92.952875`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :The Statue of Unity is the world's tallest statue, standing at 182 meters (597 feet) in the Narmada district of Gujarat, India. It was inaugurated on 31st October 2018 to honor Sardar Vallabhbhai Patel, India's first Deputy Prime Minister and Home Minister, who played a pivotal role in unifying India after independence. The statue was designed by Ram V. Sutar and constructed by Larsen & Toubro. Located on the banks of the Narmada River, near the Sardar Sarovar Dam, the monument symbolizes national integration and serves as a tribute to Patel's legacy in shaping modern India.`;
+    const fullHistoryText = `History : Tamdil Lake, located in the Mizoram state of India, is a picturesque and tranquil water body nestled amidst the lush hills of the region. "Tamdil" translates to "Lake of the Heart" in the Mizo language, reflecting its serene and heart-shaped appearance. The lake has both natural and cultural significance. It is surrounded by dense forests and offers an ideal spot for birdwatching, boating, and fishing. Locals also consider the lake a sacred site, and it has a rich biodiversity. Tamdil is one of Mizoram’s most scenic tourist attractions, known for its natural beauty and peaceful atmosphere.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
     const hour = time.getHours();
   return (
     <>
-       <Pagenav/>
+        <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Statue_Of_Unity.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Tam_Dil.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,26 +50,24 @@ const Statue_Of_Unity = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9 AM to 6 PM</Text>
-                { 9 <= hour && 17 >= hour ? 
+                <Text style={styles.text}>Timing :8 AM to 5 PM.</Text>
+                { 8 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹500 for adult
+                <Text style={styles.text}>Ticket :₹50-₹100 for adult  
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Statue of Unity
-Sardar Vallabhbhai Patel,
-Kevadia,
-Narmada District,
-Gujarat,
-India - 393155.</Text>
+                <Text style={styles.text_address}>Address :Tamdil Lake,
+Mamit District,
+Mizoram 796441,
+India.</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>
@@ -81,7 +79,7 @@ India - 393155.</Text>
   )
 }
 
-export default Statue_Of_Unity
+export default Tam_Dil
 
 const styles = StyleSheet.create({
     photo: {
@@ -183,4 +181,4 @@ const styles = StyleSheet.create({
       textDecorationLine: 'underline',
       // textAlign: 'center',
     }
-}) 
+})

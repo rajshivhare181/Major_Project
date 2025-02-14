@@ -66,8 +66,8 @@ const Rimbi_Waterfall = () => {
             <View style={styles.address}>
                 <Text style={styles.text_address}>Address :Rimbi Waterfall, West Sikkim, Sikkim, India.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
+                  <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                    <Text style={styles.text}>Show on map</Text>
                   </TouchableOpacity>
                 </View>
             </View>

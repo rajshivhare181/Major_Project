@@ -28,7 +28,7 @@ const Bangaram_Island = () => {
       const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=10.936459,72.288191`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `Bangaram Island is part of the Lakshadweep Archipelago, located in the Arabian Sea. Known for its unspoiled beauty and coral reefs, the island has been inhabited for centuries by the local tribes of Lakshadweep. Historically, it was primarily used by fishermen and sailors for shelter. In the modern era, Bangaram gained attention for its serene, untouched environment and became a popular destination for eco-tourism and water sports. The island, along with others in the region, was officially integrated into the Indian Union after independence. Today, it remains a quiet, exclusive retreat for nature lovers and adventure tourists.`;
+    const fullHistoryText = `Bangaram Island, part of the Lakshadweep archipelago in India, is a teardrop-shaped gem renowned for its turquoise lagoons and white sandy beaches. Historically, the Lakshadweep islands were first settled during the Cheraman Perumal era, with Bangaram being a refuge for travelers and traders. Islam was introduced to the region by St. Ubaidullah, a shipwreck survivor in the 7th century. Over time, the island transitioned from a trading hub to a tourist destination, attracting visitors with its serene beauty and biodiversity.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -57,13 +57,13 @@ const Bangaram_Island = () => {
 } 
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :no entry fees</Text>
+                <Text style={styles.text}>Ticket :₹500</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Bangaram Island, Lakshadweep, India</Text>
+                <Text style={styles.text_address}>Address : Bangaram Island, Lakshadweep, India. </Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>

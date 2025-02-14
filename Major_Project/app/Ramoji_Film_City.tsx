@@ -67,9 +67,9 @@ const Ramoji_Film_City = () => {
                 <Text style={styles.text_address}>Address :Ramoji Film City, Anaspur Village, Hayathnagar Mandal, Hyderabad, Telangana, India
                 Pin Code: 501512</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn}>
-                      <Text style={styles.text}>View on map</Text>
-                  </TouchableOpacity>
+                   <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                    </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>

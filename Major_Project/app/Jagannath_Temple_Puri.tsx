@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Tam_dil = () => {
+const Jagannath_Temple_Puri = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,10 +25,10 @@ const Tam_dil = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=23.738565,92.952875`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=19.804938,85.8315`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History : Tamdil Lake, located in the Mizoram state of India, is a picturesque and tranquil water body nestled amidst the lush hills of the region. "Tamdil" translates to "Lake of the Heart" in the Mizo language, reflecting its serene and heart-shaped appearance. The lake has both natural and cultural significance. It is surrounded by dense forests and offers an ideal spot for birdwatching, boating, and fishing. Locals also consider the lake a sacred site, and it has a rich biodiversity. Tamdil is one of Mizoram’s most scenic tourist attractions, known for its natural beauty and peaceful atmosphere.`;
+    const fullHistoryText = `History :The Shree Jagannatha Temple in Puri, Odisha, is dedicated to Lord Jagannatha, a form of Lord Vishnu. Its origins trace back to the 12th century, when King Anantavarman Chodaganga Deva commissioned the temple's construction in 1135 CE. The temple is an architectural masterpiece, showcasing the Kalinga style. Lord Jagannatha, along with his siblings Balabhadra and Subhadra, are the deities worshipped here. The temple is famous for its grand Rath Yatra (chariot festival), attracting millions of pilgrims annually. Over centuries, it has remained a significant religious and cultural hub for Hindus worldwide.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -37,7 +37,7 @@ const Tam_dil = () => {
     <>
         <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Tam_dil.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Jagannath_Temple_Puri.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,24 +50,22 @@ const Tam_dil = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :8 AM to 5 PM.</Text>
-                { 8 <= hour && 16 >= hour ? 
+                <Text style={styles.text}>Timing : 5 AM - 9 PM </Text>
+                { 5 <= hour && 20 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹50-₹100 for adult  
+                <Text style={styles.text}>Ticket :Free
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Tamdil Lake,
-Mamit District,
-Mizoram 796441,
-India.</Text>
+                <Text style={styles.text_address}>Address :Shree Jagannatha Temple, Grand Road, Puri, Odisha, India, 752001
+</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>
@@ -79,7 +77,7 @@ India.</Text>
   )
 }
 
-export default Tam_dil
+export default Jagannath_Temple_Puri
 
 const styles = StyleSheet.create({
     photo: {

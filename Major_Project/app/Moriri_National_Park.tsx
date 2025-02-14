@@ -29,7 +29,7 @@ const Marine_National_Park   = () => {
       // `;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History : The Mahatma Gandhi Marine National Park is located in the South Andaman Islands, near Wandoor village, approximately 25 km from Port Blair, the capital of the Andaman and Nicobar Islands. Established in 1983, the park was named after Mahatma Gandhi to honor his legacy in the field of non-violence and conservation of nature. The park spans over 280 square kilometers, including both land and marine areas, and it was created to protect the rich marine biodiversity of the Andaman Islands.`;
+    const fullHistoryText = `History :Tso Moriri, meaning "Mountain Lake," is a high-altitude lake situated at 4,522 meters in the Changthang region of Ladakh, India. Historically, it has been a vital source of freshwater in this arid region and holds significant cultural importance for the local nomadic Changpa tribes, who have inhabited the area for centuries. The lake and its surrounding wetlands are designated as a Ramsar site, recognizing their ecological importance as a habitat for various migratory birds and unique wildlife. Over time, Tso Moriri has become a sought-after destination for travelers seeking serene natural beauty and a glimpse into traditional Ladakhi culture.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
@@ -51,14 +51,14 @@ const Marine_National_Park   = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :9 AM to 5 PM</Text>
-                { 9 <= hour && 16 >= hour ? 
+                <Text style={styles.text}>Timing :6 AM to 5 PM</Text>
+                { 6 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :₹100 for adult
+                <Text style={styles.text}>Ticket :₹400 for adult
 
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
@@ -66,9 +66,7 @@ const Marine_National_Park   = () => {
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Mahatma Gandhi Marine National Park
-Wandoor, South Andaman,
-Andaman and Nicobar Islands, India.</Text>
+                <Text style={styles.text_address}>Address :Tso Moriri Lake is located in the Changthang region of Ladakh, India.</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>

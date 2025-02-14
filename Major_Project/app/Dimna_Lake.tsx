@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Mokochung_Fort = () => {
+const Dimna_Lake = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,19 +25,19 @@ const Mokochung_Fort = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=26.321031,94.514716`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=22.863672,86.262838`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :Mokokchung Fort has historical significance, especially during the British colonial era. The fort was built by the British in the 19th century to establish a strategic presence in the region. It was part of the British military presence to control and monitor the local tribes in the area, which were known for their independence and resistance to foreign control. Over time, the fort became a symbol of colonial rule and resistance. The fort is part of the larger heritage of the Angami tribe, one of the indigenous communities in Nagaland.`;
+    const fullHistoryText = `Dirang is a town in the West Kameng district of Arunachal Pradesh, India, located in the eastern Himalayas. Historically, it has been a significant stopover on the trade route between India and Tibet. The area is inhabited primarily by the Monpa tribe, known for their distinct culture and traditions. During the British colonial period, Dirang was part of the region known as the “North East Frontier Agency,” which later became Arunachal Pradesh. Over time, Dirang developed as a small administrative and military base. Today, it is recognized for its scenic beauty, diverse wildlife, and as a gateway to the Tawang region.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
-    const hour = time.getHours();
+const hour = time.getHours();
   return (
     <>
-       <Pagenav/>
+        <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Mokochung_Fort.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Dimna_Lake.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,21 +50,24 @@ const Mokochung_Fort = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :10 AM - 5 PM</Text>
-                { 10 <= hour && 16 >= hour ? 
+                <Text style={styles.text}>Timing : 6 AM to 6 PM</Text>
+                { 6 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
-                <Text style={styles.time1}>Close</Text>
-                }
+                 <Text style={styles.time1}>Close</Text>
+                } 
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket : ₹100 to 200 for adult  
-               </Text>
+                <Text style={styles.text}>Ticket : No entry fee</Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Mokokchung District of Nagaland, India. </Text>
+                <Text style={styles.text_address}>Address : Dirang
+West Kameng District,
+Arunachal Pradesh,
+India
+Pincode: 790101</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>
@@ -76,7 +79,7 @@ const Mokochung_Fort = () => {
   )
 }
 
-export default Mokochung_Fort
+export default Dimna_Lake
 
 const styles = StyleSheet.create({
     photo: {

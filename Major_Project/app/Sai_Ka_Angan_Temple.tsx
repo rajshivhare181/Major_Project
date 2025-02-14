@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Manakula_Vinayagkar_Temple = () => {
+const Sai_Ka_Angan_Temple = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,19 +25,19 @@ const Manakula_Vinayagkar_Temple = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=11.896707,79.806316`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.459814,77.038217`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :Mamit is a town in Mamit District, located in the western part of Mizoram. Historically, Mamit was home to the Lushai (Mizo) tribes, and it remains an important area for agriculture, with locals traditionally cultivating rice, tobacco, and tea. The region saw significant changes during the Mizo National Front movement in the mid-20th century, leading to a strong sense of Mizo identity and unity. Today, Mamit is a peaceful town known for its natural beauty, including rolling hills, rivers, and waterfalls, which attract tourists, as well as its cultural heritage and agricultural products.`;
+    const fullHistoryText = `History : Sai Ka Angan is a renowned temple dedicated to Sai Baba in Gurugram, Haryana. The temple was established in 2007 with the blessings of Shirdi Sai Baba, and it is considered a place of spiritual solace and healing for devotees. The temple aims to promote peace, love, and compassion, reflecting the teachings of Sai Baba. Devotees visit the temple to seek blessings for their well-being and to experience tranquility. The temple’s serene atmosphere, simple yet beautiful architecture, and association with Shirdi Sai Baba have made it one of the most visited spiritual places in Gurugram.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
     const hour = time.getHours();
   return (
     <>
-       <Pagenav/>
+        <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Manakula_Vinayagkar_Temple.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Sai_Ka_Angan_Temple.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,22 +50,24 @@ const Manakula_Vinayagkar_Temple = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 8 AM to 5 PM.</Text>
-                { 8 <= hour && 16 >= hour ? 
+                <Text style={styles.text}>Timing : 5 AM to 9 PM</Text>
+                { 5 <= hour && 18 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :Free 
-
+                <Text style={styles.text}>Ticket :Free  
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Mamit Town, Mamit District, Mizoram 796441, India</Text>
+                <Text style={styles.text_address}>Address :Sai Ka Angan
+Sector 38,
+Gurugram, Haryana,
+India - 122001.</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>
@@ -77,7 +79,7 @@ const Manakula_Vinayagkar_Temple = () => {
   )
 }
 
-export default Manakula_Vinayagkar_Temple
+export default Sai_Ka_Angan_Temple
 
 const styles = StyleSheet.create({
     photo: {

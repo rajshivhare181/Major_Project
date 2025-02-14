@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Sonmarg = () => {
+const Qutub_Minar = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,19 +25,19 @@ const Sonmarg = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=34.303162,75.293111`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.524426,77.185206`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :Sonmarg, meaning "Meadow of Gold," is a breathtaking hill station in Jammu and Kashmir, India, nestled at an altitude of 8,960 feet. Historically, it served as a gateway to the Silk Road, connecting India with China and other Central Asian regions. The lush valley was a favorite retreat for Mughal emperors and played a significant role in their northern campaigns. Surrounded by majestic Himalayan peaks and pristine glaciers, Sonmarg holds cultural and historical significance as a starting point for the annual Amarnath Yatra. Today, it is renowned for its natural beauty, trekking trails, and adventure activities, attracting tourists year-round.`;
+    const fullHistoryText = `History : The Qutub Minar is a UNESCO World Heritage site and one of Delhi’s most iconic landmarks. Built in 1193 by Qutb-ud-din Aibak, the founder of the Delhi Sultanate, it stands at 73 meters (240 feet), making it the tallest brick minaret in the world. The Qutub Minar is a fine example of Indo-Islamic Afghan architecture, featuring intricate carvings and inscriptions in Arabic. The tower was originally constructed to celebrate Aibak's victory over the Rajputs. It also holds historical significance, marking the beginning of Muslim rule in India. Over the centuries, it has been renovated and preserved as a heritage monument.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
     const hour = time.getHours();
   return (
     <>
-       <Pagenav/>
+        <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Sonmarg.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Qutub_Minar.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,22 +50,24 @@ const Sonmarg = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing :6 AM to 10 PM</Text>
-                { 6 <= hour && 21 >= hour ? 
+                <Text style={styles.text}>Timing : 7 AM to 5 PM</Text>
+                { 7 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :Free
+                <Text style={styles.text}>Ticket :₹400 for adult  
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address : Sonmarg, Ganderbal District, Jammu and Kashmir, India
-                Pin Code: 191203</Text>
+                <Text style={styles.text_address}>Address : Qutub Minar
+Mehrauli,
+New Delhi,
+India - 110030.</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>
@@ -77,7 +79,7 @@ const Sonmarg = () => {
   )
 }
 
-export default Sonmarg
+export default Qutub_Minar
 
 const styles = StyleSheet.create({
     photo: {

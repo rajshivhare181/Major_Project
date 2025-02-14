@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Jagannatha_Temple_Puri = () => {
+const Manakula_Vinayagar_Temple = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,19 +25,19 @@ const Jagannatha_Temple_Puri = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=19.804938,85.8315`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=11.896707,79.806316`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-    const fullHistoryText = `History :The Shree Jagannatha Temple in Puri, Odisha, is dedicated to Lord Jagannatha, a form of Lord Vishnu. Its origins trace back to the 12th century, when King Anantavarman Chodaganga Deva commissioned the temple's construction in 1135 CE. The temple is an architectural masterpiece, showcasing the Kalinga style. Lord Jagannatha, along with his siblings Balabhadra and Subhadra, are the deities worshipped here. The temple is famous for its grand Rath Yatra (chariot festival), attracting millions of pilgrims annually. Over centuries, it has remained a significant religious and cultural hub for Hindus worldwide.`;
+    const fullHistoryText = `History :Mamit is a town in Mamit District, located in the western part of Mizoram. Historically, Mamit was home to the Lushai (Mizo) tribes, and it remains an important area for agriculture, with locals traditionally cultivating rice, tobacco, and tea. The region saw significant changes during the Mizo National Front movement in the mid-20th century, leading to a strong sense of Mizo identity and unity. Today, Mamit is a peaceful town known for its natural beauty, including rolling hills, rivers, and waterfalls, which attract tourists, as well as its cultural heritage and agricultural products.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
     const time = new Date();
     const hour = time.getHours();
   return (
     <>
-        <Pagenav/>
+       <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Jagannatha_Temple_Puri.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Manakula_Vinayagar_Temple.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -50,22 +50,22 @@ const Jagannatha_Temple_Puri = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 5 AM - 9 PM </Text>
-                { 5 <= hour && 20 >= hour ? 
+                <Text style={styles.text}>Timing : 8 AM to 5 PM.</Text>
+                { 8 <= hour && 16 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :Free
+                <Text style={styles.text}>Ticket :Free 
+
                </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Shree Jagannatha Temple, Grand Road, Puri, Odisha, India, 752001
-</Text>
+                <Text style={styles.text_address}>Address :Mamit Town, Mamit District, Mizoram 796441, India</Text>
                 <View style={styles.buttonWrapper}>
                 <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
                       <Text style={styles.text}>Show on map</Text>
@@ -77,7 +77,7 @@ const Jagannatha_Temple_Puri = () => {
   )
 }
 
-export default Jagannatha_Temple_Puri
+export default Manakula_Vinayagar_Temple
 
 const styles = StyleSheet.create({
     photo: {

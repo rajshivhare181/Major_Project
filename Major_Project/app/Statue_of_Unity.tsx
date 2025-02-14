@@ -8,7 +8,7 @@ import Pagenav from '@/components/Pagenav';
 const { width, height } = Dimensions.get("window");
 const imgHeight = height * 0.4;
 
-const Ambience_Mall_And_Valley = () => {
+const Statue_of_Unity = () => {
 
   const [showFullText, setShowFullText] = useState(false);
     const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -25,21 +25,19 @@ const Ambience_Mall_And_Valley = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=28.505677,77.096711`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=21.838476,73.719295`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
-
-    const fullHistoryText = `History : Ambience Mall in Gurugram, Haryana, is one of the largest and most popular shopping malls in the National Capital Region (NCR) of India. Opened in 2007, it was developed by Ambience Group, known for its luxury developments. The mall is located near the NH-8 highway, making it a prime destination for both local residents and tourists. It features a wide range of high-end brands, entertainment options, and food courts, attracting shoppers from across the city. Over the years, Ambience Mall has become a hub for retail, dining, and leisure activities, contributing to the region's urban growth.`;
+    const fullHistoryText = `History :The Statue of Unity is the world's tallest statue, standing at 182 meters (597 feet) in the Narmada district of Gujarat, India. It was inaugurated on 31st October 2018 to honor Sardar Vallabhbhai Patel, India's first Deputy Prime Minister and Home Minister, who played a pivotal role in unifying India after independence. The statue was designed by Ram V. Sutar and constructed by Larsen & Toubro. Located on the banks of the Narmada River, near the Sardar Sarovar Dam, the monument symbolizes national integration and serves as a tribute to Patel's legacy in shaping modern India.`;
   
     const truncatedHistoryText = `${fullHistoryText.substring(0, 150)}...`;
-
     const time = new Date();
     const hour = time.getHours();
   return (
     <>
-        <Pagenav/>
+       <Pagenav/>
         <Animated.ScrollView ref={scrollRef} showsVerticalScrollIndicator={false}>
-            <Animated.Image source={require('@/assets/images/Ambience_Mall_And_Valley.png')} style={[styles.photo, imageAnimatedStyle]}/>
+            <Animated.Image source={require('@/assets/images/Statue_of_Unity.png')} style={[styles.photo, imageAnimatedStyle]}/>
             <View style={styles.history}>
               <Text style={styles.text}>
                 {showFullText ? fullHistoryText : truncatedHistoryText}
@@ -52,28 +50,30 @@ const Ambience_Mall_And_Valley = () => {
               </TouchableOpacity>
             </View>
             <View style={styles.timing}>
-                <Text style={styles.text}>Timing : 10 AM to 10 PM</Text>
-                { 10<= hour && 21 >= hour ? 
+                <Text style={styles.text}>Timing :9 AM to 6 PM</Text>
+                { 9 <= hour && 17 >= hour ? 
                 <Text style={styles.time}>Open</Text> :
                 <Text style={styles.time1}>Close</Text>
                 }
             </View>
             <View style={styles.ticket}>
-                <Text style={styles.text}>Ticket :no entry fee</Text>
+                <Text style={styles.text}>Ticket :₹500 for adult
+               </Text>
                 <TouchableOpacity activeOpacity={0.7} style = {styles.book}>
                     <Text style={styles.text}>Book</Text>
                 </TouchableOpacity>
             </View>
             <View style={styles.address}>
-                <Text style={styles.text_address}>Address :Ambience Mall
-National Highway 8,
-Sector 24,
-Gurugram, Haryana,
-India - 122018.</Text>
+                <Text style={styles.text_address}>Address : Statue of Unity
+Sardar Vallabhbhai Patel,
+Kevadia,
+Narmada District,
+Gujarat,
+India - 393155.</Text>
                 <View style={styles.buttonWrapper}>
-                  <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
-                                      <Text style={styles.text}>Show on map</Text>
-                    </TouchableOpacity>
+                <TouchableOpacity activeOpacity={0.7} style={styles.btn} onPress={openGoogleMaps}>
+                      <Text style={styles.text}>Show on map</Text>
+                  </TouchableOpacity>
                 </View>
             </View>
         </Animated.ScrollView>
@@ -81,7 +81,7 @@ India - 122018.</Text>
   )
 }
 
-export default Ambience_Mall_And_Valley
+export default Statue_of_Unity
 
 const styles = StyleSheet.create({
     photo: {
@@ -133,6 +133,20 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       alignSelf: "center",
     },
+    time: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "green",
+      alignSelf: "center",
+    },
+    time1: {
+      fontSize: width * 0.04, // Text size based on screen width
+      paddingVertical: height * 0.01, // Padding top relative to height
+      paddingHorizontal: width * 0.02,
+      color: "red",
+      alignSelf: "center",
+    },
     text_address: {
       fontSize: width * 0.04, // Text size based on screen width
       paddingVertical: height * 0.01, // Padding top relative to height
@@ -168,19 +182,5 @@ const styles = StyleSheet.create({
       paddingHorizontal: width * 0.02,
       textDecorationLine: 'underline',
       // textAlign: 'center',
-    },
-    time: {
-      fontSize: width * 0.04, // Text size based on screen width
-      paddingVertical: height * 0.01, // Padding top relative to height
-      paddingHorizontal: width * 0.02,
-      color: "green",
-      alignSelf: "center",
-    },
-    time1: {
-      fontSize: width * 0.04, // Text size based on screen width
-      paddingVertical: height * 0.01, // Padding top relative to height
-      paddingHorizontal: width * 0.02,
-      color: "red",
-      alignSelf: "center",
     }
-})
+}) 
