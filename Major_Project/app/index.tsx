@@ -16,6 +16,7 @@ import DrawerScreenAnimation from "@/components/drawerScreenAnimation";
 import { useNavigation } from '@react-navigation/native';
 import { DrawerNavigationProp } from '@react-navigation/drawer'; 
 import Layout from './_layout';
+import * as WebBrowser from "expo-web-browser";
 
 const { width, height } = Dimensions.get("window");
 
@@ -76,7 +77,7 @@ export default function Index() {
     }
   }
 
-  const ongoRestaurant = (value: any) => {
+  const ongoRestaurant = async (value: any) => {
     // console.log(value);
     if (user) {
       if (value == "Dineout") {
@@ -126,7 +127,7 @@ export default function Index() {
       }else if (value == "nearbuy") {
         const nbappUrl = 'https://www.nearbuy.com/';
 
-        Linking.openURL(nbappUrl).catch(err => console.error("An error occurred", err));
+        await WebBrowser.openBrowserAsync(nbappUrl);
       }
     } else {
       Alert.alert("Please Login First");
@@ -194,7 +195,7 @@ export default function Index() {
       if (value == "Ola") {
         const olaappUrl = 'https://www.olacabs.com/';
 
-        Linking.openURL(olaappUrl).catch(err => console.error("An error occurred", err));
+        await WebBrowser.openBrowserAsync(olaappUrl);
       } else if (value == "Uber") {
         const uberappUrl = 'uber://';
         const uberplayStoreUrl = 'https://play.google.com/store/apps/details?id=com.ubercab';
@@ -220,7 +221,7 @@ export default function Index() {
       }else if (value == "Rapido") {
         const rapidoappUrl = 'https://rapido.bike/';
 
-        await Linking.openURL(rapidoappUrl).catch(err => console.error("An error occurred", err));
+        await WebBrowser.openBrowserAsync(rapidoappUrl);
       }
     } else {
       Alert.alert("Please Login First");
@@ -502,7 +503,7 @@ export default function Index() {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#009688" }}>
+    <View style={{ flex: 1, backgroundColor: "#FFE9D0" }}>
       <DrawerScreenAnimation>
         <View style={styles.stack}>
           <TouchableOpacity 

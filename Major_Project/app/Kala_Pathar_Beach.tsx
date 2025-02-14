@@ -25,7 +25,7 @@ const Kala_Pathar_Beach = () => {
         }
     });
     const openGoogleMaps = () => {
-      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=12.000611,12.000611`;
+      const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=12.000611,93.007095`;
       Linking.openURL(googleMapsUrl).catch(err => console.error("An error occurred", err));
     };
     const fullHistoryText = `Historically, the area around Kalapathar Beach has been relatively quiet and untouched, which has helped preserve its natural beauty. Unlike the more popular Radhanagar Beach, Kalapathar remains a tranquil spot, offering visitors an opportunity to experience the natural beauty of the Andaman Islands without large crowds. The beach is part of the larger Havelock Island region, which has become a major tourist destination due to its pristine beaches and rich marine life.`;

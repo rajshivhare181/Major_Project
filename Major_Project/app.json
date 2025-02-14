@@ -4,7 +4,7 @@
     "slug": "Major_Project",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
+    "icon": "./assets/images/Aao_Mahre_Desh.png",
     "scheme": "myapp",
     "owner": "raj_shivhare",
     "platforms": [
@@ -19,23 +19,30 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "This app needs access to your camera to take photos.",
+        "NSPhotoLibraryUsageDescription": "This app needs access to your photo library to select photos."
+      }
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/images/adaptive-icon.png",
+        "foregroundImage": "./assets/images/Aao_Mahre_Desh.png",
         "backgroundColor": "#ffffff"
       },
       "permissions": [
         "android.permission.ACCESS_COARSE_LOCATION",
-        "android.permission.ACCESS_FINE_LOCATION"
+        "android.permission.ACCESS_FINE_LOCATION",
+        "CAMERA",
+        "WRITE_EXTERNAL_STORAGE",
+        "READ_EXTERNAL_STORAGE"
       ],
       "package": "com.raj_shivhare.Major_Project"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/favicon1.png"
     },
     "plugins": [
       "expo-router",

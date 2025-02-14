@@ -13,7 +13,9 @@ import MyButton from '@/components/myButton';
 import { DrawerNavigationProp } from '@react-navigation/drawer';
 import RNPickerSelect from 'react-native-picker-select';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
-import { ref, uploadBytes, getDownloadURL, deleteObject } from 'firebase/storage';
+import { ref, uploadBytes, getDownloadURL, deleteObject, getStorage } from 'firebase/storage';
+import * as ImagePicker from 'expo-image-picker';
+
 
 const { width, height } = Dimensions.get("window");
 
@@ -26,44 +28,69 @@ const Profile = () => {
   const [editMode, setEditMode] = useState(false);
   const [editedData, setEditedData] = useState<any>({});
   const [profileImage, setProfileImage] = useState<string | null>(null);
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
 
-  const reload = async () => {
-    const getUser = await AsyncStorage.getItem('user');
-    setUser(getUser ? JSON.parse(getUser) : null);
-  };
-
+  
   useEffect(() => {
+    const reload = async () => {
+      const getUser = await AsyncStorage.getItem('user');
+      setUser(getUser ? JSON.parse(getUser) : null);
+      // console.log("user2", user);
+    };
     reload();
     const unsubscribe = onAuthStateChanged(auth, (currentUser: User | null) => {
       setUser(currentUser);
     });
-    if (auth.currentUser) fetchUser();
+    if (auth.currentUser) {
+      const fetchUser = async () => {
+        const userId = auth.currentUser?.uid;
+        if (userId) {
+          try {
+            const userDoc = await getDoc(doc(db, "users", userId));
+            const data = userDoc.data();
+            setUserData(data || {});
+            setEditedData(data || {});
+            // console.log("userdata:", userData);
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+          }
+        } else {
+          console.warn("No user found for fetchUser");
+        }
+      };
+
+      const fetchImage = async () => {
+        const userId = auth.currentUser?.uid;
+        if (userData.profileImage){
+          try {
+            const storage = getStorage();
+            const imageRef = ref(storage, `profileImages/${userId}`); // Path in Storage
+            const url = await getDownloadURL(imageRef);
+            setImageUrl(url);
+          } catch (error) {
+            console.error("Error fetching image:", error);
+          }
+          // console.log(userData?.profileImage);
+        }
+        // console.log("fetchImage was in execution");
+        // console.log(userData.profileImage);
+        // console.log(userId)
+      };
+
+      fetchUser();
+      fetchImage();
+      // console.log("user", user);
+    }
     return unsubscribe;
   }, []);
-
-  const fetchUser = async () => {
-    const userId = auth.currentUser?.uid;
-    if (userId) {
-      try {
-        const userDoc = await getDoc(doc(db, "users", userId));
-        const data = userDoc.data();
-        setUserData(data || {});
-        setEditedData(data || {});
-      } catch (error) {
-        console.error("Error fetching user data:", error);
-      }
-    } else {
-      console.warn("No user found for fetchUser");
-    }
-  };
-
+  
   const handleImageOptions = () => {
     const options = [
       { text: "Take Photo", onPress: handleTakePhoto },
       { text: "Choose from Device", onPress: handleChoosePhoto },
     ];
 
-    if (profileImage) {
+    if (userData.profileImage) {
       options.push({ text: "Remove Photo", onPress: handleRemovePhoto });
     }
 
@@ -74,16 +101,52 @@ const Profile = () => {
   };
 
   const handleTakePhoto = async () => {
-    const result = await launchCamera({ mediaType: 'photo' });
+    const { status } = await ImagePicker.requestCameraPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert("Permission Denied", "Camera access is required to take photos.");
+      return;
+    }
+  
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // Correct way to set media type
+      allowsEditing: true,
+      quality: 1,
+    });
+  
+    if (result.canceled) {
+      Alert.alert("No photo taken", "You did not take a photo.");
+      return;
+    }
+  
     if (result.assets?.[0]?.uri) {
-      uploadImage(result.assets[0].uri);
+      uploadImage(result.assets[0].uri);  // Ensure proper handling of the URI
+    } else {
+      Alert.alert("Error", "Something went wrong while taking the photo.");
     }
   };
-
+  
   const handleChoosePhoto = async () => {
-    const result = await launchImageLibrary({ mediaType: 'photo' });
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert("Permission Denied", "Media library access is required to choose photos.");
+      return;
+    }
+  
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images, // Correct media type usage
+      allowsEditing: true,
+      quality: 1,
+    });
+  
+    if (result.canceled) {
+      Alert.alert("No photo selected", "You did not select a photo.");
+      return;
+    }
+  
     if (result.assets?.[0]?.uri) {
-      uploadImage(result.assets[0].uri);
+      uploadImage(result.assets[0].uri); // Make sure the URI is passed correctly
+    } else {
+      Alert.alert("Error", "Something went wrong while selecting the photo.");
     }
   };
 
@@ -145,7 +208,7 @@ const Profile = () => {
   };
 
   return (
-    <View style={{ flex: 1, backgroundColor: "#009688" }}>
+    <View style={{ flex: 1, backgroundColor: "#FFE9D0" }}>
       <DrawerScreenAnimation>
         <View style={styles.stack}>
           <TouchableOpacity 
@@ -162,12 +225,20 @@ const Profile = () => {
             justifyContent: "center",
             alignItems: "center",
           }}>
-            <Image source={require('@/assets/images/user.png')} 
+            {imageUrl ? (
+              <Image
+              source={{ uri: imageUrl }}
+              style={{ width: 200, height: 200, borderRadius: 100 }}
+            />
+            ) : (
+              <Image source={require('@/assets/images/user.png')} 
               style={{
                 height: 200,
                 width: 200,
               }} 
             />
+            )}
+            
             <TouchableOpacity style={styles.imageButton} onPress={handleImageOptions}>
               <Text style={{ color: 'white', fontWeight: 'bold' }}>Upload Photo</Text>
             </TouchableOpacity>

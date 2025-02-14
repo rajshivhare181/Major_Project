@@ -8,6 +8,7 @@ import register from './register';
 import login from './login';
 import profile from './profile';
 import setting from './setting';
+import about from './about';
 import { useRouter } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth } from '../firebase';
@@ -422,6 +423,9 @@ import Yumthang_Valley from './Yumthang_Valley';
 import Zakir_Hussain_Rose_Garden from './Vila_Palace';
 import Ziro_Valley from './Ziro_Valley';
 import Zoological_Park from './Zoological_Park';
+import { ref, getDownloadURL, getStorage } from 'firebase/storage';
+import { doc, getDoc, } from "firebase/firestore";
+import { db } from '../firebase';
 
 const Drawer = createDrawerNavigator();
 const { width, height } = Dimensions.get("window");
@@ -430,105 +434,60 @@ export default function Layout() {
   const router = useRouter();
 
   const [user, setUser] = useState<User | null>(null);
-
-  const reload = async () => {
-    const getUser = await AsyncStorage.getItem('user');
-    setUser(getUser ? JSON.parse(getUser) : null);
-  };
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+  const [userData, setUserData] = useState<any>(null);
 
   useEffect(() => {
+    const reload = async () => {
+      const getUser = await AsyncStorage.getItem('user');
+      setUser(getUser ? JSON.parse(getUser) : null);
+      // console.log("user2", user);
+    };
     reload();
     const unsubscribe = onAuthStateChanged(auth, (currentUser: User | null) => {
       setUser(currentUser);
     });
+    if (auth.currentUser) {
+      const fetchUser = async () => {
+        const userId = auth.currentUser?.uid;
+        if (userId) {
+          try {
+            const userDoc = await getDoc(doc(db, "users", userId));
+            const data = userDoc.data();
+            setUserData(data || {});
+            // console.log("userdata:", userData);
+          } catch (error) {
+            console.error("Error fetching user data:", error);
+          }
+        } else {
+          console.warn("No user found for fetchUser");
+        }
+      };
+
+      const fetchImage = async () => {
+        const userId = auth.currentUser?.uid;
+        if (userData.profileImage){
+          try {
+            const storage = getStorage();
+            const imageRef = ref(storage, `profileImages/${userId}`); // Path in Storage
+            const url = await getDownloadURL(imageRef);
+            setImageUrl(url);
+          } catch (error) {
+            console.error("Error fetching image:", error);
+          }
+          // console.log(userData?.profileImage);
+        }
+        // console.log("fetchImage was in execution");
+        // console.log(userData.profileImage);
+        // console.log(userId)
+      };
+
+      fetchUser();
+      fetchImage();
+      // console.log("user", user);
+    }
     return unsubscribe;
   }, []);
-
-  const userLoggedIn = () => {
-    return (
-      <Drawer.Navigator
-        drawerContent={(props) => {
-          return (
-            <SafeAreaView>
-              <View style={{
-                height: 200,
-                width: "95%",
-                justifyContent: "center",
-                alignItems: "center",
-              }}>
-                <Image source={require('@/assets/images/user.png')} 
-                  style={{
-                    height: 130,
-                    width: 130,
-                    borderRadius: 65,
-                  }} />
-              </View>
-              <DrawerItemList {...props} />
-              {/* <TouchableOpacity style={styles.btn} onPress={handleLogout}>
-                <Text style={styles.text}>Log out</Text>
-              </TouchableOpacity> */}
-            </SafeAreaView>
-          );
-        }}
-        screenOptions={{
-          drawerType: "slide",
-          headerShown: false,
-          headerTitleStyle: { fontWeight: "bold" },
-          drawerActiveTintColor: "#D20103",
-          drawerLabelStyle: { color: "#111" },
-          overlayColor: "transparent",
-          drawerStyle: {
-            width: "66%",
-            backgroundColor: "#009688",
-            paddingHorizontal: 10,
-          },
-        }}
-      >
-        <Drawer.Screen name='index' component={Index} options={{
-          title: "Home", drawerLabel: "Home", drawerIcon: () => <FontAwesome6 name="house" size={18} color="black" />
-        }} />
-        <Drawer.Screen name='profile' component={profile} options={{
-          title: "Profile", drawerLabel: "Profile", drawerIcon: () => <FontAwesome5 name="user-alt" size={18} color="black" />
-        }} />
-        <Drawer.Screen name='setting' component={setting} options={{
-          title: "Setting", drawerLabel: "Setting", drawerIcon: () => <Fontisto name="player-settings" size={18} color="black" />
-        }} />
-        <Drawer.Screen name='Gwalior_Fort' component={Gwalior_Fort} options={{
-          title: "Gwalior_Fort", drawerLabel: "Gwalior_Fort", drawerIcon: () => <Fontisto name="player-settings" size={18} color="black" />
-        }} />
-      </Drawer.Navigator>
-    );
-  };
-
-  const userLoggedOut = () => {
-    return (
-      <Drawer.Navigator
-        screenOptions={{
-          drawerType: "slide",
-          headerShown: false,
-          headerTitleStyle: { fontWeight: "bold" },
-          drawerActiveTintColor: "#D20103",
-          drawerLabelStyle: { color: "#111" },
-          overlayColor: "transparent",
-          drawerStyle: {
-            width: "66%",
-            backgroundColor: "#009688",
-            paddingTop: 15,
-          },
-        }}
-      >
-        <Drawer.Screen name='index' component={Index} options={{
-          title: "Home", drawerLabel: "Home", drawerIcon: () => <FontAwesome6 name="house" size={18} color="black" />
-        }} />
-        <Drawer.Screen name='register' component={register} options={{
-          title: "Register", drawerLabel: "Register", drawerIcon: () => <Entypo name="add-user" size={18} color="black" />
-        }} />
-        <Drawer.Screen name='login' component={login} options={{
-          title: "Login", drawerLabel: "Login", drawerIcon: () => <Entypo name="login" size={18} color="black" />
-        }} />
-      </Drawer.Navigator>
-    );
-  };
 
   return (
     <>
@@ -536,19 +495,26 @@ export default function Layout() {
         (<Drawer.Navigator
           drawerContent={(props) => {
             return (
-              <SafeAreaView>
+              <SafeAreaView style={{paddingVertical: height * 0.02}}>
                 <View style={{
                   height: 200,
                   width: "95%",
                   justifyContent: "center",
                   alignItems: "center",
                 }}>
-                  <Image source={require('@/assets/images/user.png')} 
-                    style={{
-                      height: 130,
-                      width: 130,
-                      borderRadius: 65,
-                    }} />
+                  {imageUrl ? (
+                    <Image
+                      source={{ uri: imageUrl }}
+                      style={{ width: 200, height: 200, borderRadius: 100 }}
+                    />
+                  ) : (
+                    <Image source={require('@/assets/images/user.png')} 
+                      style={{
+                      height: 200,
+                      width: 200,
+                    }} 
+                  />
+                  )}
                 </View>
                 <DrawerItemList {...props} />
                 {/* <TouchableOpacity style={styles.btn} onPress={handleLogout}>
@@ -566,21 +532,24 @@ export default function Layout() {
             overlayColor: "transparent",
             drawerStyle: {
               width: "66%",
-              backgroundColor: "#009688",
+              backgroundColor: "#FFE9D0",
               paddingHorizontal: 10,
             },
           }}
         >
-          <Drawer.Screen name='index' component={Index} options={{
-            title: "Home", drawerLabel: "Home", drawerIcon: () => <FontAwesome6 name="house" size={18} color="black" />
-          }} />
-          <Drawer.Screen name='profile' component={profile} options={{
-            title: "Profile", drawerLabel: "Profile", drawerIcon: () => <FontAwesome5 name="user-alt" size={18} color="black" />
-          }} />
-          <Drawer.Screen name='setting' component={setting} options={{
-            title: "Setting", drawerLabel: "Setting", drawerIcon: () => <Fontisto name="player-settings" size={18} color="black" />
-          }} />
-          <Drawer.Screen name='Gwalior_Fort' component={Gwalior_Fort} options={{
+        <Drawer.Screen name='index' component={Index} options={{
+          title: "Home", drawerLabel: "Home", drawerIcon: () => <FontAwesome6 name="house" size={18} color="black" />
+        }} />
+        <Drawer.Screen name='profile' component={profile} options={{
+          title: "Profile", drawerLabel: "Profile", drawerIcon: () => <FontAwesome5 name="user-alt" size={18} color="black" />
+        }} />
+        <Drawer.Screen name='setting' component={setting} options={{
+          title: "Setting", drawerLabel: "Setting", drawerIcon: () => <Fontisto name="player-settings" size={18} color="black" />
+        }} />
+        <Drawer.Screen name='about' component={about} options={{
+          title: "About", drawerLabel: "About", drawerIcon: () => <Fontisto name="info" size={18} color="black" />
+        }} />
+        <Drawer.Screen name='Gwalior_Fort' component={Gwalior_Fort} options={{
           title: "Gwalior_Fort", drawerLabel: "Gwalior_Fort", drawerItemStyle: { display: 'none' }
         }} />
           <Drawer.Screen name='Adalaj_Stepwell' component={Adalaj_Stepwell} options={{
@@ -596,7 +565,7 @@ export default function Layout() {
           title: "Agra_Fort", drawerLabel: "Agra_Fort", drawerItemStyle: { display: 'none' }
         }} />
         <Drawer.Screen name='Aguada_Fort' component={Aguada_Fort} options={{
-          title: "Aguada_Fort", drawerLabel: "Aguada_Fort", drawerIcon: () => <Fontisto name="player-settings" size={18} coloGwalior_Fortr="black" />
+          title: "Aguada_Fort", drawerLabel: "Aguada_Fort", drawerItemStyle: { display: 'none' }
         }} />
         <Drawer.Screen name='Aizawl' component={Aizawl} options={{
           title: "Aizawl", drawerLabel: "Aizawl", drawerItemStyle: { display: 'none' }
@@ -682,7 +651,6 @@ export default function Layout() {
         <Drawer.Screen name='Banjhakri_Falls' component={Banjhakri_Falls} options={{
           title: "Banjhakri_Falls", drawerLabel: "Banjhakri_Falls", drawerItemStyle: { display: 'none' }
         }} />
-
         <Drawer.Screen name='Bannerghatta_Biological_Park' component={Bannerghatta_Biological_Park} options={{
           title: "Bannerghatta_Biological_Park", drawerLabel: "Bannerghatta_Biological_Park", drawerItemStyle: { display: 'none' }
         }} />
@@ -1807,7 +1775,7 @@ export default function Layout() {
             overlayColor: "transparent",
             drawerStyle: {
               width: "66%",
-              backgroundColor: "#009688",
+              backgroundColor: "#FFE9D0",
               paddingTop: 15,
             },
           }}
