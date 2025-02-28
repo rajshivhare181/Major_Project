@@ -14,7 +14,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { auth } from '../firebase';
 import { onAuthStateChanged, User, signOut } from 'firebase/auth';
 import { Dimensions } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Gwalior_Fort from './Gwalior_Fort';
 import Adalaj_Stepwell from './Adalaj_Stepwell';
 import Agartala from './Agartala';
@@ -457,6 +457,7 @@ export default function Layout() {
             const userDoc = await getDoc(doc(db, "users", userId));
             const data = userDoc.data();
             setUserData(data || {});
+            fetchImage();
             // console.log("userdata:", userData);
           } catch (error) {
             console.error("Error fetching user data:", error);
@@ -466,30 +467,25 @@ export default function Layout() {
         }
       };
 
-      const fetchImage = async () => {
-        const userId = auth.currentUser?.uid;
-        if (userData.profileImage){
-          try {
-            const storage = getStorage();
-            const imageRef = ref(storage, `profileImages/${userId}`); // Path in Storage
-            const url = await getDownloadURL(imageRef);
-            setImageUrl(url);
-          } catch (error) {
-            console.error("Error fetching image:", error);
-          }
-          // console.log(userData?.profileImage);
-        }
-        // console.log("fetchImage was in execution");
-        // console.log(userData.profileImage);
-        // console.log(userId)
-      };
-
       fetchUser();
-      fetchImage();
       // console.log("user", user);
     }
     return unsubscribe;
   }, []);
+
+  const fetchImage = useCallback(async () => {
+    const userId = auth.currentUser?.uid;
+    if (userId && userData?.profileImage) {
+      try {
+        const storage = getStorage();
+        const imageRef = ref(storage, `profileImages/${userId}`);
+        const url = await getDownloadURL(imageRef);
+        setImageUrl(url);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    }
+  }, [userData?.profileImage]);
 
   return (
     <>
@@ -497,7 +493,7 @@ export default function Layout() {
         (<Drawer.Navigator
           drawerContent={(props) => {
             return (
-              <SafeAreaView style={{paddingVertical: height * 0.02}}>
+              <SafeAreaView style={{paddingVertical: height * 0.02, flex: 1}}>
                 <View style={{
                   height: 200,
                   width: "95%",

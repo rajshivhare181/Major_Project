@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity, Platform, Image, TextInput, Alert } from 'react-native';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { auth } from '../firebase';
 import { onAuthStateChanged, User } from 'firebase/auth';
 import DrawerScreenAnimation from '@/components/drawerScreenAnimation';
@@ -50,6 +50,7 @@ const Profile = () => {
             const data = userDoc.data();
             setUserData(data || {});
             setEditedData(data || {});
+            fetchImage();
             // console.log("userdata:", userData);
           } catch (error) {
             console.error("Error fetching user data:", error);
@@ -59,30 +60,25 @@ const Profile = () => {
         }
       };
 
-      const fetchImage = async () => {
-        const userId = auth.currentUser?.uid;
-        if (userData.profileImage){
-          try {
-            const storage = getStorage();
-            const imageRef = ref(storage, `profileImages/${userId}`); // Path in Storage
-            const url = await getDownloadURL(imageRef);
-            setImageUrl(url);
-          } catch (error) {
-            console.error("Error fetching image:", error);
-          }
-          // console.log(userData?.profileImage);
-        }
-        // console.log("fetchImage was in execution");
-        // console.log(userData.profileImage);
-        // console.log(userId)
-      };
-
       fetchUser();
-      fetchImage();
       // console.log("user", user);
     }
     return unsubscribe;
   }, []);
+
+  const fetchImage = useCallback(async () => {
+    const userId = auth.currentUser?.uid;
+    if (userId && userData?.profileImage) {
+      try {
+        const storage = getStorage();
+        const imageRef = ref(storage, `profileImages/${userId}`);
+        const url = await getDownloadURL(imageRef);
+        setImageUrl(url);
+      } catch (error) {
+        console.error("Error fetching image:", error);
+      }
+    }
+  }, [userData?.profileImage]);
   
   const handleImageOptions = () => {
     const options = [
@@ -162,6 +158,7 @@ const Profile = () => {
         const downloadURL = await getDownloadURL(imageRef);
         await updateDoc(doc(db, "users", userId), { profileImage: downloadURL });
         setProfileImage(downloadURL);
+        fetchImage();
         Alert.alert("Success", "Profile image uploaded successfully!");
       } catch (error) {
         console.error("Error uploading image:", error);

@@ -106,7 +106,7 @@ const setting = () => {
           </TouchableOpacity>
           <Text style={{ color: 'black', paddingTop: height * 0.018, fontSize: width * 0.05, fontWeight: 'bold'}}>Setting</Text>
         </View>
-        <View style={{ backgroundColor: '#F3F1F1', height: height }}>
+        <View style={{ backgroundColor: '#F3F1F1', flex: 1 }}>
           <ScrollView showsVerticalScrollIndicator={false} 
             style={{ backgroundColor: '#F3F1F1'}}
           >
@@ -124,8 +124,16 @@ const setting = () => {
             </TouchableOpacity>
             <View style={styles.faq}>
               <Text style={styles.name}>FAQ</Text>
-              <Text style={styles.question}>Q.1</Text>
-              <Text style={styles.question}>Ans.</Text>
+              <Text style={styles.question}>Q.1 What is the app's purpose?</Text>
+              <Text style={styles.question}>Ans.This app is your one-stop travel companion! It helps you easily plan and book everything you need for your trip—whether it’s flights, hotels, car rentals, or exciting tours and activities. It’s designed to make travel planning a breeze!</Text>
+              <Text style={styles.question}>Q.2 Can I cancel or modify my booking through the app?</Text>
+              <Text style={styles.question}>Ans.Yes, You can easily cancel or make changes to your bookings right from the app. Just check the booking details to see the options and any applicable rules. It’s simple and flexible!</Text>
+              <Text style={styles.question}>Q.3 Is my personal and payment information safe with the app?</Text>
+              <Text style={styles.question}>Ans.Absolutely! Your safety is a top priority. The app uses secure technology to protect your personal and payment information, so you can book with peace of mind.</Text>
+              <Text style={styles.question}>Q.4 Does the app offer travel guides or recommendations?</Text>
+              <Text style={styles.question}>Ans.Yes, it does! You’ll find helpful travel guides and personalized recommendations based on your destination. From local hotspots to hidden gems, the app has got you covered!</Text>
+              <Text style={styles.question}>Q.5 Can I book tours and activities directly through the app?</Text>
+              <Text style={styles.question}>Ans.Definitely! You can browse and book fun tours and activities, all within the app. Whether you're into sightseeing, adventure, or relaxation, there’s something for everyone!</Text>
             </View>
             <TouchableOpacity activeOpacity={0.7} style={styles.lang3} onPress={reconfirm}>
               <Text style={styles.name}>Delete Profile</Text>
@@ -192,7 +200,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: width * 0.05,
   },
   question: {
-    fontSize: width * 0.045,
+    fontSize: width * 0.043,
     paddingHorizontal: width * 0.05,
   },
 })
