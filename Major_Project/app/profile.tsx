@@ -15,6 +15,7 @@ import RNPickerSelect from 'react-native-picker-select';
 import { launchCamera, launchImageLibrary } from 'react-native-image-picker';
 import { ref, uploadBytes, getDownloadURL, deleteObject, getStorage } from 'firebase/storage';
 import * as ImagePicker from 'expo-image-picker';
+import { router } from 'expo-router';
 
 
 const { width, height } = Dimensions.get("window");
@@ -104,7 +105,7 @@ const Profile = () => {
     }
   
     const result = await ImagePicker.launchCameraAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images, // Correct way to set media type
+      mediaTypes: ImagePicker.MediaType.Images, // Correct way to set media type
       allowsEditing: true,
       quality: 1,
     });
@@ -158,6 +159,7 @@ const Profile = () => {
         const downloadURL = await getDownloadURL(imageRef);
         await updateDoc(doc(db, "users", userId), { profileImage: downloadURL });
         setProfileImage(downloadURL);
+        setImageUrl(downloadURL);
         fetchImage();
         Alert.alert("Success", "Profile image uploaded successfully!");
       } catch (error) {
@@ -175,6 +177,7 @@ const Profile = () => {
         await deleteObject(imageRef);
         await updateDoc(doc(db, "users", userId), { profileImage: deleteField() });
         setProfileImage(null);
+        setImageUrl(null);
         Alert.alert("Success", "Profile image removed successfully!");
       } catch (error) {
         console.error("Error removing image:", error);

@@ -495,12 +495,12 @@ export default function Layout() {
             return (
               <SafeAreaView style={{paddingVertical: height * 0.02, flex: 1}}>
                 <View style={{
-                  height: 200,
+                  height: 0,
                   width: "95%",
                   justifyContent: "center",
                   alignItems: "center",
                 }}>
-                  {imageUrl ? (
+                  {/* {imageUrl ? (
                     <Image
                       source={{ uri: imageUrl }}
                       style={{ width: 200, height: 200, borderRadius: 100 }}
@@ -512,7 +512,7 @@ export default function Layout() {
                       width: 200,
                     }} 
                   />
-                  )}
+                  )} */}
                 </View>
                 <DrawerItemList {...props} />
                 {/* <TouchableOpacity style={styles.btn} onPress={handleLogout}>
