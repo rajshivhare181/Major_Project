@@ -1,309 +1,454 @@
-import { View, Text, TextInput, StyleSheet, Dimensions, Alert, TouchableOpacity, ActivityIndicator } from 'react-native';
-import React, { useEffect, useState, useRef } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  Dimensions,
+  Alert,
+  TouchableOpacity,
+  ActivityIndicator,
+} from "react-native";
+
+import React, { useEffect, useState } from "react";
 import { useRouter } from "expo-router";
 import Mybutton from "@/components/myButton";
-import PhoneInput from 'react-native-phone-number-input';
-import { auth, app, db } from "../firebase";
-import { useFocusEffect } from '@react-navigation/native';
-import { getApps } from 'firebase/app';
-import { signInWithCredential, PhoneAuthProvider } from 'firebase/auth';
-import { FirebaseRecaptchaVerifierModal } from 'expo-firebase-recaptcha';
-import { collection, query, where, getDocs } from "firebase/firestore";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
+import { auth } from "../firebase";
+
+import {
+  reload,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth";
 
 const { width, height } = Dimensions.get("window");
 
 const Login = () => {
   const router = useRouter();
 
-  const [userNumber, setUserNumber] = useState<string>('');
-  const phoneInput = useRef<PhoneInput>(null);
-  const [userotp, setUserotp] = useState('');
+  const [userEmail, setUserEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const [loading, setLoading] = useState(false);
-  const recaptchaVerifier = useRef<FirebaseRecaptchaVerifierModal>(null);
-  const [verificationId, setVerificationId] = useState<string | null>(null);
-  const [isEditable, setIsEditable] = useState(true);
-  const [resendDisabled, setResendDisabled] = useState(true);
-  const [countdown, setCountdown] = useState(300); // 5 minutes
+  const [forgotLoading, setForgotLoading] = useState(false);
+  const [resendLoading, setResendLoading] = useState(false);
 
-  useFocusEffect(
-    React.useCallback(() => {
-      // Reset all the states to initial values
-      setUserNumber("");
-      setUserotp('');
-      setVerificationId(null);
-      setIsEditable(true);
-      setResendDisabled(true);
-      setCountdown(300);
-      return () => {};
-    }, [])
-  );
+  // ----------------------------------------------------
+  // LOGIN
+  // ----------------------------------------------------
+  const handleLogin = async () => {
+    const email = userEmail.trim().toLowerCase();
 
-  // Countdown Timer for Resend Button
-  useEffect(() => {
-    if (resendDisabled && countdown > 0) {
-      const timer = setInterval(() => setCountdown((prev) => prev - 1), 1000);
-      return () => clearInterval(timer);
-    } else if (countdown === 0) {
-      setResendDisabled(false);
-    }
-  }, [resendDisabled, countdown]);
-
-  useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged(user => {
-      if (user) {
-        // If the user is authenticated, navigate to the index screen
-        router.push("/");
-      }
-    });
-  
-    return unsubscribe; // Clean up the auth state change listener when the component unmounts
-  }, []);
-  
-
-  // const handleSignin = async () => {
-  //   // console.log("Email:", email);
-  //   // console.log("Password:", password);
-
-  //   if (!userEmail || !password) {
-  //     Alert.alert("Email and password must not be empty.");
-  //     return;
-  //   }
-
-  //   return await signInWithEmailAndPassword(auth, userEmail, password)
-  //     .then((userCredential) => {
-  //       // User successfully signed in
-  //       const user = userCredential.user;
-  //       console.log("User signed in successfully:", user.email);
-  //       return user;
-  //     })
-  //     .catch((error) => {
-  //       console.error("Error signing in:", error.code, error.message);
-  //       if (error.code === 'auth/network-request-failed') {
-  //         alert("Network error: Please check your internet connection.");
-  //       } else {
-  //         alert(`Error: ${error.message}`);
-  //       }
-  //     });
-  // };
-
-  // Phone Verification
-  const requestOTP = async (): Promise<void> => {
-    if (!recaptchaVerifier.current) {
-      console.log('Error', 'Recaptcha verifier is not ready. Please try again.');
+    if (!email) {
+      Alert.alert("Required", "Please enter your email address.");
       return;
     }
 
-    if (!userNumber) {
-      Alert.alert('Phone Number is required.');
+    if (!password) {
+      Alert.alert("Required", "Please enter your password.");
       return;
     }
 
-    // console.log(userNumber);
     try {
-      setLoading(true); // Show loading indicator
-      setVerificationId(null); // Clear the previous verificationId
+      setLoading(true);
 
-      // Step 1: Check if the phone number exists in the 'users' collection
-      const usersCollection = collection(db, 'users');
+      // Firebase Email/Password Login
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
 
-      // console.log("Checking phone number:", userNumber);
+      const user = userCredential.user;
 
-      // Check if the phone number exists in Firestore
-      const userQuery = query(usersCollection, where('phone', '==', userNumber));
-      const userQuerySnapshot = await getDocs(userQuery);
+      // ------------------------------------------------
+      // Check Email Verification
+      // ------------------------------------------------
 
-      if (userQuerySnapshot.empty) {
-        // Phone number does not exist
-        Alert.alert('Register First', 'No account found for this number. Please register first.');
+      // Refresh user information from Firebase
+      await reload(user);
+
+      const currentUser = auth.currentUser;
+
+      if (!currentUser?.emailVerified) {
+        setLoading(false);
+
+        Alert.alert(
+          "Email Not Verified",
+          "Please verify your email before continuing.",
+          [
+            {
+              text: "Verify Email",
+              onPress: () => {
+                router.replace({
+                  pathname: "/verify-email",
+                  params: {
+                    email: email,
+                  },
+                });
+              },
+            },
+            {
+              text: "Cancel",
+              style: "cancel",
+              onPress: async () => {
+                await signOut(auth);
+              },
+            },
+          ]
+        );
+
         return;
       }
 
-      // Step 2: If the phone number exists, proceed with OTP verification
-      const phoneProvider = new PhoneAuthProvider(auth);
-      const verificationId = await phoneProvider.verifyPhoneNumber(
-        userNumber,
-        recaptchaVerifier.current
+      // ------------------------------------------------
+      // Login Successful
+      // ------------------------------------------------
+
+      setLoading(false);
+
+      router.replace("/");
+    } catch (error: any) {
+      console.log("Login Error:", error);
+
+      setLoading(false);
+
+      switch (error?.code) {
+        case "auth/invalid-credential":
+          Alert.alert(
+            "Login Failed",
+            "Incorrect email or password."
+          );
+          break;
+
+        case "auth/wrong-password":
+          Alert.alert(
+            "Login Failed",
+            "Incorrect password."
+          );
+          break;
+
+        case "auth/user-not-found":
+          Alert.alert(
+            "Account Not Found",
+            "No account exists with this email address."
+          );
+          break;
+
+        case "auth/invalid-email":
+          Alert.alert(
+            "Invalid Email",
+            "Please enter a valid email address."
+          );
+          break;
+
+        case "auth/user-disabled":
+          Alert.alert(
+            "Account Disabled",
+            "This account has been disabled."
+          );
+          break;
+
+        case "auth/too-many-requests":
+          Alert.alert(
+            "Too Many Attempts",
+            "Too many login attempts. Please try again later."
+          );
+          break;
+
+        case "auth/network-request-failed":
+          Alert.alert(
+            "Network Error",
+            "Please check your internet connection and try again."
+          );
+          break;
+
+        default:
+          Alert.alert(
+            "Login Failed",
+            error?.message ||
+              "Something went wrong. Please try again."
+          );
+      }
+    }
+  };
+
+  // ----------------------------------------------------
+  // FORGOT PASSWORD
+  // ----------------------------------------------------
+  const handleForgotPassword = async () => {
+    const email = userEmail.trim().toLowerCase();
+
+    if (!email) {
+      Alert.alert(
+        "Email Required",
+        "Please enter your email address first."
       );
-      // console.log('New verificationId:', newverificationId);
-      setVerificationId(verificationId); // Set a new verificationId
-      setIsEditable(false); // Disable phone number input
-      setResendDisabled(true); // Disable resend button
-      setCountdown(300); // Reset countdown
-      Alert.alert('OTP Sent', 'Please check your phone for the OTP.');
-    } catch (error) {
-      console.error(error);
-      Alert.alert('Error', 'Failed to send OTP. Please try again.');
-    } finally {
-      setLoading(false); // Hide loading indicator
-    }
-  };
-
-  const editPhoneNumber = (): void => {
-    setIsEditable(true); // Enable phone number input
-    setVerificationId(null); // Invalidate the previous OTP
-  };
-
-  const verifyOtp = async (): Promise<void> => {
-    if (!verificationId) {
-      Alert.alert('Error', 'Please request an OTP first.');
-      return;
-    }
-
-    if (!userotp) {
-      Alert.alert('Error', 'Please enter the OTP.');
       return;
     }
 
     try {
-      setLoading(true); // Show loading indicator
-      const credential = PhoneAuthProvider.credential(verificationId, userotp);
-      const result = await signInWithCredential(auth, credential);
-      AsyncStorage.setItem('user', JSON.stringify(result.user));
-      // console.log('User signed in:', result.user);
-      // Alert.alert('Success', 'Phone number verified successfully!');
-      // You can redirect the user to the next screen here
-    } catch (error) {
-      console.error(error);
-      Alert.alert('Error', 'Invalid OTP. Please try again.');
-    } finally {
-      setLoading(false); // Hide loading indicator
+      setForgotLoading(true);
+
+      await sendPasswordResetEmail(auth, email);
+
+      setForgotLoading(false);
+
+      Alert.alert(
+        "Password Reset Email Sent",
+        "Please check your email and follow the password reset link to create a new password."
+      );
+    } catch (error: any) {
+      console.log("Forgot Password Error:", error);
+
+      setForgotLoading(false);
+
+      switch (error?.code) {
+        case "auth/user-not-found":
+          Alert.alert(
+            "Account Not Found",
+            "No account exists with this email address."
+          );
+          break;
+
+        case "auth/invalid-email":
+          Alert.alert(
+            "Invalid Email",
+            "Please enter a valid email address."
+          );
+          break;
+
+        case "auth/network-request-failed":
+          Alert.alert(
+            "Network Error",
+            "Please check your internet connection and try again."
+          );
+          break;
+
+        default:
+          Alert.alert(
+            "Error",
+            error?.message ||
+              "Unable to send password reset email."
+          );
+      }
+    }
+  };
+
+  // ----------------------------------------------------
+  // RESEND VERIFICATION EMAIL
+  // ----------------------------------------------------
+  const handleResendVerification = async () => {
+    const user = auth.currentUser;
+
+    if (!user) {
+      Alert.alert(
+        "Login Required",
+        "Please login first."
+      );
+      return;
+    }
+
+    try {
+      setResendLoading(true);
+
+      await sendEmailVerification(user);
+
+      setResendLoading(false);
+
+      Alert.alert(
+        "Verification Email Sent",
+        "A new verification link has been sent to your email."
+      );
+    } catch (error: any) {
+      console.log(
+        "Resend Verification Error:",
+        error
+      );
+
+      setResendLoading(false);
+
+      if (error?.code === "auth/too-many-requests") {
+        Alert.alert(
+          "Please Wait",
+          "Too many verification emails have been requested. Please try again later."
+        );
+      } else {
+        Alert.alert(
+          "Error",
+          error?.message ||
+            "Unable to send verification email."
+        );
+      }
     }
   };
 
   return (
-    <View style={{
-      flex: 1,
-      justifyContent: "center",
-      alignItems: "center",
-    }}>
-      <FirebaseRecaptchaVerifierModal
-        ref={recaptchaVerifier}
-        firebaseConfig={app.options}
-        attemptInvisibleVerification={true}
+    <View style={styles.container}>
+      <Text style={styles.heading}>Login</Text>
+
+      {/* EMAIL */}
+      <TextInput
+        value={userEmail}
+        onChangeText={setUserEmail}
+        placeholder="Enter Email"
+        placeholderTextColor="#777"
+        style={styles.input}
+        keyboardType="email-address"
+        autoCapitalize="none"
+        autoCorrect={false}
       />
-      <Text style= {styles.heading}>Login</Text>
-      <View style={styles.otp}>
-        <View style={[!isEditable && styles.disabled]} pointerEvents={!isEditable ? 'none' : 'auto'}>
-          <PhoneInput
-            ref={phoneInput}
-            value={userNumber}
-            defaultCode="IN"
-            layout="first"
-            placeholder="Enter Number"
-            onChangeFormattedText={(Text) => isEditable && setUserNumber(Text)}
-            textContainerStyle={styles.phoneInputText}
-            containerStyle={styles.number}
+
+      {/* PASSWORD */}
+      <TextInput
+        value={password}
+        onChangeText={setPassword}
+        placeholder="Enter Password"
+        placeholderTextColor="#777"
+        style={styles.input}
+        secureTextEntry
+        autoCapitalize="none"
+        autoCorrect={false}
+      />
+
+      {/* FORGOT PASSWORD */}
+      <TouchableOpacity
+        style={styles.forgotButton}
+        onPress={handleForgotPassword}
+        disabled={forgotLoading}
+      >
+        {forgotLoading ? (
+          <ActivityIndicator
+            size="small"
+            color="#007BFF"
           />
-        </View>
-        {isEditable ? (
-          <TouchableOpacity style={styles.button} onPress={requestOTP}>
-            {loading ? (
-              <ActivityIndicator size="small" color="white" />
-            ) : (
-              <Text style={styles.buttonText}>Send</Text>
-            )}
-          </TouchableOpacity>
         ) : (
-          <TouchableOpacity style={[styles.button, styles.editButton]} onPress={editPhoneNumber}>
-            <Text style={styles.buttonText}>Edit</Text>
-          </TouchableOpacity>
+          <Text style={styles.forgotText}>
+            Forgot Password?
+          </Text>
         )}
-      </View>
+      </TouchableOpacity>
 
-        {verificationId && (
-          <>
-            <TextInput
-              value={userotp}
-              onChangeText={setUserotp}
-              placeholder="Enter OTP"
-              style={styles.input}
-              keyboardType="number-pad"
-            />
-            <TouchableOpacity
-              style={[styles.resendButton, resendDisabled && styles.disabled]}
-              onPress={requestOTP}
-              disabled={resendDisabled}
-            >
-              <Text style={styles.resendText}>
-                {resendDisabled ? `Resend OTP in ${Math.floor(countdown / 60)}:${countdown % 60}` : 'Resend OTP'}
-              </Text>
-            </TouchableOpacity>
-          </>
+      {/* LOGIN */}
+      <Mybutton
+        title={loading ? "Logging in..." : "Login"}
+        onPress={handleLogin}
+      />
+
+      {/* REGISTER */}
+      <TouchableOpacity
+        style={styles.registerButton}
+        onPress={() => router.push("/register")}
+      >
+        <Text style={styles.registerText}>
+          Don't have an account?{" "}
+          <Text style={styles.registerLink}>
+            Register
+          </Text>
+        </Text>
+      </TouchableOpacity>
+
+      {/* RESEND VERIFICATION */}
+      <TouchableOpacity
+        style={styles.resendVerificationButton}
+        onPress={async () => {
+          if (!auth.currentUser) {
+            Alert.alert(
+              "Login Required",
+              "Please login first before requesting a verification email."
+            );
+            return;
+          }
+
+          await handleResendVerification();
+        }}
+        disabled={resendLoading}
+      >
+        {resendLoading ? (
+          <ActivityIndicator
+            size="small"
+            color="#007BFF"
+          />
+        ) : (
+          <Text style={styles.resendVerificationText}>
+            Resend Verification Email
+          </Text>
         )}
-
-      <Mybutton title={"Login"} onPress={verifyOtp} />
+      </TouchableOpacity>
     </View>
   );
 };
 
 export default Login;
 
+// ====================================================
+// STYLES
+// ====================================================
+
 const styles = StyleSheet.create({
-  heading: {
-    fontWeight: "bold",
-    fontSize: width * 0.08, // Dynamic font size
-    marginBottom: height * 0.02, // Margin relative to screen height
-  },
-  input: {
-    fontSize: width * 0.045, // Dynamic font size
-    height: height * 0.06, // 6% of screen height
-    width: width * 0.9, // 90% of screen width
-    justifyContent: 'center',
-    borderColor: 'black',
-    borderWidth: 2,
-    borderRadius: 10,
-    marginVertical: height * 0.015, // Dynamic margin
-    paddingLeft: width * 0.05, // 5% padding left
-  },
-  number: {
-    fontSize: width * 0.045, // Dynamic font size
-    height: height * 0.06, // 6% of screen height
-    width: width * 0.70, // 90% of screen width
-    justifyContent: 'center',
-    borderColor: 'black',
-    borderWidth: 2,
-    borderRadius: 10,
-    // paddingLeft: width * 0.05, // 5% padding left
-  },
-  disabled: {
-    opacity: 0.5
-  },
-  otp: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginVertical: height * 0.03, // Dynamic margin
-  },
-  phoneInputText: {
-    paddingVertical: 0,
-    // paddingLeft: width * 0.05,
-    borderRadius: 10, // Ensure rounded corners
-    // backgroundColor: 'transparent', // Adjust background to avoid styling conflicts
-  },
-  button: {
-    backgroundColor: "#8533ff",
-    width: width * 0.20, // Button width is 20% of screen width
-    height: height * 0.06, // Button height is 6% of screen height
-    borderRadius: 10,
+  container: {
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    marginLeft: width * 0.02, // 2% margin between number input and button
+    paddingHorizontal: width * 0.05,
   },
-  buttonText: {
-    color: "white",
-    fontSize: 16,
+
+  heading: {
+    fontWeight: "bold",
+    fontSize: width * 0.08,
+    marginBottom: height * 0.03,
+  },
+
+  input: {
+    fontSize: width * 0.045,
+    height: height * 0.06,
+    width: width * 0.9,
+    justifyContent: "center",
+    borderColor: "black",
+    borderWidth: 2,
+    borderRadius: 10,
+    marginVertical: height * 0.01,
+    paddingLeft: width * 0.05,
+    color: "black",
+  },
+
+  forgotButton: {
+    width: width * 0.9,
+    alignItems: "flex-end",
+    marginTop: height * 0.005,
+    marginBottom: height * 0.02,
+  },
+
+  forgotText: {
+    color: "#007BFF",
+    fontSize: 15,
+    textDecorationLine: "underline",
+  },
+
+  registerButton: {
+    marginTop: height * 0.025,
+  },
+
+  registerText: {
+    fontSize: 15,
+    color: "#555",
+  },
+
+  registerLink: {
+    color: "#007BFF",
     fontWeight: "bold",
   },
-  editButton: {
-    backgroundColor: "#FFA500",
+
+  resendVerificationButton: {
+    marginTop: height * 0.02,
+    padding: 8,
   },
-  resendButton: {
-    alignSelf: "center",
-    marginVertical: 10,
-  },
-  resendText: {
+
+  resendVerificationText: {
     color: "#007BFF",
-    fontSize: 16,
+    fontSize: 15,
     textDecorationLine: "underline",
   },
 });

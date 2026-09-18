@@ -52,7 +52,8 @@
           "locationAlwaysAndWhenInUsePermission": "Allow $(Major_Project) to use your location."
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-asset"
     ],
     "experiments": {
       "typedRoutes": true
